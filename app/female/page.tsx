@@ -3,6 +3,7 @@ import { createClient, groq } from "next-sanity"
 import { Product } from "@/types/Product"
 import Image from "next/image"
 import imageUrlBuilder from '@sanity/image-url'
+import Header from "@/components/Header"
 
 function getProducts(): Promise<Product[]> {
     return createClient(clientConfig).fetch(
@@ -22,38 +23,43 @@ function getProducts(): Promise<Product[]> {
 const builder = imageUrlBuilder(clientConfig)
 
 // source will be image
-function urlFor(source) {
+function urlFor(source: Object) {
     return builder.image(source)
 }
 
 export default async function Female() {
-    const products = await getProducts()
+    const products = await getProducts();
+
     return (
-        <div className="flex flex-wrap">
-            {products.map((product) => (
-                <div key={product._id}
-                    className="m-5 border border-red-800
-                    flex flex-col                 
-                    w-52 ">
-                    {/* url builder will be used here */}
-                    <Image
-                        src={urlFor(product.image).url()}
-                        alt={product.name}
-                        width={200}
-                        height={200}
-                    />
-                    {/* fix name from overflowing the width of image, check finished site */}
-                    <h1 className="text-xl font-bold break-words">{product.name}</h1>
+        <>
+            <Header />
+            <div className="flex flex-wrap">
+                {products.map((product) => (
+                    <div key={product._id}
+                        className={`m-5 flex flex-col w-[${300}px] `}>
+                        {/* set div width to image width so that "break-words" can be applied on text */}
 
-                    <h1 className="text-lg font-bold opacity-60 ">
-                        {product.category}
-                    </h1>
+                        {/* url builder used here */}
+                        < Image
+                            src={urlFor(product.image).url()}
+                            alt={product.name}
+                            width={300}
+                            height={300}
+                        />
 
-                    <h2 >{product.price}</h2>
+                        <h1 className="mt-1 text-xl font-semibold break-words tracking-wide">{product.name}</h1>
 
-                </div>
-            ))}
-        </div>
+                        <h1 className="mt-1 text-lg font-bold opacity-60 break-words">
+                            {product.category}
+                        </h1>
+
+                        <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
+
+                    </div>
+                ))
+                }
+            </div >
+        </>
     )
 }
 
