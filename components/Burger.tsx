@@ -2,29 +2,29 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { AlignRight } from 'lucide-react';
+import { AlignJustify, X } from 'lucide-react';
+
 
 export default function Burger() {
   const [navbar, setNavbar] = useState(false)
 
   return (
-    <div className="md:hidden lg:hidden">
+    <div className="z-50 md:hidden lg:hidden">
 
       {/* Hamburger menu wrapped in button */}
       <button onClick={() => setNavbar(!navbar)}>
-
-        <AlignRight />
+        {navbar ? <X size={38} /> : <AlignJustify size={38} />}
       </button>
 
       {/* Links */}
       <div className={`${navbar ? "block" : "hidden"}
       flex flex-col justify-around items-center
-      absolute top-[10vh] h-[90vh] w-screen left-0
-      bg-gray-400`}>
-        <Link href="/female">Female</Link>
-        <Link href="/male">Male</Link>
-        <Link href="/kids">Kids</Link>
-        <Link href="/products">All Products</Link>
+      fixed top-[10vh] left-0 w-screen h-[90%]
+      bg-gray-400 `}>
+        <Link href="/female" onClick={() => setNavbar(!navbar)}>Female</Link>
+        <Link href="/male" onClick={() => setNavbar(!navbar)}>Male</Link>
+        <Link href="/kids" onClick={() => setNavbar(!navbar)}>Kids</Link>
+        <Link href="/products" onClick={() => setNavbar(!navbar)}>All Products</Link>
       </div>
     </div>
   )

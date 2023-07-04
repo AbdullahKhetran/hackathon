@@ -10,15 +10,16 @@ import Navbar from "./Navbar";
 export default function Header() {
 
     return (
-        <div className="flex justify-between my-[5vh]">
+        <div className="flex justify-between my-[5vh] mx-5">
             {/* Logo */}
-            <Image
-                src={logo}
-                alt="Logo"
-                width={135}
-                height={23}
-            />
-
+            <Link href="/">
+                <Image
+                    src={logo}
+                    alt="Logo"
+                    width={135}
+                    height={23}
+                />
+            </Link>
             <Burger />
 
         </div>
