@@ -1,7 +1,7 @@
-import image from "./image-schema"
-import featuredProduct from "./featured-product"
-import product from "./product"
-import brand from "./brands"
+import image from "./images-schema"
+import featuredProduct from "./featuredProducts-schema"
+import product from "./products-schema"
+import brand from "./brands-schema"
 
 const schemas = [image, featuredProduct, product, brand]
 
