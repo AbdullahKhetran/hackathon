@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import Header from '../components/Header'
 import MainSection from '@/components/MainSection'
-import Promotions from '@/components/Promotions'
+import Promotion from '@/components/Promotion'
+import FeaturedProduct from '@/components/FeaturedProduct'
+import Jewellry from '@/components/Jewellry'
 
 
 export default function Home() {
@@ -9,7 +11,9 @@ export default function Home() {
     <div className="mx-10">
       <Header />
       <MainSection />
-      <Promotions />
+      <Promotion />
+      <FeaturedProduct />
+      <Jewellry />
     </div>
   )
 }
