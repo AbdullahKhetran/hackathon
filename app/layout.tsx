@@ -1,8 +1,12 @@
 import Header from '../components/Header'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Sora } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const sora = Sora({
+  subsets: ["latin"],
+  display: "swap",
+})
+
 
 export const metadata = {
   title: 'hackathon',
@@ -17,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={sora.className}>{children}</body>
       {/* <Header /> */}
 
     </html>
