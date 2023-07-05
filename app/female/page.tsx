@@ -3,7 +3,7 @@ import { createClient, groq } from "next-sanity"
 import { Product } from "@/types/Product"
 import Image from "next/image"
 import imageUrlBuilder from '@sanity/image-url'
-import Header from "@/components/Header"
+import Navbar from "@/components/Navbar"
 
 function getProducts(): Promise<Product[]> {
     return createClient(clientConfig).fetch(
@@ -31,20 +31,22 @@ export default async function Female() {
     const products = await getProducts();
 
     return (
-        <>
-            <Header />
-            <div className="flex flex-wrap">
+        <div className="">
+            <Navbar />
+            <div className="grid gap-8 
+             xs:grid-cols-1 sm:grid-cols-2 min-[1000px]:grid-cols-3 xl:grid-cols-4
+             mx-20 justify-around justify-items-center ">
                 {products.map((product) => (
                     <div key={product._id}
-                        className={`m-5 flex flex-col w-[${300}px] `}>
+                        className={`flex flex-col w-[250px]`}>
                         {/* set div width to image width so that "break-words" can be applied on text */}
 
                         {/* url builder used here */}
                         < Image
                             src={urlFor(product.image).url()}
                             alt={product.name}
-                            width={300}
-                            height={300}
+                            width={250}
+                            height={270}
                         />
 
                         <h1 className="mt-1 text-xl font-semibold break-words tracking-wide">{product.name}</h1>
@@ -59,7 +61,7 @@ export default async function Female() {
                 ))
                 }
             </div >
-        </>
+        </div>
     )
 }
 

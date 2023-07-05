@@ -1,5 +1,9 @@
+import Navbar from "@/components/Navbar";
+
 export default function Products() {
     return (
-        <div>All products goes here</div>
+        <div>
+            <Navbar />
+        </div>
     )
 }
