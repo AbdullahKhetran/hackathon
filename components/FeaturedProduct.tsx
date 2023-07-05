@@ -6,7 +6,7 @@ import product3 from "@/public/featured-product3.png"
 
 export default function FeaturedProduct() {
     return (
-        <div>
+        <div className='border-4 border-cyan-700'>
             <h1>Products</h1>
             <h2>Check What We Have</h2>
 

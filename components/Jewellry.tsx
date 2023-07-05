@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Jewellry() {
     return (
 
-        <div>
+        <div className='border-4  border-purple-800'>
 
             <h1 className=" text-4xl font-bold">Unique and Authentic Vintage Designer Jewellery</h1>
             <div className="grid">

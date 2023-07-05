@@ -9,7 +9,7 @@ export default function Burger() {
   const [navbar, setNavbar] = useState(false)
 
   return (
-    <div className="z-50 md:hidden lg:hidden">
+    <div className="z-50 ">
 
       {/* Hamburger menu wrapped in button */}
       <button onClick={() => setNavbar(!navbar)}>

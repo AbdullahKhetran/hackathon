@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 export default function MainSection() {
     return (
-        <section>
-            <span className='p-5 bg-blue-200 text-blue-700 font-bold rounded-lg'>
+        <section className='border-4  border-red-700'>
+            <span className='inline-block p-5 bg-blue-200 text-blue-700 font-bold rounded-lg'>
                 Sale 70%
             </span>
 

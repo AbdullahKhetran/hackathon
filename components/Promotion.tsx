@@ -5,7 +5,7 @@ import event3 from "@/public/event3.webp"
 
 export default function Promotions() {
     return (
-        <div>
+        <div className='border-4  border-yellow-400'>
             <h1>PROMOTIONS</h1>
             <h2>Our Promotions Events</h2>
 

@@ -1,25 +1,35 @@
-import Link from "next/link"
-import Image from "next/image"
-import logo from "@/public/logo.png"
+"use client"
+
+import { useState, useEffect } from 'react';
 
 
-// This is Navbar for medium size screen onwards
+import SmNav from './SmNav';
+import LgNav from './lgNav';
+
+
 
 export default function Navbar() {
+    const [width, setwidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleWindowResize = () => {
+            setwidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    // const [navbar, setNavbar] = useState(false)
     return (
-        <div className="flex justify-between">
-            <Image
-                src={logo}
-                alt="Logo"
-                width={135}
-                height={23}
-            />
-
-            <Link href="/female">Female</Link>
-            <Link href="/male">Male</Link>
-            <Link href="/kids">Kids</Link>
-            <Link href="/products">All Products</Link>
-
+        <div>
+            {width > 1000 ?
+                <LgNav /> :
+                <SmNav />
+            }
         </div>
-    )
+    );
 }
