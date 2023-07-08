@@ -6,7 +6,7 @@ import Burger from "./Burger";
 export default function SmNav() {
 
     return (
-        <div className="flex justify-between my-[5vh] mx-10">
+        <div className="flex justify-between my-[5vh]">
             {/* Logo */}
             <Link href="/">
                 <Image
