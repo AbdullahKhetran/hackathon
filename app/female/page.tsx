@@ -5,7 +5,7 @@ import Image from "next/image"
 import imageUrlBuilder from '@sanity/image-url'
 import Navbar from "@/components/Navbar"
 
-function getProducts(): Promise<Product[]> {
+function getFemaleProducts(): Promise<Product[]> {
     return createClient(clientConfig).fetch(
         groq`*[_type == "products" && gender == "female"]{
         _id,
@@ -27,8 +27,9 @@ function urlFor(source: Object) {
     return builder.image(source)
 }
 
+
 export default async function Female() {
-    const products = await getProducts();
+    const products = await getFemaleProducts();
 
     return (
         <div className="">
