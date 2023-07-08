@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 import SmNav from './SmNav';
-import LgNav from './lgNav';
-
+import LgNav from './LgNav';
 
 
 export default function Navbar() {
