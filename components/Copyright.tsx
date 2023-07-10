@@ -1,7 +1,7 @@
 export default function Copyright() {
     return (
         <div className="flex flex-col md:flex-row justify-between
-        border-4 border-yellow-500">
+        border-4 border-yellow-500 my-8">
             {/* use html identity for copyright symbol */}
             <div className="flex md:flex-col">
                 <h1>Copyright &copy; 2022&nbsp;</h1>
