@@ -5,6 +5,8 @@ import Image from "next/image"
 import imageUrlBuilder from '@sanity/image-url'
 import Navbar from "@/components/Navbar"
 import { displayProducts } from "@/components/utils"
+import Footer from "@/components/Footer"
+import Copyright from "@/components/Copyright"
 
 function getFemaleProducts(): Promise<Product[]> {
     return createClient(clientConfig).fetch(
@@ -28,6 +30,8 @@ export default async function Female() {
         <div className="">
             <Navbar />
             {displayProducts(femaleProducts)}
+            <Footer />
+            <Copyright />
         </div>
     )
 }
