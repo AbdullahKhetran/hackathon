@@ -21,6 +21,7 @@ export default function LgNav() {
             <Link href="/male">Male</Link>
             <Link href="/kids">Kids</Link>
             <Link href="/products">All Products</Link>
+            <input type="type" placeholder="Search products" className="border rounded-md" />
 
         </div>
     )
