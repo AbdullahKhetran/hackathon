@@ -7,6 +7,7 @@ export default function MainSection() {
         <section className='flex flex-col gap-8 border-4 border-red-700'>
             <span className='w-[120px] h-10 py-2 px-4 bg-blue-100 text-blue-700 font-semibold rounded-lg  '>
                 Sale 70%
+                {/* is ki jagah shadcn ka badge component bhi use kr skte ho, as hamzah did */}
             </span>
             {/* adjust letter spacing on h1 */}
 
