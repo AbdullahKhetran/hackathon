@@ -1,4 +1,3 @@
-import Header from '../components/SmNav'
 import './globals.css'
 import { Sora } from 'next/font/google'
 
