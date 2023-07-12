@@ -5,6 +5,7 @@ import Jewellry from '@/components/Jewellry'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Copyright from '@/components/Copyright'
+import Newsletter from '@/components/Newsletter'
 
 
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Promotion />
       <FeaturedProduct />
       <Jewellry />
+      <Newsletter />
       <Footer />
       <Copyright />
     </div>
