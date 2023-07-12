@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import logo from "@/public/logo.png"
+import logo from "@/public/Logo.webp"
 
 
 // This is Navbar for screen larger than small size

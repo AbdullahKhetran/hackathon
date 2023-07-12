@@ -1,15 +1,12 @@
 import Image from "next/image";
-import logo from "@/public/logo.png"
+import logo from "@/public/Logo.webp"
 import { Facebook, Linkedin, Twitter } from "lucide-react";
 import Link from "next/link";
 
 
 export default function Footer() {
     return (
-
-        // styling reamining: margins, size etc
-
-        <div className="border-4 border-red-700 flex flex-col gap-8 my-8">
+        <div className="border-4 border-red-700 flex flex-col gap-8 mb-12">
             {/* logo, detail, icons */}
             <div className="flex flex-col gap-8">
                 <Image

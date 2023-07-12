@@ -5,8 +5,7 @@ import event3 from "@/public/event3.webp"
 
 export default function Promotions() {
     return (
-        <div className='my-10 '>
-
+        <div className='my-24'>
             <div className="flex flex-col gap-4 items-center">
                 <h1 className="text-sm font-bold text-blue-600">PROMOTIONS</h1>
                 <h2 className="font-semibold text-3xl">Our Promotions Events</h2>
