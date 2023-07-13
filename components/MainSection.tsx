@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 export default function MainSection() {
     return (
-        <section className='flex flex-col gap-8 border-4 border-red-700 mb-24'>
+
+        <div className='flex flex-col gap-8 border-4 border-red-700 mb-24'>
             <span className='w-[120px] h-10 py-2 px-4 bg-blue-100 text-blue-700 font-semibold rounded-lg  '>
                 Sale 70%
                 {/* is ki jagah shadcn ka badge component bhi use kr skte ho, as hamzah did */}
@@ -22,8 +23,7 @@ export default function MainSection() {
                 <h2 className='font-bold ml-2'>Start Shopping</h2>
             </Link>
 
-
-
-        </section>
+            {/* add logos through sanity */}
+        </div>
     )
 }

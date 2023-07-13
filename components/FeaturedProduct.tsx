@@ -3,6 +3,8 @@ import Image from "next/image";
 import product1 from "@/public/featured-product1.png"
 import product2 from "@/public/featured-product2.webp"
 import product3 from "@/public/featured-product3.webp"
+import ProductCard from "./ProductCard";
+
 
 export default function FeaturedProduct() {
     const headingStyle = "text-xl font-bold"
@@ -17,32 +19,9 @@ export default function FeaturedProduct() {
                 so remove this manual code and fetch it */}
 
                 {/*This link leads to the page of that product so dynamic routing */}
-
-                <Link href="/products" className="flex flex-col items-center gap-1 hover:scale-110 hover:transition-transform">
-                    <Image
-                        src={product1}
-                        alt="Product image"
-                    />
-                    <h1 className={headingStyle}>Brushed Raglan Sweatshirt</h1>
-                    <h2 className={headingStyle}>$195</h2>
-                </Link>
-                <Link href="/products" className="flex flex-col items-center gap-1 hover:scale-110 hover:transition-transform">
-                    <Image
-                        src={product2}
-                        alt="Product image"
-                        width={370}
-                        height={394} />
-                    <h1 className={headingStyle}>Cameryn Sash Tie Dresst</h1>
-                    <h2 className={headingStyle}>$545</h2>
-                </Link>
-                <Link href="/products" className="flex flex-col items-center gap-1 hover:scale-110 hover:transition-transform">
-                    <Image
-                        src={product3}
-                        alt="Product image"
-                    />
-                    <h1 className={headingStyle}>Flex Sweatshirt</h1>
-                    <h2 className={headingStyle}>$175</h2>
-                </Link>
+                <ProductCard img={product1} name="Brushed Raglan Sweatshirt" price={195} />
+                <ProductCard img={product2} name="Cameryn Sash Tie Dress" price={525} />
+                <ProductCard img={product3} name="Flex Sweatshirt" price={175} />
 
             </div>
         </div>
