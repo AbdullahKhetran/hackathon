@@ -7,7 +7,10 @@ export type Product = {
     gender: string,
     category: string,
     image: string,
-    slug: string,
+    slug: {
+        current: string,
+        _type: string
+    },
     price: string,
     details: PortableTextBlock[],
     care: PortableTextBlock[],
