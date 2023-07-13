@@ -5,9 +5,10 @@ import { createClient, groq } from "next-sanity";
 import imageUrlBuilder from '@sanity/image-url'
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 
-function getAllProducts(): Promise<Product[]> {
+export function getAllProducts(): Promise<Product[]> {
     return createClient(clientConfig).fetch(
         groq`*[_type == "products"]{
             _id,
@@ -16,6 +17,7 @@ function getAllProducts(): Promise<Product[]> {
             price,
             image,
             category,
+            slug
 
         }`
     )
@@ -31,7 +33,6 @@ function urlFor(source: Object) {
 
 export default async function Products() {
     const products = await getAllProducts();
-
     return (
         <div>
             <Navbar />
@@ -41,7 +42,9 @@ export default async function Products() {
              mx-20 justify-around justify-items-center ">
 
                 {products.map((product) => (
-                    <div key={product._id}
+                    <Link
+                        key={product._id}
+                        href={`/products/${product.slug.current}`}
                         className={`flex flex-col w-[250px]`}>
                         {/* set div width to image width so that "break-words" can be applied on text */}
 
@@ -57,8 +60,8 @@ export default async function Products() {
                             {product.category}
                         </h1>
                         <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
-
-                    </div>
+                        {/* <p>{product.slug}</p> */}
+                    </Link>
                 ))}
             </div >
             <Footer />

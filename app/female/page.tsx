@@ -1,8 +1,6 @@
 import clientConfig from "@/sanity/config/client-config"
 import { createClient, groq } from "next-sanity"
 import { Product } from "@/types/Product"
-import Image from "next/image"
-import imageUrlBuilder from '@sanity/image-url'
 import Navbar from "@/components/Navbar"
 import { displayProducts } from "@/components/utils"
 import Footer from "@/components/Footer"
