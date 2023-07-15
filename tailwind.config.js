@@ -24,10 +24,22 @@ module.exports = {
     extend: {
 
       colors: {
-        darkGray: "#212121"
+        darkGray: "#212121",
+        sectionSilver: "#fcfcfc",
+        promotionCard: "#d6d6d8",
+        promotionProduct: "#efe1c7",
+        promotionProduct2: "#d7d7d9",
+        socialIconbg: "#f1f1f1",
+        productSubtitle: "#666666",
+
+
+
       }
 
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography')
+  ],
 }
