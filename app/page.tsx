@@ -2,16 +2,16 @@ import MainSection from '@/components/MainSection'
 import Promotion from '@/components/Promotion'
 import FeaturedProduct from '@/components/FeaturedProduct'
 import Jewellry from '@/components/Jewellry'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Copyright from '@/components/Copyright'
+import Footer from '@/components/Footer/Footer'
 import Newsletter from '@/components/Newsletter'
+import Navbar from '@/components/Navbar/Navbar'
+import Copyright from '@/components/Footer/Copyright'
 
 
 
 export default function Home() {
   return (
-    <div className="mx-8 max-w-screen-2xl">
+    <div className="mx-8 lg:mx-auto max-w-screen-xl">
       <Navbar />
       <MainSection />
       <Promotion />

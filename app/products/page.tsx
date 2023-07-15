@@ -1,27 +1,14 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 import clientConfig from "@/sanity/config/client-config";
 import { Product } from "@/types/Product";
 import { createClient, groq } from "next-sanity";
 import imageUrlBuilder from '@sanity/image-url'
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
+import { getAllProducts } from "@/components/utils";
 
 
-export function getAllProducts(): Promise<Product[]> {
-    return createClient(clientConfig).fetch(
-        groq`*[_type == "products"]{
-            _id,
-            name,
-            gender,
-            price,
-            image,
-            category,
-            slug
-
-        }`
-    )
-}
 
 // Image Url builder
 const builder = imageUrlBuilder(clientConfig)
