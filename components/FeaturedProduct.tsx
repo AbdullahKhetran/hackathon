@@ -1,9 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
 import product1 from "@/public/featured-product1.png"
 import product2 from "@/public/featured-product2.webp"
 import product3 from "@/public/featured-product3.webp"
-import ProductCard from "./ProductCard";
+import ProductCard from "./Product/ProductCard";
 
 
 export default function FeaturedProduct() {
@@ -17,6 +15,8 @@ export default function FeaturedProduct() {
 
                 {/* These are fetched from products section
                 so remove this manual code and fetch it */}
+
+                {/* write a groq query for featured products */}
 
                 {/*This link leads to the page of that product so dynamic routing */}
                 <ProductCard img={product1} name="Brushed Raglan Sweatshirt" price={195} />

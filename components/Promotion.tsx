@@ -13,7 +13,7 @@ export default function Promotions() {
 
             <div className=" mt-4 grid gap-4 ">
                 <div className=" grid gap-y-4 ">
-                    <div className="bg-gray-300 flex justify-around px-4">
+                    <div className="bg-promotionCard flex justify-around px-4">
                         <div className="flex flex-col justify-center">
                             <h1 className="font-medium text-3xl">GET UP TO <span className="font-bold text-4xl">60%</span></h1>
                             <p className="text-lg">For the summer season</p>
@@ -24,7 +24,7 @@ export default function Promotions() {
 
                         />
                     </div>
-                    <div className="bg-zinc-800 text-white p-12 flex flex-col justify-center items-center">
+                    <div className="bg-darkGray text-white p-12 flex flex-col justify-center items-center">
                         {/* give spacing in h1 */}
                         <h1 className="font-extrabold text-4xl mb-2">GET 30% OFF</h1>
                         <p className="text-sm">USE PROMO CODE</p>
@@ -33,7 +33,7 @@ export default function Promotions() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <div className=" flex flex-col bg-orange-200">
+                    <div className=" flex flex-col bg-promotionProduct">
                         <div >
                             {/* fetch these details from sanity */}
                             <h1>Flex Sweatshirt</h1>
@@ -47,7 +47,7 @@ export default function Promotions() {
                         />
                     </div>
 
-                    <div className="flex flex-col bg-gray-300 ">
+                    <div className="flex flex-col bg-promotionProduct2 ">
                         {/* fetch these details from sanity */}
                         <div>
                             <h1>Flex Push Button Bomber</h1>

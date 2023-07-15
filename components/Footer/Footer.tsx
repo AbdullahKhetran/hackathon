@@ -6,9 +6,9 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <div className="border-4 border-red-700 flex flex-col gap-8 mb-12">
+        <div className=" grid grid-cols-1 gap-8 py-16 px-8">
             {/* logo, detail, icons */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 justify-between">
                 <Image
                     src={logo}
                     alt="Logo"
@@ -18,14 +18,14 @@ export default function Footer() {
                 <p className="text-xl text-gray-600 w-[60%]">Small, artisan label that offers a thoughtfully curated collection of high quality everyday essentials made.</p>
 
                 {/* style icons, bodies should be filled and size */}
-                <div className="flex gap-2">
-                    <Link href="#" className="bg-gray-100 p-2 rounded-lg">
+                <div className="flex gap-4">
+                    <Link href="#" className="bg-socialIconbg p-2 rounded-lg">
                         <Twitter size={30} />
                     </Link>
-                    <Link href="#" className="bg-gray-100 p-2 rounded-lg">
+                    <Link href="#" className="bg-socialIconbg p-2 rounded-lg">
                         <Facebook size={30} />
                     </Link>
-                    <Link href="#" className="bg-gray-100 p-2 rounded-lg">
+                    <Link href="#" className="bg-socialIconbg p-2 rounded-lg">
                         <Linkedin size={30} />
                     </Link>
 
@@ -33,7 +33,7 @@ export default function Footer() {
             </div>
 
             {/* Links */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-8">
                 {/* Contact */}
                 <div className="flex flex-col text-neutral-500 text-xl gap-5">
                     {/* overriding text size in h1 */}

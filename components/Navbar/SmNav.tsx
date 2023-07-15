@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../public/Logo.webp"
+import logo from "@/public/Logo.webp"
 import Burger from "./Burger";
 
 export default function SmNav() {
 
     return (
-        <div className="flex justify-between my-[5vh]">
+        <div className="flex justify-between m-8 my-[5vh]">
             {/* Logo */}
             <Link href="/">
                 <Image

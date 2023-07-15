@@ -32,7 +32,7 @@ export default function Navbar() {
     // const [navbar, setNavbar] = useState(false)
     return (
         <div>
-            {width > 1000 ?
+            {width > 1023 ?
                 <LgNav /> :
                 <SmNav />
             }

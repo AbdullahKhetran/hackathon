@@ -1,7 +1,7 @@
 import jewellry from "@/public/feature.webp"
 import Image from "next/image"
 import Link from "next/link"
-import Button from "./Button"
+import Button from "./Buttons"
 
 export default function Jewellry() {
     return (
