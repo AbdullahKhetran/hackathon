@@ -49,7 +49,7 @@ const product = {
             type: "string",
         },
         {
-            name: "detils",
+            name: "details",
             title: "Details",
             type: "array",
             of: [{ type: "block" }]
