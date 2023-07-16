@@ -11,15 +11,22 @@ import Copyright from '@/components/Footer/Copyright'
 
 export default function Home() {
   return (
-    <div className="mx-8 lg:mx-auto max-w-screen-xl">
-      <Navbar />
-      <MainSection />
-      <Promotion />
-      <FeaturedProduct />
-      <Jewellry />
-      <Newsletter />
-      <Footer />
-      <Copyright />
+    // <div className=" max-w-screen-2xl 2xl:mx-auto">
+    <div>
+      <div className='max-w-center'>
+        <Navbar />
+        <MainSection />
+        <Promotion />
+        <FeaturedProduct />
+        <Jewellry />
+        <Newsletter />
+        <Footer />
+      </div>
+      <div className='border border-t border-productSubtitle'></div>
+
+      <div className='max-w-center'>
+        <Copyright />
+      </div>
     </div>
   )
 }
