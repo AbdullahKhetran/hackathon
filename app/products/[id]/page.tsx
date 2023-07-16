@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getAllProducts } from "@/components/utils";
+import { getAllProducts } from "@/sanity/sanity-utils";
 import Footer from "@/components/Footer/Footer";
 import imageUrlBuilder from "@sanity/image-url"
 import clientConfig from "@/sanity/config/client-config";
@@ -69,7 +69,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         <Size />
                         <Quantity />
                         <div className="flex my-4 gap-2">
-                            <AddToCartButton />
+                            <AddToCartButton content="Add to Cart" />
                             <h2 className="self-center text-3xl font-bold tracking-widest">{matchingProduct?.price}</h2>
                         </div>
                     </div>
