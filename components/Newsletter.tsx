@@ -2,7 +2,7 @@ import Button from "./Buttons";
 
 export default function Newsletter() {
     return (
-        <div className="relative my-24 ">
+        <div className="relative my-24 mx-8 md:mx-16 xl:mx-32 ">
             <div className="absolute w-full h-full text-6xl font-extrabold  tracking-widest opacity-5 text-ellipsis mt-16 -z-10">
                 Newsletter
             </div>

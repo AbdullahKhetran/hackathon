@@ -2,11 +2,8 @@ import { Product } from "@/types/Product"
 import Image from "next/image"
 import imageUrlBuilder from '@sanity/image-url'
 import clientConfig from "@/sanity/config/client-config"
-import { createClient, groq } from "next-sanity";
 import Link from "next/link"
-
-
-
+import { Brand } from "@/types/Brands"
 
 // Image Url builder
 const builder = imageUrlBuilder(clientConfig)
@@ -14,22 +11,6 @@ const builder = imageUrlBuilder(clientConfig)
 // source will be image
 function urlFor(source: Object) {
     return builder.image(source)
-}
-
-export function getAllProducts(): Promise<Product[]> {
-    return createClient(clientConfig).fetch(
-        groq`*[_type == "products"]{
-            _id,
-            name,
-            gender,
-            price,
-            category,
-            image,
-            slug,
-            details,
-            care,
-        }`
-    )
 }
 
 export function displayProducts(products: Product[]) {
@@ -44,7 +25,7 @@ export function displayProducts(products: Product[]) {
                     key={product._id}
                     href={`/products/${product.slug.current}`}
                     className={`flex flex-col w-[250px]`}>
-                    {/* set div width to image width so that "break-words" can be applied on text */}
+                    {/* set parent's width to image width so that "break-words" can be applied on text */}
 
                     {/* url builder used here */}
                     < Image
@@ -58,9 +39,43 @@ export function displayProducts(products: Product[]) {
                         {product.category}
                     </h1>
                     <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
-                    {/* <p>{product.slug}</p> */}
                 </Link>
             ))}
         </div >
+    )
+}
+
+export function displayLogos(brands: Brand[]) {
+    return (
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {brands.map((brand) => (
+                <Image
+                    src={urlFor(brand.logo).url()}
+                    key={brand._id}
+                    alt="Brands Logo"
+                    width={92}
+                    height={30}
+                    className=" aspect-[92/30]" />
+            ))}
+        </div>
+    )
+
+}
+
+export function displayFeaturedProduct(product: Product) {
+    return (
+
+        <Link
+            href={`/products/${product.slug.current}`}
+            className="flex flex-col items-center hover:scale-110 hover:transition-transform" >
+            <Image
+                src={urlFor(product.image).url()}
+                alt={product.name}
+                width={370}
+                height={394} />
+            <h1 className="mt-1 text-xl font-semibold break-words tracking-wide">{product.name}</h1>
+            <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
+        </Link>
+
     )
 }

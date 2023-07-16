@@ -2,7 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { AlignJustify, X, ShoppingCart } from 'lucide-react';
+import { AlignJustify, X, ShoppingCart, Circle } from 'lucide-react';
+import CartIcon from "./CartIcon";
+
 
 
 export default function Burger() {
@@ -28,15 +30,7 @@ export default function Burger() {
       fixed top-[10vh] left-0 w-screen h-[90%]
       bg-white `}>
 
-        {/* add circle icon here from shadcn */}
-        <button className="flex flex-col relative items-end p-5 bg-socialIconbg rounded-[50%]">
-
-          <span className="bg-[#f02d34] rounded-[50%] w-6 h-6 text-[#eee] text-center font-semibold  ">0</span>
-          <ShoppingCart size={32} />
-
-          {/* make the value dynamic */}
-        </button>
-
+        <CartIcon />
 
 
         <Link href="/female" onClick={changeState} className={linkStyle}>Female</Link>
