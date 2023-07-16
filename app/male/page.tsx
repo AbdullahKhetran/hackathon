@@ -10,10 +10,17 @@ export default async function Male() {
     const menProducts = await getMaleProducts()
     return (
         <div>
-            <Navbar />
-            {displayProducts(menProducts)}
-            <Footer />
-            <Copyright />
+            <div className='max-w-center'>
+                <Navbar />
+                {displayProducts(menProducts)}
+                <Footer />
+            </div>
+            <div className='border border-t border-productSubtitle'></div>
+            <div className='max-w-center'>
+                <Copyright />
+            </div>
+
+
         </div>
     )
 }

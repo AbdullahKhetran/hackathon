@@ -8,11 +8,17 @@ export default async function Female() {
     const femaleProducts = await getFemaleProducts();
 
     return (
-        <div className="">
-            <Navbar />
-            {displayProducts(femaleProducts)}
-            <Footer />
-            <Copyright />
+        <div >
+            <div className='max-w-center'>
+                <Navbar />
+                {displayProducts(femaleProducts)}
+                <Footer />
+            </div>
+            <div className='border border-t border-productSubtitle'></div>
+
+            <div className="max-w-center">
+                <Copyright />
+            </div>
         </div>
     )
 }

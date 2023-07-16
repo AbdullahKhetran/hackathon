@@ -9,10 +9,17 @@ export default async function Kids() {
     const kidsProducts = await getKidsProducts()
     return (
         <div>
-            <Navbar />
-            {displayProducts(kidsProducts)}
-            <Footer />
-            <Copyright />
+            <div className='max-w-center'>
+                <Navbar />
+                {displayProducts(kidsProducts)}
+                <Footer />
+            </div>
+            <div className='border border-t border-productSubtitle'></div>
+
+            <div className='max-w-center'>
+                <Copyright />
+
+            </div>
         </div>
     )
 }
