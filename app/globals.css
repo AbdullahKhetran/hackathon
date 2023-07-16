@@ -6,7 +6,9 @@
 
 /* copied from class */
 @layer base {
-  wrapper {
-    @apply max-w-screen-xl
+  .max-w-center {
+    max-width: 1536px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
