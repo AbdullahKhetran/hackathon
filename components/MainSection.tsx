@@ -18,7 +18,7 @@ export default async function MainSection() {
                 <div className='flex flex-col gap-8'>
                     <span className='w-[120px] h-10 py-2 px-4 bg-blue-100 text-blue-700 font-semibold rounded-lg  '>
                         Sale 70%
-                        {/* alternate: shadcn badge component */}
+                        {/* alternative: shadcn badge component */}
                     </span>
 
                     <h1 className='text-darkGray text-5xl font-semibold lg:text-6xl lg:font-bold tracking:wide'>An Industrial Take on Streetwear</h1>

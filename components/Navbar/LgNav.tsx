@@ -15,7 +15,7 @@ export default function LgNav() {
                     alt="Logo"
                     width={140}
                     height={35}
-                    className="aspect-[140/35]"
+                // className="aspect-[140/35]"
                 />
             </Link>
 

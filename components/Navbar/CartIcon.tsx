@@ -14,12 +14,12 @@ export default function CartIcon() {
 
 export function LgNavCartIcon() {
     return (
-        <button className="flex flex-col items-end px-2 py-1 bg-socialIconbg rounded-[60%]">
-            <span className="bg-[#f02d34] rounded-[50%] p-0.5 px-1 text-[#eee]  font-semibold  text-sm">0</span>
+        <button className="flex flex-col items-end px-1 py-[4px] bg-socialIconbg rounded-[50%]">
+            <span className="bg-[#f02d34] rounded-[50%]  px-1 text-[#eee]  font-semibold  text-xs">0</span>
             {/* make the value dynamic */}
 
 
-            <ShoppingCart size={28} />
+            <ShoppingCart size={20} />
         </button>
     )
 }

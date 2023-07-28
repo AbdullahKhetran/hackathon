@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         <div className="flex flex-col gap-10 max-w-[70%] mt-16">
                             <div className=" flex flex-col gap-1">
                                 <h1 className="text-3xl tracking-wider text-darkGray">{matchingProduct?.name}</h1>
-                                <h2 className="text-xl font-semibold opacity-50">{matchingProduct?.category}</h2>
+                                <h2 className="text-2xl font-semibold opacity-50">{matchingProduct?.category}</h2>
                             </div>
                             <Size />
                             <Quantity />
