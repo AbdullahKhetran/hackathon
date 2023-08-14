@@ -16,10 +16,12 @@
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "@vercel/postgres": "^0.4.1",
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
     "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.28.2",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
     "lucide-react": "^0.258.0",
@@ -36,6 +38,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9"
+    "@tailwindcss/typography": "^0.5.9",
+    "drizzle-kit": "^0.19.12"
   }
 }
