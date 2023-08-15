@@ -20,7 +20,8 @@ export async function GET(request: NextRequest) {
             // console.log(uid)
             // console.log(NextResponse.json({ data: res }))
 
-            return NextResponse.json("Successful")
+            // return NextResponse.json("Successful")
+            return NextResponse.json({ data: res })
 
         } else {
             cookies().set("userid", uuid())
