@@ -7,33 +7,43 @@ import { eq } from "drizzle-orm";
 
 
 export async function GET(request: NextRequest) {
-    // find the user id and then show only his products
+
     const params = request.nextUrl.searchParams
+    const paramUserId = params.get("userid")
 
     try {
+        const cookieUserId = cookies().get("userid")
 
-        // for specific user
-        if (params.has("userid")) {
-            const uid = params.get("userid") as string;
+        if (paramUserId == cookieUserId?.value) {
+
+            const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            // console.log(uid)
-            // console.log(NextResponse.json({ data: res }))
-
-            // return NextResponse.json("Successful")
             return NextResponse.json({ data: res })
 
         } else {
-            cookies().set("userid", uuid())
-            return NextResponse.json("Cart is empty")
+            const userId = uuid()
+            cookies().set("userid", userId)
+            return NextResponse.json({ message: "Cart is empty" })
         }
 
-
-    } catch (error) {
-        // console.log(error)
-        return NextResponse.json("Something went wrong")
     }
+
+    catch (error) {
+        // console.log(error)
+        if (error instanceof Error) {
+            return NextResponse.json({ message: "Something went wrong", err: error.message }, {
+                status: 500,
+            })
+        } else {
+            console.log(error)
+            return NextResponse.json("There is an error, check console")
+        }
+    }
+
 }
+
+
 
 export async function POST(request: NextRequest) {
 
