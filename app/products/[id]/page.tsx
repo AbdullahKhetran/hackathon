@@ -71,7 +71,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                             <Quantity />
                             <div className="flex my-4 gap-2">
                                 <AddToCartButton content="Add to Cart" />
-                                <h2 className="self-center text-3xl font-bold tracking-widest">{matchingProduct?.price}</h2>
+                                <h2 className="self-center text-3xl font-bold tracking-widest">{"$" + matchingProduct?.price}</h2>
                             </div>
                         </div>
 

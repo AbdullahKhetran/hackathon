@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const paramUserId = params.get("userid")
     // user id was inserted from cookie
 
-    console.log("User id in params is " + paramUserId)
+    // console.log("User id in params is " + paramUserId)
 
     try {
 
