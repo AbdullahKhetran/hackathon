@@ -1,17 +1,9 @@
 import { Product } from "@/types/Product"
 import Image from "next/image"
-import imageUrlBuilder from '@sanity/image-url'
-import clientConfig from "@/sanity/config/client-config"
 import Link from "next/link"
 import { Brand } from "@/types/Brands"
+import { urlFor } from "@/sanity/sanity-utils"
 
-// Image Url builder
-const builder = imageUrlBuilder(clientConfig)
-
-// source will be image
-function urlFor(source: Object) {
-    return builder.image(source)
-}
 
 export function displayProducts(products: Product[]) {
     return (
@@ -38,7 +30,7 @@ export function displayProducts(products: Product[]) {
                     <h1 className="mt-1 text-lg font-bold opacity-60 break-words">
                         {product.category}
                     </h1>
-                    <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
+                    <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{"$" + product.price}</h2>
                 </Link>
             ))}
         </div >
@@ -74,7 +66,7 @@ export function displayFeaturedProduct(product: Product) {
                 width={370}
                 height={394} />
             <h1 className="mt-1 text-xl font-semibold break-words tracking-wide">{product.name}</h1>
-            <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{product.price}</h2>
+            <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{"$" + product.price}</h2>
         </Link>
 
     )

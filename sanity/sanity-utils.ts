@@ -2,6 +2,15 @@ import { Product } from "@/types/Product"
 import clientConfig from "@/sanity/config/client-config"
 import { createClient, groq } from "next-sanity";
 import { Brand } from "@/types/Brands";
+import imageUrlBuilder from "@sanity/image-url"
+
+// Image Url builder
+const builder = imageUrlBuilder(clientConfig)
+
+// source will be image
+export function urlFor(source: Object) {
+    return builder.image(source)
+}
 
 
 export function getAllProducts(): Promise<Product[]> {
@@ -88,3 +97,19 @@ export function getFeaturedProducts(): Promise<Product[]> {
         }`
     )
 }
+
+
+export function getSpecificProduct(productId: string): Promise<Product> {
+    return createClient(clientConfig).fetch(
+        groq`*[_type == "products" && slug.current == $productId][0]{
+            _id,
+            name,            
+            price,
+            category,
+            image,
+            slug,
+    }`,
+        { productId }
+    )
+}
+
