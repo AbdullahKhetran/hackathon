@@ -11,7 +11,7 @@ export type Product = {
         current: string,
         _type: string
     },
-    price: string,
+    price: number,
     details: PortableTextBlock[],
     care: PortableTextBlock[],
 
