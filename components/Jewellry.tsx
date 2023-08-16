@@ -45,7 +45,7 @@ export default function Jewellry() {
                     />
                     <div className="flex flex-col gap-8">
                         <p className="max-w-[100%] text-xl text-[#212121] leading-relaxed text-justify">This piece is ethically crafted in our small family-owned workshop in Peru with unmatched attention to detail and care. The Natural color is the actual natural color of the fiber, undyed and 100% traceable.</p>
-                        <Button content="See all products" />
+                        <Button content="See all products" path="/products" />
                     </div>
                 </div>
             </div>
