@@ -10,17 +10,17 @@ export async function GET(request: NextRequest) {
 
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
+    // user id was inserted from cookie
+
+    console.log("User id in params is " + paramUserId)
 
     try {
-        const cookieUserId = cookies().get("userid")
 
-        if (paramUserId == cookieUserId?.value) {
-
+        if (paramUserId) {
             const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            return NextResponse.json({ data: res })
-
+            return NextResponse.json(res)
         } else {
             const userId = uuid()
             cookies().set("userid", userId)
