@@ -2,12 +2,6 @@ require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { cookies } from "next/headers";
 import { ShoppingCart } from "lucide-react"
-import { Trash2 } from 'lucide-react';
-import Image from "next/image";
-import Link from "next/link";
-import { getSpecificProduct, urlFor } from "@/sanity/sanity-utils";
-import { QuantityButtons } from "../Product/Quantity";
-import { Item } from "@radix-ui/react-dropdown-menu";
 import { DisplayProducts } from "./ProductCard";
 
 
