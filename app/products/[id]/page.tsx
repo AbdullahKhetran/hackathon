@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { getAllProducts } from "@/sanity/sanity-utils";
 import Footer from "@/components/Footer/Footer";
-import imageUrlBuilder from "@sanity/image-url"
-import clientConfig from "@/sanity/config/client-config";
 import { AddToCartButton } from "@/components/Buttons";
 import Navbar from "@/components/Navbar/Navbar";
 import Copyright from "@/components/Footer/Copyright";
@@ -10,15 +8,7 @@ import Size from "@/components/Product/Size";
 import Quantity from "@/components/Product/Quantity";
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
-
-// Image Url builder
-const builder = imageUrlBuilder(clientConfig)
-
-// source will be image
-function urlFor(source: Object) {
-    return builder.image(source)
-}
-
+import { urlFor } from "@/sanity/sanity-utils";
 
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
@@ -65,7 +55,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         <div className="flex flex-col gap-10 max-w-[70%] mt-16">
                             <div className=" flex flex-col gap-1">
                                 <h1 className="text-3xl tracking-wider text-darkGray">{matchingProduct?.name}</h1>
-                                <h2 className="text-2xl font-semibold opacity-50">{matchingProduct?.category}</h2>
+                                <h2 className="text-2xl font-semibold text-black/50">{matchingProduct?.category}</h2>
                             </div>
                             <Size />
                             <Quantity />

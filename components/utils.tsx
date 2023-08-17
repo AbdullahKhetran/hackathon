@@ -27,7 +27,7 @@ export function displayProducts(products: Product[]) {
                         height={270}
                     />
                     <h1 className="mt-1 text-xl font-semibold break-words tracking-wide">{product.name}</h1>
-                    <h1 className="mt-1 text-lg font-bold opacity-60 break-words">
+                    <h1 className="mt-1 text-lg font-bold   text-black/60 break-words">
                         {product.category}
                     </h1>
                     <h2 className="mt-1 text-2xl font-semibold tracking-wide" >{"$" + product.price}</h2>
