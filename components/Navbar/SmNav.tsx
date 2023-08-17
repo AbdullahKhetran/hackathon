@@ -1,26 +1,21 @@
-import Link from "next/link";
-import Image from "next/image";
-import logo from "@/public/Logo.webp"
-import Burger from "./Burger";
+"use client"
+import OpenMenu from "./openMenu";
+import CloseMenu from "./closedMenu";
+import { useState } from "react";
 
 export default function SmNav() {
+    const [burger, setBurger] = useState(false)
+
+    function changeState() {
+        setBurger(!burger)
+    }
 
     return (
-        <div className="flex justify-between mx-8 md:mx-16 my-[5vh]">
-            {/* Logo */}
-            <Link href="/">
-                <Image
-                    src={logo}
-                    alt="Logo"
-                    width={140}
-                    height={35}
-                />
-            </Link>
-            <Burger />
-
+        <div className=" my-8 mx-8 md:mx-16 ">
+            {burger ?
+                <OpenMenu onShow={changeState} /> :
+                <CloseMenu onShow={changeState} />
+            }
         </div>
-
-
-
     )
 }

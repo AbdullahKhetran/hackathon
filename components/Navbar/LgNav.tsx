@@ -29,7 +29,7 @@ export default function LgNav() {
             <div className="flex gap-2 p-1 border rounded-md w-[30%]">
 
                 <Search size={20} strokeWidth={1} />
-                <input type="type" placeholder="Search products" />
+                <input type="type" placeholder="Search products" className="grow focus:outline-none" />
             </div>
 
             <div className=" ">
