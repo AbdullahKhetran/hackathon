@@ -25,7 +25,7 @@ const featuredProduct = {
         {
             name: "price",
             title: "Price",
-            type: "string",
+            type: "number",
         },
         {
 

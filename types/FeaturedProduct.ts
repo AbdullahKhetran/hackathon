@@ -3,7 +3,7 @@ export type FeaturedProduct = {
     createdAt: Date,
     image: string,
     title: string,
-    price: string,
+    price: number,
     slug: {
         current: string,
         _type: string
