@@ -5,7 +5,7 @@ import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "./ProductCard";
 
 
-export const cartData = async () => {
+const cartData = async () => {
     const uid = await cookies().get("userid")?.value as string
     // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
 
@@ -20,7 +20,7 @@ export const cartData = async () => {
 }
 
 
-export function EmptyCart() {
+function EmptyCart() {
     return (
         <div className="flex flex-col items-center gap-4">
             <ShoppingCart size={140} />
@@ -44,11 +44,8 @@ export async function CartPage() {
     return (
         <div>
             <h1 className="font-bold text-xl">Shopping Cart</h1>
-            {/* <CartData /> */}
             <DisplayProducts res={result} />
-
         </div>
-
     )
 }
 

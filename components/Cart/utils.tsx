@@ -1,9 +1,8 @@
 import { Cart } from "@/lib/drizzle";
-import { cartData } from "./CartData";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 
 
-export type MyProduct = {
+type MyProduct = {
     _id: string,
     name: string,
     price: number,
@@ -12,8 +11,8 @@ export type MyProduct = {
     slug: { current: string; _type: string; },
 }
 
-export let productId: string[] = []
-export let products: MyProduct[] = []
+let productId: string[] = []
+let products: MyProduct[] = []
 
 
 export async function getIdsFromDb(items: Cart[]) {
@@ -33,12 +32,4 @@ export async function getProductsFromSanity(Ids: string[]) {
     }
     // console.log(products)
     return products
-}
-
-
-
-export async function Caller() {
-    const res = await cartData()
-    getIdsFromDb(res)
-    getProductsFromSanity(productId)
 }

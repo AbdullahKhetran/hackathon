@@ -6,7 +6,6 @@ import { urlFor } from "@/sanity/sanity-utils"
 
 
 export async function DisplayProducts({ res }: { res: Cart[] }) {
-    // const { res } = props
     let productsID = await getIdsFromDb(res)
     let products = await getProductsFromSanity(productsID)
 

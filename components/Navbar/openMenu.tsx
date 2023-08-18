@@ -38,19 +38,19 @@ export default function OpenMenu({ onShow }: Props) {
                 </button>
             </div>
 
-            <div className="flex flex-col grow justify-center gap-5 items-center text-lg ">
+            <div className="flex flex-col grow justify-center gap-5 items-center text-lg">
 
                 {/* Cart Icon */}
                 <Link href={"/cart"} className="flex flex-col relative items-end py-2 px-4 bg-socialIconbg rounded-[50%] w-max">
-                    <span className="bg-[#f02d34] rounded-[50%] w-6 h-6 text-[#eee] text-center  font-semibold  ">0</span>
+                    <span className="bg-[#f02d34] rounded-[50%] w-6 h-6 text-[#eee] text-center font-semibold">0</span>
                     <ShoppingCart size={32} />
                 </Link>
 
 
-                <Link href="/female" >Female</Link>
-                <Link href="/male" >Male</Link>
-                <Link href="/kids" >Kids</Link>
-                <Link href="/products" >All Products</Link>
+                <Link href="/female">Female</Link>
+                <Link href="/male">Male</Link>
+                <Link href="/kids">Kids</Link>
+                <Link href="/products">All Products</Link>
             </div>
         </div>
     )
