@@ -1,4 +1,4 @@
-import { PortableTextBlock } from "sanity";
+import { Image, PortableTextBlock } from "sanity";
 
 export type Product = {
     _id: string,
@@ -6,7 +6,8 @@ export type Product = {
     name: string,
     gender: string,
     category: string,
-    image: string,
+    // image: string,
+    image: Image,
     slug: {
         current: string,
         _type: string

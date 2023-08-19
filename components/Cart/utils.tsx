@@ -1,5 +1,6 @@
 import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
+import { Image } from "sanity";
 
 
 type MyProduct = {
@@ -7,7 +8,8 @@ type MyProduct = {
     name: string,
     price: number,
     category: string,
-    image: any,
+    // image: any,
+    image: Image,
     slug: { current: string; _type: string; },
 }
 
