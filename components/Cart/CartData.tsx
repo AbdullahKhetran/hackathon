@@ -42,9 +42,13 @@ export async function CartPage() {
         )
     }
     return (
-        <div>
-            <h1 className="font-bold text-xl">Shopping Cart</h1>
+        <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+            {/* Post request krte hue product id bhi bheje (isko sanity ke product .slug.current ke equal rkhte hain. basically db ki item ki product id sanity ke item ka slug hoga. In dono ko match krte hain) */}
+
+            <h1 className="font-bold text-2xl">Shopping Cart</h1>
+
             <DisplayProducts res={result} />
+
         </div>
     )
 }
