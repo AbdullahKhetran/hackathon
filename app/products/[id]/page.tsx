@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getAllProducts } from "@/sanity/sanity-utils";
 import Footer from "@/components/Footer/Footer";
-import { AddToCartButton } from "@/components/Buttons";
+// import { AddToCartButton } from "@/components/Buttons";
 import Navbar from "@/components/Navbar/Navbar";
 import Copyright from "@/components/Footer/Copyright";
 import Size from "@/components/Product/Size";
@@ -9,6 +9,9 @@ import Quantity from "@/components/Product/Quantity";
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 import { urlFor } from "@/sanity/sanity-utils";
+import { handleAddToCart } from "@/lib/utils";
+import { Minus, Plus, ShoppingCart } from "lucide-react";
+import { Order } from "@/components/productPage/Order";
 
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
@@ -52,18 +55,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         </div>
 
                         {/* Order */}
-                        <div className="flex flex-col gap-10 max-w-[70%] mt-16">
-                            <div className=" flex flex-col gap-1">
-                                <h1 className="text-3xl tracking-wider text-darkGray">{matchingProduct?.name}</h1>
-                                <h2 className="text-2xl font-semibold text-black/50">{matchingProduct?.category}</h2>
-                            </div>
-                            <Size />
-                            <Quantity />
-                            <div className="flex my-4 gap-2">
-                                <AddToCartButton content="Add to Cart" />
-                                <h2 className="self-center text-3xl font-bold tracking-widest">{"$" + matchingProduct?.price}</h2>
-                            </div>
-                        </div>
+                        <Order matchingProduct={matchingProduct!} />
 
                     </div>
 
