@@ -52,14 +52,14 @@ export async function POST(request: NextRequest) {
     try {
         if (req.productid && req.quantity) {
 
-            let uid = cookies().get("userid")?.value
+            const uid = cookies().get("userid")?.value as string
 
-            if (!uid) {
-                cookies().set("userid", uuid())
+            // if (!uid) {
+            //     cookies().set("userid", uuid())
 
-            }
+            // }
 
-            uid = cookies().get("userid")?.value as string
+            // uid = cookies().get("userid")?.value as string
 
             const res = await db.insert(cartTable).values({
                 userid: uid,
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
             }).returning()
 
         } else {
-            throw new Error("Product id and quantity is required")
+            return NextResponse.json("Product id and quantity is required")
         }
 
     } catch (error) {

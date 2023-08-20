@@ -31,12 +31,12 @@ export async function handleAddToCart({ product, quantity, uid }: Props) {
   const res = await fetch("api/cart", {
     method: "POST",
     body: JSON.stringify({
-      user_id: uid,
-      product_id: product._id,
+      userid: uid,
+      productid: product._id,
       quantity: quantity,
     })
   })
-
+  console.log(res)
   if (!res.ok) {
     throw new Error("Could not add to cart")
   }
