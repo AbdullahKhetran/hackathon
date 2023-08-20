@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     const req: NewCart = await request.json();
 
     try {
-        if (req.productid && req.quantity) {
+        if (req.productid && req.quantity && req.userid) {
 
             // const uid = cookies().get("userid")?.value as string
 
@@ -68,8 +68,10 @@ export async function POST(request: NextRequest) {
                 quantity: req.quantity
             }).returning()
 
+            return NextResponse.json(res)
+
         } else {
-            return NextResponse.json("Product id and quantity is required")
+            return NextResponse.json("User Id, Product Id and Quantity is required")
         }
 
     } catch (error) {
