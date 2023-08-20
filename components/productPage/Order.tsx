@@ -12,10 +12,10 @@ type Props = {
     matchingProduct: Product,
 }
 
-export function Order({ matchingProduct }: Props) {
+export async function Order({ matchingProduct }: Props) {
     const [quantity, setQuantity] = useState(1)
     // const uid = auth() as unknown as string
-    const myuserid = auth() as unknown as string
+    const myuserid = await auth() as unknown as string
     console.log(myuserid)
 
     return (
