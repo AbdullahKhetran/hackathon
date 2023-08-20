@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     try {
         if (req.productid && req.quantity) {
 
-            const uid = cookies().get("userid")?.value as string
+            // const uid = cookies().get("userid")?.value as string
 
             // if (!uid) {
             //     cookies().set("userid", uuid())
@@ -61,8 +61,9 @@ export async function POST(request: NextRequest) {
 
             // uid = cookies().get("userid")?.value as string
 
+
             const res = await db.insert(cartTable).values({
-                userid: uid,
+                userid: req.userid,
                 productid: req.productid,
                 quantity: req.quantity
             }).returning()
