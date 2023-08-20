@@ -1,7 +1,5 @@
 import { cartTable, db, Cart, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 as uuid } from "uuid";
-import { cookies } from 'next/headers'
 import { eq } from "drizzle-orm";
 
 
@@ -10,37 +8,22 @@ export async function GET(request: NextRequest) {
 
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
-    // user id was inserted from cookie
 
     // console.log("User id in params is " + paramUserId)
 
     try {
+        const uid = paramUserId as string;
+        const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-        if (paramUserId) {
-            const uid = paramUserId as string;
-            const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
-
-            return NextResponse.json(res)
-        } else {
-            const userId = uuid()
-            cookies().set("userid", userId)
-            return NextResponse.json({ message: "Cart is empty" })
-        }
-
+        return NextResponse.json(res)
     }
 
     catch (error) {
-        // console.log(error)
-        if (error instanceof Error) {
-            return NextResponse.json({ message: "Something went wrong", err: error.message }, {
-                status: 500,
-            })
-        } else {
-            console.log(error)
-            return NextResponse.json("There is an error, check console")
-        }
+        return NextResponse.json(
+            { message: "Something went wrong", err: error },
+            { status: 500, }
+        )
     }
-
 }
 
 
