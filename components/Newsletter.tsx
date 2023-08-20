@@ -10,7 +10,7 @@ export default function Newsletter() {
                 <h1 className="font-bold text-4xl leading-snug text-center">Subscribe to our Newsletter</h1>
                 <p className="text-xl text-center">Get the latest information and promo offers directly</p>
                 <input type="text" placeholder="Input email address" className="border border-black p-2 " />
-                <Button content="Subscribe" path="" disabled={true} />
+                <Button content="Subscribe" path="/" disabled={true} />
             </div>
         </div>
     )

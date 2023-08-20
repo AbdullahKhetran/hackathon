@@ -17,3 +17,10 @@ export type Product = {
     care: PortableTextBlock[],
 
 }
+
+// export type TempProps = {
+//     _id: string,
+//     name: string,
+//     category: string,
+//     price: number
+// }
