@@ -5,33 +5,34 @@
 //   return twMerge(clsx(inputs))
 // }
 
+
 import { v4 as uuid } from "uuid";
 import { cookies } from "next/headers"
 import { Product } from "@/types/Product";
+// import {  TempProps } from "@/types/Product";
+
+
 
 type Props = {
-  matchingProduct: Product;
-  quantity: number
+  product: Product,
+  quantity: number,
+  uid: string,
 }
 
-export async function handleAddToCart({ matchingProduct, quantity }: Props) {
-  // check whether cookie is present
-  let uid = await cookies().get("userid")?.value
+// This is temp
+// type Props2 = {
+//   product: TempProps;
+//   quantity: number,
+//   uid: string
+// }
 
-  // if undefined then set it
-  if (uid === undefined) {
-    cookies().set("userid", uuid())
-  }
-
-  // now get it back, in case it was undefined
-  uid = await cookies().get("userid")?.value // this should be string
-
+export async function handleAddToCart({ product, quantity, uid }: Props) {
 
   const res = await fetch("api/cart", {
     method: "POST",
     body: JSON.stringify({
       user_id: uid,
-      product_id: matchingProduct._id,
+      product_id: product._id,
       quantity: quantity,
     })
   })
