@@ -11,7 +11,7 @@ export default async function CartPage() {
     // console.log(uid)
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
     const result: Cart[] = await res.json()
     // console.log(result) // an array
