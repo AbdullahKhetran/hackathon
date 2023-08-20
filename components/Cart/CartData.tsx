@@ -1,3 +1,4 @@
+"use client"
 require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
@@ -7,6 +8,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 export default async function CartPage() {
     const uid = useAppSelector((state) => state.auth.value.uid)
+    // console.log(uid)
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
@@ -21,8 +23,7 @@ export default async function CartPage() {
                 <EmptyCart />
             </div>
         )
-    }
-    return (
+    } else return (
         <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
             {/* Post request krte hue product id bhi bheje (isko sanity ke product .slug.current ke equal rkhte hain. basically db ki item ki product id sanity ke item ka slug hoga. In dono ko match krte hain) */}
 
