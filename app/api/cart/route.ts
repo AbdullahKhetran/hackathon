@@ -52,30 +52,29 @@ export async function POST(request: NextRequest) {
     try {
         if (req.productid && req.quantity && req.userid) {
 
-            // const uid = cookies().get("userid")?.value as string
-
-            // if (!uid) {
-            //     cookies().set("userid", uuid())
-
-            // }
-
-            // uid = cookies().get("userid")?.value as string
-
-
             const res = await db.insert(cartTable).values({
                 userid: req.userid,
                 productid: req.productid,
                 quantity: req.quantity
             }).returning()
 
-            return NextResponse.json(res)
+            return NextResponse.json(
+                { message: "Data added successfully" },
+                { status: 200 }
+            )
 
         } else {
-            return NextResponse.json("User Id, Product Id and Quantity is required")
+            return NextResponse.json(
+                { message: "User Id, Product Id and Quantity is required" },
+                { status: 400 }
+            )
         }
 
     } catch (error) {
         console.log(error)
-        return NextResponse.json("Post request didnt go as expected")
+        return NextResponse.json(
+            { err: error },
+            { status: 500 }
+        )
     }
 }
