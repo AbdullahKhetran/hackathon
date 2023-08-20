@@ -9,8 +9,8 @@ const cartData = async () => {
     const uid = await cookies().get("userid")?.value as string
 
     console.log(`From cartData(): User id stored in cookie is ${uid}`)
-    const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
+    // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
 
 
     const result: Cart[] = await res.json()
