@@ -3,20 +3,55 @@ import { handleAddToCart } from "@/lib/utils"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Product } from "@/types/Product"
 import Size from "../Product/Size"
-// import QtyButtons from "./QtyButtons"
 import { useState } from "react"
-import { auth } from "@/lib/serverActions"
-// import { TempProps } from "@/types/Product"
+import { v4 as uuid } from "uuid";
+// redux
+import { useAppSelector } from "@/redux/hooks";
+import { AppDispatch } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { addUserId, removeUserId } from "@/redux/features/authSlice";
 
 type Props = {
     matchingProduct: Product,
 }
 
-export async function Order({ matchingProduct }: Props) {
+
+// type Prop2 = {
+//     onButtonClick: () => void
+// }
+
+// function Auth({ onButtonClick }: Prop2) {
+
+//     const dispatch = useDispatch<AppDispatch>()
+//     const userId = useAppSelector((state) => state.auth.value.uid)
+
+//     if (userId.length === 0) {
+//         dispatch(addUserId(uuid()))
+//     }
+
+//     return (
+//         <button onClick={onButtonClick}
+//             className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
+//         >
+//             <ShoppingCart />
+//             <span> Add to Cart</span>
+//         </button>
+//     )
+// }
+
+export function Order({ matchingProduct }: Props) {
+
     const [quantity, setQuantity] = useState(1)
-    // const uid = auth() as unknown as string
-    const myuserid = await auth() as unknown as string
-    console.log(myuserid)
+
+    // User Id
+    const dispatch = useDispatch<AppDispatch>()
+    const userIdFromState = useAppSelector((state) => state.auth.value.uid)
+
+    if (userIdFromState.length === 0) {
+        dispatch(addUserId(uuid()))
+    }
+    const userId = useAppSelector((state) => state.auth.value.uid)
+    console.log(userId)
 
     return (
         <div className="flex flex-col gap-10 max-w-[70%] mt-16">
@@ -56,14 +91,22 @@ export async function Order({ matchingProduct }: Props) {
             <div className="flex my-4 gap-2">
 
                 {/* Form because I have to execute a function containing server action */}
-                <form action={auth}>
+                {/* <form action={auth}>
                     <button onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: myuserid })}
                         className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
                     >
                         <ShoppingCart />
                         <span> Add to Cart</span>
                     </button>
-                </form>
+                </form> */}
+
+
+                <button onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: userId })}
+                    className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
+                >
+                    <ShoppingCart />
+                    <span> Add to Cart</span>
+                </button>
 
 
                 <h2 className="self-center text-3xl font-bold tracking-widest">{"$" + matchingProduct?.price}</h2>
