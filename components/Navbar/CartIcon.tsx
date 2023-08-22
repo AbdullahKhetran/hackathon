@@ -4,7 +4,7 @@ import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 
 export function LgNavCartIcon() {
-    const userid = useAppSelector((state) => state.auth.value.uid)
+    const userid = useAppSelector((state) => state.auth.uid)
     console.log(userid)
 
     return (
