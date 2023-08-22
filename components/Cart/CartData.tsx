@@ -24,7 +24,7 @@ export default async function CartPage() {
 
                 <h1 className="font-bold text-2xl">Shopping Cart</h1>
 
-                <DisplayProducts res={result} />
+                {/* <DisplayProducts res={result} /> */}
 
             </div>
         )

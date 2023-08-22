@@ -1,3 +1,4 @@
+require("dotenv").config
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk"
 import { visionTool } from '@sanity/vision'
@@ -5,8 +6,8 @@ import { visionTool } from '@sanity/vision'
 import schemas from "./sanity/schemas";
 
 const config = defineConfig({
-    projectId: "qffp0dty",
-    dataset: "production",
+    projectId: process.env.SANITY_PROJECT_ID as string,
+    dataset: process.env.SANITY_DATASET as string,
     title: "Hackathon site",
     apiVersion: "2023-07-04",
     basePath: "/admin",
