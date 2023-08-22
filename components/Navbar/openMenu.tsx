@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "@/public/Logo.webp"
 import { useEffect } from "react";
 import { X, ShoppingCart } from 'lucide-react';
+import { useAppSelector } from "@/redux/hooks";
 
 
 type Props = {
@@ -20,6 +21,9 @@ export default function OpenMenu({ onShow }: Props) {
             document.body.style.overflow = 'auto';
         };
     }, []);
+
+    const userid = useAppSelector((state) => state.auth.value.uid)
+    console.log(userid)
 
     return (
         <div className="flex flex-col p-8 fixed top-0 left-0  w-full h-full bg-white">
@@ -41,7 +45,7 @@ export default function OpenMenu({ onShow }: Props) {
             <div className="flex flex-col grow justify-center gap-5 items-center text-lg">
 
                 {/* Cart Icon */}
-                <Link href={"/cart"} className="flex flex-col relative items-end py-2 px-4 bg-socialIconbg rounded-[50%] w-max">
+                <Link href={`/cart?userid=${userid}`} className="flex flex-col relative items-end py-2 px-4 bg-socialIconbg rounded-[50%] w-max">
                     <span className="bg-[#f02d34] rounded-[50%] w-6 h-6 text-[#eee] text-center font-semibold">0</span>
                     <ShoppingCart size={32} />
                 </Link>

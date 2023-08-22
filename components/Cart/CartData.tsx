@@ -1,22 +1,38 @@
+"use client"
 require("dotenv").config
 import { Cart } from "@/lib/drizzle";
-import { cookies } from "next/headers";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "./ProductCard";
+import { useAppSelector } from "@/redux/hooks";
 
 
-const cartData = async () => {
-    const uid = await cookies().get("userid")?.value as string
+export default async function CartPage() {
+    const uid = useAppSelector((state) => state.auth.value.uid)
+    console.log("from CartPage uid is", uid)
 
-    console.log(`From cartData(): User id stored in cookie is ${uid}`)
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/?userid=${uid}`)
-
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
     const result: Cart[] = await res.json()
     // console.log(result) // an array
 
-    return result
+    if (result.length > 0) {
+        return (
+            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+
+                <h1 className="font-bold text-2xl">Shopping Cart</h1>
+
+                <DisplayProducts res={result} />
+
+            </div>
+        )
+    } else return (
+        <div>
+            <h1 className="font-bold text-xl">Shopping Cart</h1>
+            <EmptyCart />
+        </div>
+    )
+
 }
 
 
@@ -30,26 +46,4 @@ function EmptyCart() {
 }
 
 
-export async function CartPage() {
-    const result = await cartData()
-    // console.log("cart data from api is", result)
-    if (result.length === 0) {
-        return (
-            <div>
-                <h1 className="font-bold text-xl">Shopping Cart</h1>
-                <EmptyCart />
-            </div>
-        )
-    }
-    return (
-        <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
-            {/* Post request krte hue product id bhi bheje (isko sanity ke product .slug.current ke equal rkhte hain. basically db ki item ki product id sanity ke item ka slug hoga. In dono ko match krte hain) */}
-
-            <h1 className="font-bold text-2xl">Shopping Cart</h1>
-
-            <DisplayProducts res={result} />
-
-        </div>
-    )
-}
 

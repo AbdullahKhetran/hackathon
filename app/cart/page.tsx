@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer/Footer"
 import Copyright from "@/components/Footer/Copyright"
 import Navbar from "@/components/Navbar/Navbar"
-import { CartPage } from "@/components/Cart/CartData"
+import CartPage from "@/components/Cart/CartData"
 
 
 export default function Home() {

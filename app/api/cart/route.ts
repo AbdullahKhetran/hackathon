@@ -1,7 +1,5 @@
 import { cartTable, db, Cart, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 as uuid } from "uuid";
-import { cookies } from 'next/headers'
 import { eq } from "drizzle-orm";
 
 
@@ -10,37 +8,22 @@ export async function GET(request: NextRequest) {
 
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
-    // user id was inserted from cookie
 
-    // console.log("User id in params is " + paramUserId)
+    console.log("User id in params is " + paramUserId)
 
     try {
+        const uid = paramUserId as string;
+        const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-        if (paramUserId) {
-            const uid = paramUserId as string;
-            const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
-
-            return NextResponse.json(res)
-        } else {
-            const userId = uuid()
-            cookies().set("userid", userId)
-            return NextResponse.json({ message: "Cart is empty" })
-        }
-
+        return NextResponse.json(res)
     }
 
     catch (error) {
-        // console.log(error)
-        if (error instanceof Error) {
-            return NextResponse.json({ message: "Something went wrong", err: error.message }, {
-                status: 500,
-            })
-        } else {
-            console.log(error)
-            return NextResponse.json("There is an error, check console")
-        }
+        return NextResponse.json(
+            { message: "Something went wrong", err: error },
+            { status: 500, }
+        )
     }
-
 }
 
 
@@ -50,29 +33,31 @@ export async function POST(request: NextRequest) {
     const req: NewCart = await request.json();
 
     try {
-        if (req.productid && req.quantity) {
-
-            const uid = cookies().get("userid")?.value as string
-
-            // if (!uid) {
-            //     cookies().set("userid", uuid())
-
-            // }
-
-            // uid = cookies().get("userid")?.value as string
+        if (req.productid && req.quantity && req.userid) {
 
             const res = await db.insert(cartTable).values({
-                userid: uid,
+                userid: req.userid,
                 productid: req.productid,
                 quantity: req.quantity
             }).returning()
 
+            return NextResponse.json(
+                { message: "Data added successfully" },
+                { status: 200 }
+            )
+
         } else {
-            return NextResponse.json("Product id and quantity is required")
+            return NextResponse.json(
+                { message: "User Id, Product Id and Quantity is required" },
+                { status: 400 }
+            )
         }
 
     } catch (error) {
         console.log(error)
-        return NextResponse.json("Post request didnt go as expected")
+        return NextResponse.json(
+            { err: error },
+            { status: 500 }
+        )
     }
 }

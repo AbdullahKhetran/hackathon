@@ -27,4 +27,4 @@ npm i
 npm run dev
 ```
 
-5. Visit [localhost](http://localhost:3000/) at browser
+6. Visit [localhost](http://localhost:3000/) at browser

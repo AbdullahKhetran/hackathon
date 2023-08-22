@@ -6,8 +6,7 @@
 // }
 
 
-import { v4 as uuid } from "uuid";
-import { cookies } from "next/headers"
+
 import { Product } from "@/types/Product";
 // import {  TempProps } from "@/types/Product";
 
@@ -28,7 +27,7 @@ type Props = {
 
 export async function handleAddToCart({ product, quantity, uid }: Props) {
 
-  const res = await fetch("api/cart", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart`, {
     method: "POST",
     body: JSON.stringify({
       userid: uid,

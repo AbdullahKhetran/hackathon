@@ -21,7 +21,7 @@ export async function getIdsFromDb(items: Cart[]) {
     items.map((item) => (
         productId.push(item.productid)
     ))
-    console.log(productId)
+    // console.log(productId)
     return productId
 }
 
