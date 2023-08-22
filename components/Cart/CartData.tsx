@@ -2,7 +2,7 @@
 require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
-import { DisplayProducts } from "./ProductCard";
+import { DisplayProducts } from "@/components/Cart/ProductCard";
 import { useAppSelector } from "@/redux/hooks";
 
 
@@ -16,7 +16,7 @@ export default async function CartPage() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
     const result: Cart[] = await res.json()
-    // console.log(result) // an array
+    console.log(result) // an array
 
     if (result.length > 0) {
         return (
