@@ -17,7 +17,9 @@ let productId: string[] = []
 let products: MyProduct[] = []
 
 
-export async function getIdsFromDb(items: Cart[]) {
+export function getIdsFromDb(items: Cart[]) {
+    console.log("Entered getIdsFromDb function")
+
     items.map((item) => (
         productId.push(item.productid)
     ))
@@ -26,6 +28,8 @@ export async function getIdsFromDb(items: Cart[]) {
 }
 
 export async function getProductsFromSanity(Ids: string[]) {
+    console.log("Entered getProductsFromSanity function")
+
 
     for (let index = 0; index < Ids.length; index++) {
 

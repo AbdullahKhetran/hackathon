@@ -23,7 +23,7 @@ export default function OpenMenu({ onShow }: Props) {
     }, []);
 
     const userid = useAppSelector((state) => state.auth.uid)
-    console.log(userid)
+    // console.log(userid)
 
     return (
         <div className="flex flex-col p-8 fixed top-0 left-0  w-full h-full bg-white">

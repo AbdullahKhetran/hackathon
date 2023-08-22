@@ -7,8 +7,10 @@ import { useAppSelector } from "@/redux/hooks";
 
 
 export default async function CartPage() {
+    console.log("Entered CartPage function")
+
     const uid = useAppSelector((state) => state.auth.uid)
-    console.log("from CartPage uid is", uid)
+    // console.log("from CartPage uid is", uid)
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)

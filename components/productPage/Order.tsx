@@ -15,30 +15,6 @@ type Props = {
     matchingProduct: Product,
 }
 
-
-// type Prop2 = {
-//     onButtonClick: () => void
-// }
-
-// function Auth({ onButtonClick }: Prop2) {
-
-//     const dispatch = useDispatch<AppDispatch>()
-//     const userId = useAppSelector((state) => state.auth.uid)
-
-//     if (userId.length === 0) {
-//         dispatch(addUserId(uuid()))
-//     }
-
-//     return (
-//         <button onClick={onButtonClick}
-//             className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
-//         >
-//             <ShoppingCart />
-//             <span> Add to Cart</span>
-//         </button>
-//     )
-// }
-
 export function Order({ matchingProduct }: Props) {
 
     const [quantity, setQuantity] = useState(1)
@@ -51,7 +27,7 @@ export function Order({ matchingProduct }: Props) {
         dispatch(addUserId(uuid()))
     }
     const userId = useAppSelector((state) => state.auth.uid)
-    console.log("user id from state is", userId)
+    // console.log("user id from state is", userId)
 
     return (
         <div className="flex flex-col gap-10 max-w-[70%] mt-16">
@@ -89,17 +65,6 @@ export function Order({ matchingProduct }: Props) {
             </div>
 
             <div className="flex my-4 gap-2">
-
-                {/* Form because I have to execute a function containing server action */}
-                {/* <form action={auth}>
-                    <button onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: myuserid })}
-                        className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
-                    >
-                        <ShoppingCart />
-                        <span> Add to Cart</span>
-                    </button>
-                </form> */}
-
 
                 <button onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: userId })}
                     className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"

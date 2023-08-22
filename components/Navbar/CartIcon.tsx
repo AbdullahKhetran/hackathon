@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export function LgNavCartIcon() {
     const userid = useAppSelector((state) => state.auth.uid)
-    console.log(userid)
+    // console.log(userid)
 
     return (
         <Link href={`/cart?userid=${userid}`} className="flex flex-col items-end px-1 py-[4px] bg-socialIconbg rounded-[50%]">
