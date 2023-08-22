@@ -18,13 +18,15 @@ export default async function CartPage() {
     const result: Cart[] = await res.json()
     // console.log(result) // an array
 
+    const dataFromVercel: Cart[] = [{ "id": 23, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "02e5b664-fe39-4d4a-a712-5c3345a39a3f", "quantity": 3 }, { "id": 24, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "5a4cfa64-c039-49b5-86e8-e9f74979c563", "quantity": 1 }]
+
     if (result.length > 0) {
         return (
             <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
 
                 <h1 className="font-bold text-2xl">Shopping Cart</h1>
 
-                {/* <DisplayProducts res={result} /> */}
+                <DisplayProducts res={dataFromVercel} />
 
             </div>
         )
