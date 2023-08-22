@@ -22,7 +22,7 @@ export default function OpenMenu({ onShow }: Props) {
         };
     }, []);
 
-    const userid = useAppSelector((state) => state.auth.value.uid)
+    const userid = useAppSelector((state) => state.auth.uid)
     console.log(userid)
 
     return (

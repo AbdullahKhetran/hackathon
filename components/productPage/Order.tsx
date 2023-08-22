@@ -23,7 +23,7 @@ type Props = {
 // function Auth({ onButtonClick }: Prop2) {
 
 //     const dispatch = useDispatch<AppDispatch>()
-//     const userId = useAppSelector((state) => state.auth.value.uid)
+//     const userId = useAppSelector((state) => state.auth.uid)
 
 //     if (userId.length === 0) {
 //         dispatch(addUserId(uuid()))
@@ -45,12 +45,12 @@ export function Order({ matchingProduct }: Props) {
 
     // User Id
     const dispatch = useDispatch<AppDispatch>()
-    const userIdFromState = useAppSelector((state) => state.auth.value.uid)
+    const userIdFromState = useAppSelector((state) => state.auth.uid)
 
     if (userIdFromState.length === 0) {
         dispatch(addUserId(uuid()))
     }
-    const userId = useAppSelector((state) => state.auth.value.uid)
+    const userId = useAppSelector((state) => state.auth.uid)
     console.log("user id from state is", userId)
 
     return (

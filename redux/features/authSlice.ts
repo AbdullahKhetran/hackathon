@@ -9,10 +9,8 @@ type InitialState = {
     value: AuthState
 }
 
-const initialState: InitialState = {
-    value: {
-        uid: ""
-    }
+const initialState: AuthState = {
+    uid: ""
 }
 
 export const auth = createSlice({
@@ -25,9 +23,9 @@ export const auth = createSlice({
 
         addUserId: (state, action: PayloadAction<string>) => {
             return {
-                value: {
-                    uid: action.payload
-                }
+
+                uid: action.payload
+
             }
         },
 
