@@ -8,8 +8,17 @@ import Link from "next/link"
 export async function DisplayProducts({ res }: { res: Cart[] }) {
     // console.log("Entered DisplayProducts function")
 
-    let productsID = getIdsFromDb(res)
-    let products = await getProductsFromSanity(productsID)
+    // let productsID = getIdsFromDb(res)
+    // let products = await getProductsFromSanity(productsID)
+
+    const dummyData = [{
+        _id: "a",
+        name: "Dress",
+        category: "Clothes",
+        price: 200
+    }]
+
+    const products = dummyData
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
@@ -20,14 +29,14 @@ export async function DisplayProducts({ res }: { res: Cart[] }) {
                 {products.map((product) => (
 
                     <div key={product._id} className="flex flex-col md:flex-row gap-8 mt-8">
-                        <Image
+                        {/* <Image
                             src={urlFor(product.image).url()}
                             alt="Product image"
                             width={240}
                             height={240}
                             className="rounded-3xl"
 
-                        />
+                        /> */}
                         <div className="flex justify-between grow">
                             <div className="flex flex-col justify-between gap-[6px] text-lg">
                                 <h1 className="text-darkGray text-2xl font-light">{product.name}</h1>
