@@ -101,7 +101,7 @@ export function getFeaturedProducts(): Promise<Product[]> {
 
 export function getSpecificProduct(productId: string): Promise<Product> {
     return createClient(clientConfig).fetch(
-        groq`*[_type == "products" && slug.current == $productId][0]{
+        groq`*[_type == "products" && _id == $productId][0]{
             _id,
             name,            
             price,
