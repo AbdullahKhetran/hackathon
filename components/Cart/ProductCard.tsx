@@ -6,7 +6,7 @@ import { urlFor } from "@/sanity/sanity-utils"
 import Link from "next/link"
 
 export async function DisplayProducts({ res }: { res: Cart[] }) {
-    console.log("Entered DisplayProducts function")
+    // console.log("Entered DisplayProducts function")
 
     let productsID = getIdsFromDb(res)
     let products = await getProductsFromSanity(productsID)
