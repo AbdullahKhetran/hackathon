@@ -10,6 +10,16 @@ const nextConfig = {
             },
         ],
     },
+    // async headers() {
+    //     return [
+    //         {
+    //             source: "/app/api/cart",
+    //             headers: [
+    //                 {key:}
+    //             ]
+    //         }
+    //     ]
+    // },
     experimental: {
         serverActions: true
     }

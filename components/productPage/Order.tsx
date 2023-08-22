@@ -51,7 +51,7 @@ export function Order({ matchingProduct }: Props) {
         dispatch(addUserId(uuid()))
     }
     const userId = useAppSelector((state) => state.auth.value.uid)
-    console.log(userId)
+    console.log("user id from state is", userId)
 
     return (
         <div className="flex flex-col gap-10 max-w-[70%] mt-16">

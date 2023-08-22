@@ -6,8 +6,7 @@
 // }
 
 
-import { v4 as uuid } from "uuid";
-import { cookies } from "next/headers"
+
 import { Product } from "@/types/Product";
 // import {  TempProps } from "@/types/Product";
 
