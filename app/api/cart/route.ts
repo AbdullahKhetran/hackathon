@@ -12,10 +12,15 @@ export async function GET(request: NextRequest) {
     console.log("User id in params is " + paramUserId)
 
     try {
-        const uid = paramUserId as string;
-        const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
+        if (paramUserId) {
 
-        return NextResponse.json(res)
+            const uid = paramUserId as string;
+            const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
+
+            return NextResponse.json(res)
+        } else {
+            return NextResponse.json({ message: "Cart is Empty" })
+        }
     }
 
     catch (error) {
