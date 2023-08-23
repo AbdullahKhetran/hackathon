@@ -8,7 +8,7 @@ export function LgNavCartIcon() {
     // console.log(userid)
 
     return (
-        <Link href={`${process.env.NEXT_PUBLIC_URL}cart`} className="flex flex-col items-end px-1 py-[4px] bg-socialIconbg rounded-[50%]">
+        <Link href={"/cart"} className="flex flex-col items-end px-1 py-[4px] bg-socialIconbg rounded-[50%]">
             <span className="bg-[#f02d34] rounded-[50%]  px-1 text-[#eee]  font-semibold  text-xs">0</span>
             {/* make the value dynamic */}
             <ShoppingCart size={20} />
