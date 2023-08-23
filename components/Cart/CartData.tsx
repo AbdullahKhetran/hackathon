@@ -1,26 +1,26 @@
-// "use client"
+"use client"
 require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
-// import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 
 
 async function getData(uid: string): Promise<Cart[]> {
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+    const res = await fetch(`/api/cart?userid=${uid}`)
 
     const data = await res.json()
     return data
 }
 
 export default async function CartPage() {
-    // Dummy uid
-    const uid = "6fab6084-c2c6-4f06-b72d-3e9b97f281a7"
 
 
-    // const uid = useAppSelector((state) => state.auth.uid)
+
+    const uid = useAppSelector((state) => state.auth.uid)
 
     const result = await getData(uid)
     // console.log(result)
