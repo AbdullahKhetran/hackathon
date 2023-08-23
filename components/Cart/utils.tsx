@@ -1,3 +1,4 @@
+require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";
@@ -19,7 +20,6 @@ let products: MyProduct[] = []
 
 
 export function getIdsFromDb(items: Cart[]) {
-    // console.log("Entered getIdsFromDb function")
 
     items.map((item) => (
         productId.push(item.productid)
@@ -29,7 +29,6 @@ export function getIdsFromDb(items: Cart[]) {
 }
 
 export async function getProductsFromSanity(Ids: string[]) {
-    // console.log("Entered getProductsFromSanity function")
 
 
     for (let index = 0; index < Ids.length; index++) {
@@ -46,13 +45,8 @@ export async function FetchAndDisplay({ uid }: { uid: string }) {
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
-    // const res = await fetch(`/api/cart?userid=${uid}`)
-    // const res = await fetch(`../api/cart?userid=${uid}`)
-
-
     const result = await res.json()
-    // return data
-
+    console.log(result.length)
 
     if (result.length > 0) {
         return (

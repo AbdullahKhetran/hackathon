@@ -1,5 +1,5 @@
 "use client"
-require("dotenv").config
+// require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
