@@ -22,9 +22,7 @@ export default async function CartPage() {
 
     console.log("Result array length", result.length)
 
-    /* Make an alternate logic of this
-    When I pass hardcoded data it works fine
-     */
+    /* Make an alternate logic of this */
 
     if (result.length > 0) {
         return (
