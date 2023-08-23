@@ -17,7 +17,7 @@ async function getData(uid: string): Promise<Cart[]> {
 
 export default async function CartPage() {
     // Dummy uid
-    const uid = "251a8eca-a6af-49d9-b839-515f90e0048b"
+    const uid = "6fab6084-c2c6-4f06-b72d-3e9b97f281a7"
 
 
     // const uid = useAppSelector((state) => state.auth.uid)
