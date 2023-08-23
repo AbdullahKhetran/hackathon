@@ -6,11 +6,11 @@ import { DisplayProducts } from "@/components/Cart/ProductCard";
 import { useAppSelector } from "@/redux/hooks";
 import { use } from "react";
 
+
 async function fetchData(uid: string) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
     return res.json();
 }
-
 
 export default function CartPage() {
 
@@ -20,16 +20,18 @@ export default function CartPage() {
 
     const data = use(dataPromise)
 
-    if (data.length === 0) return <EmptyCart />
-    else return (
-        <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+    if (data.length > 0) {
+        return (
+            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
 
-            <h1 className="font-bold text-2xl">Shopping Cart</h1>
+                <h1 className="font-bold text-2xl">Shopping Cart</h1>
 
-            <DisplayProducts res={data} />
+                <DisplayProducts res={data} />
 
-        </div>
-    )
+            </div>
+        )
+    } else return <EmptyCart />
+
 
 
     // Dummy Data
