@@ -48,20 +48,16 @@ export async function FetchAndDisplay({ uid }: { uid: string }) {
     const result = await res.json()
     console.log(result.length)
 
-    if (result.length > 0) {
-        return (
-            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+    if (result.length === 0) return <EmptyCart />
+    else return (
+        <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
 
-                <h1 className="font-bold text-2xl">Shopping Cart</h1>
+            <h1 className="font-bold text-2xl">Shopping Cart</h1>
 
-                <DisplayProducts res={result} />
+            <DisplayProducts res={result} />
 
-            </div>
-        )
-    } else return (
-        <div>
-            <h1 className="font-bold text-xl">Shopping Cart</h1>
-            <EmptyCart />
         </div>
     )
+
+
 }
