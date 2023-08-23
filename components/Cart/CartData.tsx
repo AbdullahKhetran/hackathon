@@ -12,7 +12,7 @@ export default function CartPage() {
 
     const uid = useAppSelector((state) => state.auth.uid);
 
-    <FetchAndDisplay uid={uid} />
+    return <FetchAndDisplay uid={uid} />
 
     // const result = await getData(uid)
     // console.log(result)
