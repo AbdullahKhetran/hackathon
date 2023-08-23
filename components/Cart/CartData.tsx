@@ -4,24 +4,22 @@ import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
 import { useAppSelector } from "@/redux/hooks";
+import { getData } from "./utils";
+
+// async function getData(uid: string): Promise<Cart[]> {
+
+//     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+
+//     // const res = await fetch(`/api/cart?userid=${uid}`)
+//     // const res = await fetch(`../api/cart?userid=${uid}`)
 
 
-async function getData(uid: string): Promise<Cart[]> {
-
-    // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
-
-    // const res = await fetch(`/api/cart?userid=${uid}`)
-    // const res = await fetch(`../api/cart?userid=${uid}`)
-
-
-    const data = await res.json()
-    return data
-}
+//     const data = await res.json()
+//     return data
+// }
 
 export default async function CartPage() {
-
-
 
     const uid = useAppSelector((state) => state.auth.uid)
 
