@@ -20,24 +20,21 @@ let products: MyProduct[] = []
 
 
 export function getIdsFromDb(items: Cart[]) {
+    const productId: string[] = items.map((item) => item.productid);
+    return productId;
 
-    items.map((item) => (
-        productId.push(item.productid)
-    ))
-    // console.log(productId)
-    return productId
 }
 
-export async function getProductsFromSanity(Ids: string[]) {
 
+export async function getProductsFromSanity(Ids: string[]) {
+    const products: MyProduct[] = [];
 
     for (let index = 0; index < Ids.length; index++) {
-
-        let product = await getSpecificProduct(Ids[index])
-        products.push(product)
+        const product = await getSpecificProduct(Ids[index]);
+        products.push(product);
     }
-    // console.log(products)
-    return products
+
+    return products;
 }
 
 
