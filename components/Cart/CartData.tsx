@@ -4,26 +4,17 @@ import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
 import { useAppSelector } from "@/redux/hooks";
-import { getData } from "./utils";
-
-// async function getData(uid: string): Promise<Cart[]> {
-
-//     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
-
-//     // const res = await fetch(`/api/cart?userid=${uid}`)
-//     // const res = await fetch(`../api/cart?userid=${uid}`)
+import { FetchAndDisplay } from "./utils";
 
 
-//     const data = await res.json()
-//     return data
-// }
 
-export default async function CartPage() {
+export default function CartPage() {
 
-    const uid = useAppSelector((state) => state.auth.uid)
+    const uid = useAppSelector((state) => state.auth.uid);
 
-    const result = await getData(uid)
+    <FetchAndDisplay uid={uid} />
+
+    // const result = await getData(uid)
     // console.log(result)
     // console.log("Result array length", result.length)
 
@@ -46,26 +37,11 @@ export default async function CartPage() {
 
     // ----------------------------------
 
-    if (result.length > 0) {
-        return (
-            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
 
-                <h1 className="font-bold text-2xl">Shopping Cart</h1>
-
-                <DisplayProducts res={result} />
-
-            </div>
-        )
-    } else return (
-        <div>
-            <h1 className="font-bold text-xl">Shopping Cart</h1>
-            <EmptyCart />
-        </div>
-    )
 }
 
 
-function EmptyCart() {
+export function EmptyCart() {
     return (
         <div className="flex flex-col items-center gap-4">
             <ShoppingCart size={140} />
@@ -73,6 +49,3 @@ function EmptyCart() {
         </div>
     )
 }
-
-
-

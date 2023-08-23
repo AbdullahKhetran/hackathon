@@ -1,7 +1,8 @@
 import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";
-
+import { DisplayProducts } from "./ProductCard";
+import { EmptyCart } from "./CartData";
 
 type MyProduct = {
     _id: string,
@@ -40,7 +41,7 @@ export async function getProductsFromSanity(Ids: string[]) {
     return products
 }
 
-export async function getData(uid: string): Promise<Cart[]> {
+export async function FetchAndDisplay({ uid }: { uid: string }) {
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
@@ -49,6 +50,24 @@ export async function getData(uid: string): Promise<Cart[]> {
     // const res = await fetch(`../api/cart?userid=${uid}`)
 
 
-    const data = await res.json()
-    return data
+    const result = await res.json()
+    // return data
+
+
+    if (result.length > 0) {
+        return (
+            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+
+                <h1 className="font-bold text-2xl">Shopping Cart</h1>
+
+                <DisplayProducts res={result} />
+
+            </div>
+        )
+    } else return (
+        <div>
+            <h1 className="font-bold text-xl">Shopping Cart</h1>
+            <EmptyCart />
+        </div>
+    )
 }
