@@ -8,7 +8,13 @@ import { useAppSelector } from "@/redux/hooks";
 
 async function getData(uid: string) {
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        cache: "no-store",
+    })
 
     const data = await res.json()
     return data
