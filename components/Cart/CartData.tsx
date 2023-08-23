@@ -12,13 +12,21 @@ async function fetchData(uid: string) {
     return res.json();
 }
 
+function helper(uid: string) {
+
+    const dataPromise = fetchData(uid)
+    return dataPromise
+}
+
+
+
+
 export default function CartPage() {
 
     const uid = useAppSelector((state) => state.auth.uid);
 
-    const dataPromise = fetchData(uid)
 
-    const data = use(dataPromise)
+    const data = use(helper(uid))
 
     if (data.length > 0) {
         return (
