@@ -10,9 +10,9 @@ export async function DisplayProducts({ res }: { res: Cart[] }) {
 
     let productsID = getIdsFromDb(res)
 
-    const dummyProductsID = ["5fe6bb17-0e54-4374-9888-bff8bd446080", "c54b41dd-1620-49bb-bb4a-b4fb72ca726c"]
+    // const dummyProductsID = ["5fe6bb17-0e54-4374-9888-bff8bd446080", "c54b41dd-1620-49bb-bb4a-b4fb72ca726c"]
 
-    let products = await getProductsFromSanity(dummyProductsID)
+    let products = await getProductsFromSanity(productsID)
 
     // const dummyData = [{
     //     _id: "a",
