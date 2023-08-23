@@ -22,7 +22,7 @@ export default async function CartPage() {
 
     console.log("Result array length", result.length)
 
-    /* Make an alternate logic of this */
+    // TODO: Page static nahi hota, request bhejta hi rehta hai
 
     if (result.length > 0) {
         return (
@@ -40,9 +40,6 @@ export default async function CartPage() {
             <EmptyCart />
         </div>
     )
-
-
-
 }
 
 
