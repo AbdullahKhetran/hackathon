@@ -6,10 +6,10 @@ import { visionTool } from '@sanity/vision'
 import schemas from "./sanity/schemas";
 
 const config = defineConfig({
-    // projectId: process.env.SANITY_PROJECT_ID as string,
-    projectId: "qffp0dty",
-    // dataset: process.env.SANITY_DATASET as string,
-    dataset: "production",
+    projectId: process.env.SANITY_PROJECT_ID as string,
+    // projectId: "qffp0dty",
+    dataset: process.env.SANITY_DATASET as string,
+    // dataset: "production",
     title: "Hackathon site",
     apiVersion: "2023-07-04",
     basePath: "/admin",
