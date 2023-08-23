@@ -12,17 +12,35 @@ export default async function CartPage() {
     const uid = useAppSelector((state) => state.auth.uid)
     // console.log("from CartPage uid is", uid)
 
-    // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+    async function fetchData(): Promise<Cart[]> {
 
-    const result: Cart[] = await res.json()
-    // console.log(result) // an array
+        // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+
+        return res.json()
+        // console.log(result) // an array
+    }
+
+    const result = await fetchData()
+
 
     // const result: Cart[] = [{ "id": 23, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "02e5b664-fe39-4d4a-a712-5c3345a39a3f", "quantity": 3 }, { "id": 24, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "5a4cfa64-c039-49b5-86e8-e9f74979c563", "quantity": 1 }]
 
     console.log("Result array length", result.length)
 
-    // TODO: Page static nahi hota, request bhejta hi rehta hai
+    // -------------------------------
+
+    /*     Error only in Production
+    TODO: Page static nahi hota, request bhejta hi rehta hai
+    Navbar bhi nahi kholne deta
+
+    url se direct ao to load hota hai lekin empty cart show kr raha hai
+    link click kr ke ao to error.tsx wali file pr chla jata hai
+    link se aa kr refresh kro to phir empty cart show krta hai
+    data kisi bhi case me show nahi kr raha
+     */
+
+    // ----------------------------------
 
     if (result.length > 0) {
         return (
