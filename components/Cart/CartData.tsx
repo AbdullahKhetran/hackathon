@@ -9,11 +9,10 @@ import { useAppSelector } from "@/redux/hooks";
 async function getData(uid: string): Promise<Cart[]> {
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
-    // const res = await fetch(`/api/cart?userid=${uid}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
-    // What about this one
-    const res = await fetch(`../api/cart?userid=${uid}`)
+    // const res = await fetch(`/api/cart?userid=${uid}`)
+    // const res = await fetch(`../api/cart?userid=${uid}`)
 
 
     const data = await res.json()
