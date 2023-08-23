@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
         const uid = paramUserId as string;
         const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-        return NextResponse.json({ data: res })
+        return NextResponse.json(res)
     }
 
     catch (error) {
