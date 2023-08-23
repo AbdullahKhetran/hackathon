@@ -3,20 +3,13 @@ require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
-import { CallTrackerCall } from "assert";
 // import { useAppSelector } from "@/redux/hooks";
 
 
 async function getData(uid: string): Promise<Cart[]> {
 
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        cache: "no-store",
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
     const data = await res.json()
     return data
