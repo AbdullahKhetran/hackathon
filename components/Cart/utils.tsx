@@ -45,8 +45,12 @@ export async function FetchAndDisplay({ uid }: { uid: string }) {
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
-    const result = await res.json()
-    console.log(result.length)
+    const resul = await res.json()
+    console.log(resul.length)
+
+    // Dummy Data
+    const result: Cart[] = [{ "id": 23, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "02e5b664-fe39-4d4a-a712-5c3345a39a3f", "quantity": 3 }, { "id": 24, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "5a4cfa64-c039-49b5-86e8-e9f74979c563", "quantity": 1 }]
+
 
     if (result.length === 0) return <EmptyCart />
     else return (
