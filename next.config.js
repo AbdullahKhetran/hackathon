@@ -1,19 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'cdn.sanity.io',
-                port: '',
-
-            },
-        ],
-    },
     async headers() {
         return [
             {
-                source: "./api/:path*",
+                source: "./api/(.*)",
 
                 headers: [
 
@@ -28,6 +18,16 @@ const nextConfig = {
                 ]
             }
         ]
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.sanity.io',
+                port: '',
+
+            },
+        ],
     }
 }
 
