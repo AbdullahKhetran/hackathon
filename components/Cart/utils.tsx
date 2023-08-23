@@ -3,7 +3,7 @@ import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";
 import { DisplayProducts } from "./ProductCard";
-import { EmptyCart } from "./CartData";
+import { ShoppingCart } from "lucide-react";
 
 type MyProduct = {
     _id: string,
@@ -47,7 +47,7 @@ export async function FetchAndDisplay({ uid }: { uid: string }) {
 
     const result = await getData(uid)
 
-    return result.length === 0 ? <EmptyCart /> : <Display result={result} />
+    return result.length === 0 ? <EmptyCart /> : <Display cartItems={result} />
 
 }
 
@@ -57,18 +57,30 @@ async function getData(uid: string) {
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }
-
-    return res.json()
+    const data: Cart[] = await res.json() // ye array hai .json() use nahi kr skte
+    return data
 }
 
-function Display(result: any) {
+function Display({ cartItems }: { cartItems: Cart[] }) {
     return (
         <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
 
             <h1 className="font-bold text-2xl">Shopping Cart</h1>
 
-            <DisplayProducts res={result} />
+            <DisplayProducts res={cartItems} />
 
+        </div>
+    )
+}
+
+function EmptyCart() {
+    return (
+        <div>
+            <h1 className="font-bold text-xl">Shopping Cart</h1>
+            <div className="flex flex-col items-center gap-4">
+                <ShoppingCart size={140} />
+                <h1 className="font-bold text-4xl tracking-wide">Your cart is empty</h1>
+            </div>
         </div>
     )
 }

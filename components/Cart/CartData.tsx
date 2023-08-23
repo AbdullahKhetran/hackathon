@@ -4,7 +4,6 @@ import { Cart } from "@/lib/drizzle";
 import { ShoppingCart } from "lucide-react"
 import { DisplayProducts } from "@/components/Cart/ProductCard";
 import { useAppSelector } from "@/redux/hooks";
-import { use } from "react";
 import { FetchAndDisplay } from "./utils";
 
 
@@ -39,15 +38,5 @@ export default function CartPage() {
 }
 
 
-export function EmptyCart() {
-    return (
-        <div>
-            <h1 className="font-bold text-xl">Shopping Cart</h1>
-            <div className="flex flex-col items-center gap-4">
-                <ShoppingCart size={140} />
-                <h1 className="font-bold text-4xl tracking-wide">Your cart is empty</h1>
-            </div>
-        </div>
-    )
-}
+
 
