@@ -6,12 +6,12 @@ import { urlFor } from "@/sanity/sanity-utils"
 import Link from "next/link"
 
 export async function DisplayProducts({ res }: { res: Cart[] }) {
-
-    let productsID = getIdsFromDb(res)
+    let items = res
+    let Ids = getIdsFromDb(items) //productID
 
     // const dummyProductsID = ["5fe6bb17-0e54-4374-9888-bff8bd446080", "c54b41dd-1620-49bb-bb4a-b4fb72ca726c"]
 
-    let products = await getProductsFromSanity(productsID)
+    let products = await getProductsFromSanity(Ids)
 
     // const dummyData = [{
     //     _id: "a",
