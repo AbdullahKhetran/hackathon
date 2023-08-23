@@ -8,17 +8,20 @@ import Link from "next/link"
 export async function DisplayProducts({ res }: { res: Cart[] }) {
     // console.log("Entered DisplayProducts function")
 
-    // let productsID = getIdsFromDb(res)
-    // let products = await getProductsFromSanity(productsID)
+    let productsID = getIdsFromDb(res)
 
-    const dummyData = [{
-        _id: "a",
-        name: "Dress",
-        category: "Clothes",
-        price: 200
-    }]
+    const dummyProductsID = ["5fe6bb17-0e54-4374-9888-bff8bd446080", "c54b41dd-1620-49bb-bb4a-b4fb72ca726c"]
 
-    const products = dummyData
+    let products = await getProductsFromSanity(dummyProductsID)
+
+    // const dummyData = [{
+    //     _id: "a",
+    //     name: "Dress",
+    //     category: "Clothes",
+    //     price: 200
+    // }]
+
+    // const products = dummyData
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
