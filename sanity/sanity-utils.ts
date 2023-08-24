@@ -3,6 +3,7 @@ import clientConfig from "@/sanity/config/client-config"
 import { createClient, groq } from "next-sanity";
 import { Brand } from "@/types/Brands";
 import imageUrlBuilder from "@sanity/image-url"
+import { MyProduct } from "@/components/Cart/utils";
 
 // Image Url builder
 const builder = imageUrlBuilder(clientConfig)
@@ -98,17 +99,18 @@ export function getFeaturedProducts(): Promise<Product[]> {
     )
 }
 
-
-export function getSpecificProduct(productId: string): Promise<Product> {
+// isme koi msla hai
+export function getSpecificProduct(productId: string): Promise<MyProduct> {
+    // console.log("I got this argument", productId, "type is", typeof productId)
     return createClient(clientConfig).fetch(
-        groq`*[_type == "products" && _id == $productId][0]{
+        groq`*[_type == "products" && _id == $productId][0]{            
             _id,
             name,            
             price,
             category,
             image,
             slug,
-    }`,
+        }`,
         { productId }
     )
 }

@@ -5,10 +5,6 @@ type AuthState = {
     uid: string
 }
 
-type InitialState = {
-    value: AuthState
-}
-
 const initialState: AuthState = {
     uid: ""
 }
@@ -23,9 +19,7 @@ export const auth = createSlice({
 
         addUserId: (state, action: PayloadAction<string>) => {
             return {
-
                 uid: action.payload
-
             }
         },
 

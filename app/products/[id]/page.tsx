@@ -1,17 +1,12 @@
 import Image from "next/image";
 import { getAllProducts } from "@/sanity/sanity-utils";
 import Footer from "@/components/Footer/Footer";
-// import { AddToCartButton } from "@/components/Buttons";
 import Navbar from "@/components/Navbar/Navbar";
 import Copyright from "@/components/Footer/Copyright";
-import Size from "@/components/Product/Size";
-import Quantity from "@/components/Product/Quantity";
 import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 import { urlFor } from "@/sanity/sanity-utils";
-import { handleAddToCart } from "@/lib/utils";
-import { Minus, Plus, ShoppingCart } from "lucide-react";
-import { Order } from "@/components/productPage/Order";
+import { Order } from "@/components/Order";
 
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
@@ -75,7 +70,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         <div className="flex flex-col gap-8">
                             <h2 className="text-productSubtitle font-bold tracking-wider text-xl">PRODUCT CARE</h2>
                             <div className="prose text-lg">
-                                {/* change bullet color to black */}
+                                {/* TODO change bullet color to black */}
                                 <PortableText value={care} />
                             </div>
                         </div>

@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
 
-    console.log("User id in params is " + paramUserId)
+    // console.log("User id in params is " + paramUserId)
 
     try {
         if (paramUserId) {
