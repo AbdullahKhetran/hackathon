@@ -2,7 +2,7 @@
 import { handleAddToCart } from "@/lib/utils"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Product } from "@/types/Product"
-import Size from "../Product/Size"
+import Size from "./Product/Size"
 import { useState } from "react"
 import { v4 as uuid } from "uuid";
 // redux
@@ -22,6 +22,7 @@ export function Order({ matchingProduct }: Props) {
     // User Id
     const dispatch = useDispatch<AppDispatch>()
     const userIdFromState = useAppSelector((state) => state.auth.uid)
+    console.log("User id on product page", userIdFromState)
 
     if (userIdFromState.length === 0) {
         dispatch(addUserId(uuid()))

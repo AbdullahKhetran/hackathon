@@ -1,26 +1,12 @@
 import { Cart } from "@/lib/drizzle"
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react"
-import { getIdsFromDb, getProductsFromSanity } from "./utils"
+import { MyProduct, getIdsFromDb, getProductsFromSanity } from "./utils"
 import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import Link from "next/link"
 
-export async function DisplayProducts({ res }: { res: Cart[] }) {
-    const Ids = getIdsFromDb(res); //productID
-    const products = await getProductsFromSanity(Ids);
 
-
-    // const dummyProductsID = ["5fe6bb17-0e54-4374-9888-bff8bd446080", "c54b41dd-1620-49bb-bb4a-b4fb72ca726c"]
-
-
-    // const dummyData = [{
-    //     _id: "a",
-    //     name: "Dress",
-    //     category: "Clothes",
-    //     price: 200
-    // }]
-
-    // const products = dummyData
+export function Displayer({ products }: { products: MyProduct[] }) {
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
@@ -31,14 +17,14 @@ export async function DisplayProducts({ res }: { res: Cart[] }) {
                 {products.map((product) => (
 
                     <div key={product._id} className="flex flex-col md:flex-row gap-8 mt-8">
-                        {/* <Image
+                        <Image
                             src={urlFor(product.image).url()}
                             alt="Product image"
                             width={240}
                             height={240}
                             className="rounded-3xl"
 
-                        /> */}
+                        />
                         <div className="flex justify-between grow">
                             <div className="flex flex-col justify-between gap-[6px] text-lg">
                                 <h1 className="text-darkGray text-2xl font-light">{product.name}</h1>
@@ -87,6 +73,4 @@ export async function DisplayProducts({ res }: { res: Cart[] }) {
             </div>
         </div>
     )
-
 }
-

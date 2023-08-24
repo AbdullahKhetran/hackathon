@@ -2,10 +2,9 @@ require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";
-import { DisplayProducts } from "./ProductCard";
 import { ShoppingCart } from "lucide-react";
 
-type MyProduct = {
+export interface MyProduct {
     _id: string,
     name: string,
     price: number,
@@ -15,62 +14,34 @@ type MyProduct = {
     slug: { current: string; _type: string; },
 }
 
-let productId: string[] = []
-let products: MyProduct[] = []
-
 
 export function getIdsFromDb(items: Cart[]) {
     const productId: string[] = items.map((item) => item.productid);
+    // console.log("ids from db", productId, "length", productId.length)
     return productId;
 
 }
 
 
-export async function getProductsFromSanity(Ids: string[]) {
-    const products: MyProduct[] = [];
+export async function getProductsFromSanity(ids: string[]) {
+    const products: MyProduct[] = []
 
-    for (let index = 0; index < Ids.length; index++) {
-        const product = await getSpecificProduct(Ids[index]);
-        products.push(product);
-    }
+    const productPromises = ids.map(async (id) => {
+        let product = await getSpecificProduct(id)
+        // console.log("Product object is", product)
+        return product
+    })
 
-    return products;
-}
+    // Wait to resolve all promises and add them to the array using spread operator
+    products.push(...await Promise.all(productPromises))
 
-
-
-
-export async function FetchAndDisplay({ uid }: { uid: string }) {
-
-    const result = await getData(uid)
-
-    return result.length === 0 ? <EmptyCart /> : <Display cartItems={result} />
+    return products
 
 }
 
-async function getData(uid: string) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    const data: Cart[] = await res.json() // ye array hai .json() use nahi kr skte
-    return data
-}
 
-function Display({ cartItems }: { cartItems: Cart[] }) {
-    return (
-        <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
-
-            <h1 className="font-bold text-2xl">Shopping Cart</h1>
-
-            <DisplayProducts res={cartItems} />
-
-        </div>
-    )
-}
-
-function EmptyCart() {
+export function EmptyCart() {
     return (
         <div>
             <h1 className="font-bold text-xl">Shopping Cart</h1>
@@ -81,5 +52,3 @@ function EmptyCart() {
         </div>
     )
 }
-
-// TODO: remove any types and give types

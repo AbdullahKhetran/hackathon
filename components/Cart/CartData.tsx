@@ -1,42 +1,56 @@
 "use client"
 require("dotenv").config
 import { Cart } from "@/lib/drizzle";
-import { ShoppingCart } from "lucide-react"
-import { DisplayProducts } from "@/components/Cart/ProductCard";
-import { useAppSelector } from "@/redux/hooks";
-import { FetchAndDisplay } from "./utils";
+// import { useAppSelector } from "@/redux/hooks";
+// import { Displayer } from "./ProductCard";
+// import { getIdsFromDb, getProductsFromSanity } from "./utils";
+// import { MyProduct } from "./utils";
+// import { getSpecificProduct } from "@/sanity/sanity-utils";
+
+// export default async function CartPage() {
+
+//     // fetching uid from redux
+//     const uid = useAppSelector((state) => state.auth.uid);
+//     console.log("CP: uid from cartPage", uid)
+
+//     // THIS IS CAUSING INFINITE GET REQUEST
+//     // fetching data from api
+//     const data = await getData(uid)
+//     console.log("CP: data", data)
+
+//     // get Ids
+//     const ids = getIdsFromDb(data)
+//     console.log("CP: Products ids are", ids)
+
+//     // get products from sanity
+//     const sanityProducts: MyProduct[] = await getProductsFromSanity(ids);
+//     console.log("CP: Products from sanity", sanityProducts)
+
+//     return (
+//         <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
+
+//             <h1 className="font-bold text-2xl">Shopping Cart</h1>
+
+//             {/* <Displayer products={sanityProducts} /> */}
+
+//             {/* {ids} */}
+
+//         </div>
+//     )
+// }
 
 
 
+export async function getData(uid: string) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
+    // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
 
-export default function CartPage() {
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
 
-    const uid = useAppSelector((state) => state.auth.uid);
+    const dataPromises: Promise<Cart[]> = res.json();
+    const data: Cart[] = await dataPromises;
 
-    return <FetchAndDisplay uid={uid} />
-
-
-    // Dummy Data
-    // const result: Cart[] = [{ "id": 23, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "02e5b664-fe39-4d4a-a712-5c3345a39a3f", "quantity": 3 }, { "id": 24, "userid": "251a8eca-a6af-49d9-b839-515f90e0048b", "productid": "5a4cfa64-c039-49b5-86e8-e9f74979c563", "quantity": 1 }]
-
-
-    // -------------------------------
-
-    /*     Error only in Production
-    TODO: Page static nahi hota, request bhejta hi rehta hai
-    Navbar bhi nahi kholne deta
-
-    url se direct ao to load hota hai lekin empty cart show kr raha hai
-    link click kr ke ao to error.tsx wali file pr chla jata hai
-    link se aa kr refresh kro to phir empty cart show krta hai
-    data kisi bhi case me show nahi kr raha
-     */
-
-    // ----------------------------------
-
-
+    return data
 }
-
-
-
-
