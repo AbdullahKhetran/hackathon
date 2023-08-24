@@ -98,8 +98,6 @@ export function getFeaturedProducts(): Promise<Product[]> {
         }`
     )
 }
-
-// isme koi msla hai
 export function getSpecificProduct(productId: string): Promise<MyProduct> {
     // console.log("I got this argument", productId, "type is", typeof productId)
     return createClient(clientConfig).fetch(
