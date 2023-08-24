@@ -1,4 +1,3 @@
-require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";

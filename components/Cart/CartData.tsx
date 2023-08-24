@@ -1,5 +1,4 @@
 "use client"
-require("dotenv").config
 import { Cart } from "@/lib/drizzle";
 // import { useAppSelector } from "@/redux/hooks";
 // import { Displayer } from "./ProductCard";
