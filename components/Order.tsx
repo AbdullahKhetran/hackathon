@@ -22,7 +22,7 @@ export function Order({ matchingProduct }: Props) {
     // User Id
     const dispatch = useDispatch<AppDispatch>()
     const userIdFromState = useAppSelector((state) => state.auth.uid)
-    console.log("User id on product page", userIdFromState)
+    // console.log("User id on product page", userIdFromState)
 
     if (userIdFromState.length === 0) {
         dispatch(addUserId(uuid()))
