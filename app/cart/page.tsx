@@ -15,10 +15,11 @@ import { useEffect, useState } from "react"
 export default function Home() {
 
     const [sanityProducts, setSanityProducts] = useState<MyProduct[]>([]);
+    const [dataFetched, setDataFetched] = useState(false)
 
     const userid = useAppSelector((state) => state.auth.uid);
 
-    async function Master(data: Cart[]) {
+    async function master(data: Cart[]) {
         try {
             const ids = getIdsFromDb(data);
             // console.log("CP: Products ids are", ids);
@@ -27,6 +28,7 @@ export default function Home() {
             // console.log("CP: Products from sanity", products);
 
             setSanityProducts(products);
+            setDataFetched(true)
         } catch (error) {
             console.error("Error processing data", error);
         }
@@ -37,7 +39,7 @@ export default function Home() {
             try {
                 const uid = userid;
                 const fetchedData = await getData(uid);
-                Master(fetchedData); // Call Master with the fetched data
+                master(fetchedData); // Call Master with the fetched data
             } catch (error) {
                 console.error("Error fetching data", error);
             }
@@ -53,7 +55,10 @@ export default function Home() {
             {/* Page content */}
 
             <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
-                <PageContent products={sanityProducts} />
+                {dataFetched
+                    ? <PageContent products={sanityProducts} />
+                    : <LoadingComponent />
+                }
             </div>
 
             <Footer />
@@ -64,6 +69,13 @@ export default function Home() {
 
 
 function PageContent({ products }: { products: MyProduct[] }) {
-    return products.length === 0 ? <EmptyCart /> : <Displayer products={products} />
+    return products.length === 0
+        ? <EmptyCart />
+        : <Displayer products={products} />
 }
 
+function LoadingComponent() {
+    return (
+        <div>Fetching Data ...</div>
+    )
+}
