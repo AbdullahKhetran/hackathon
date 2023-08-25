@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CartProduct } from "@/types/cartProduct";
+import { Cart } from "@/lib/drizzle"
 
 interface CartState {
-    products: Array<CartProduct>,
+    products: Array<Cart>,
     totalQuantity: number,
     totalAmount: number,
 }
@@ -27,11 +27,11 @@ export const cartSlice = createSlice({
     initialState, // initialState: initialState
     reducers: {
 
-        addToCart(state, action: PayloadAction<{ product: CartProduct, quantity: number }>) {
+        addToCart(state, action: PayloadAction<{ product: Cart, quantity: number }>) {
 
             const ap = action.payload
 
-            const existingProduct = state.products.find((product) => product._id === ap.product._id)
+            const existingProduct = state.products.find((product) => product.productid === ap.product.productid)
 
             const amount = ap.product.price * ap.quantity
 
@@ -43,7 +43,7 @@ export const cartSlice = createSlice({
             if (existingProduct) {
                 const amountToAdd = ap.product.price * ap.quantity
 
-                existingProduct.totalPrice += amountToAdd
+                existingProduct.amount += amountToAdd
                 existingProduct.quantity += ap.quantity
             } else {
                 state.products.push(ap.product)
@@ -54,7 +54,7 @@ export const cartSlice = createSlice({
 
             const ap = action.payload;
 
-            const existingProduct = state.products.find((product) => product._id === ap)
+            const existingProduct = state.products.find((product) => product.productid === ap)
 
             // cart
             state.totalQuantity--;
@@ -64,10 +64,10 @@ export const cartSlice = createSlice({
             if (existingProduct !== undefined) {
 
                 if (existingProduct.quantity === 1) {
-                    state.products = state.products.filter((product) => product._id !== existingProduct._id)
+                    state.products = state.products.filter((product) => product.productid !== existingProduct.productid)
                 } else {
                     existingProduct.quantity--;
-                    existingProduct.totalPrice -= existingProduct.price
+                    existingProduct.amount -= existingProduct.price
                 }
             } else {
                 alert("Something went wrong, Check Console")
@@ -78,11 +78,11 @@ export const cartSlice = createSlice({
         deleteFromCart(state, action: PayloadAction<string>) {
             const ap = action.payload;
 
-            const existingProduct = state.products.find((product) => product._id === ap)
+            const existingProduct = state.products.find((product) => product.productid === ap)
 
             // cart
             if (existingProduct !== undefined) {
-                state.totalAmount -= existingProduct?.totalPrice
+                state.totalAmount -= existingProduct?.amount
                 state.totalQuantity -= existingProduct?.quantity
 
             } else {
@@ -91,7 +91,7 @@ export const cartSlice = createSlice({
             }
 
             // product
-            state.products.filter((product) => product._id !== ap)
+            state.products.filter((product) => product.productid !== ap)
         },
         reset: state => {
             state = initialState

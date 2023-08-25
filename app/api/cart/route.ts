@@ -31,29 +31,29 @@ export async function GET(request: NextRequest) {
     }
 }
 
-
-
 export async function POST(request: NextRequest) {
 
     const req: NewCart = await request.json();
 
     try {
-        if (req.productid && req.quantity && req.userid) {
+        if (req) {
 
             const res = await db.insert(cartTable).values({
                 userid: req.userid,
                 productid: req.productid,
-                quantity: req.quantity
+                quantity: req.quantity,
+                price: req.price,
+                amount: req.amount
             }).returning()
 
             return NextResponse.json(
-                { message: "Data added successfully" },
+                { message: "Data added successfully", res },
                 { status: 200 }
             )
 
         } else {
             return NextResponse.json(
-                { message: "User Id, Product Id and Quantity is required" },
+                { message: "Data could not be inserted" },
                 { status: 400 }
             )
         }
