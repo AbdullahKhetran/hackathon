@@ -1,6 +1,6 @@
-import { cartTable, db, Cart, NewCart } from "@/lib/drizzle";
+import { cartTable, db, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 
 
 
@@ -31,6 +31,8 @@ export async function GET(request: NextRequest) {
     }
 }
 
+
+
 export async function POST(request: NextRequest) {
 
     const req: NewCart = await request.json();
@@ -59,10 +61,82 @@ export async function POST(request: NextRequest) {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log("POST request error", error)
         return NextResponse.json(
             { err: error },
             { status: 500 }
         )
     }
+}
+
+
+
+export async function PUT(request: NextRequest) {
+
+    const req: NewCart = await request.json();
+
+    try {
+        if (req.productid && req.userid) {
+
+            const res = await db.update(cartTable)
+                .set({ quantity: req.quantity, amount: req.amount })
+                .where(and(eq(cartTable.userid, req.userid), eq(cartTable.productid, req.productid)))
+                .returning()
+
+            return NextResponse.json(
+                { message: "Product updated sucessfully" },
+                { status: 200 }
+            )
+        } else {
+            return NextResponse.json(
+                { message: "Product could not be updated" },
+                { status: 400 }
+            )
+        }
+
+    } catch (error) {
+        console.log("PUT request error", error)
+        return NextResponse.json(
+            { err: error },
+            { status: 500 }
+        )
+    }
+
+}
+
+
+export async function DELETE(request: NextRequest) {
+
+    const params = request.nextUrl.searchParams
+    const paramUserId = params.get("userid")
+    const paramProductId = params.get("productid")
+
+    try {
+        if (paramUserId) {
+
+            const uid = paramUserId as string;
+            const productId = paramProductId as string
+
+            const res = await db.delete(cartTable)
+                .where(and(eq(cartTable.userid, uid), eq(cartTable.productid, productId)))
+                .returning()
+
+            return NextResponse.json(
+                { message: "Products removed sucessfully" },
+                { status: 200 }
+            )
+        } else {
+            return NextResponse.json(
+                { message: "Products could not be removed" },
+                { status: 400 }
+            )
+        }
+    } catch (error) {
+        console.log("DELETE request error", error)
+        return NextResponse.json(
+            { err: error },
+            { status: 500 }
+        )
+    }
+
 }
