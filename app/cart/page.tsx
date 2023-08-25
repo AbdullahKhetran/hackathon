@@ -38,14 +38,14 @@ export default function Home() {
             try {
                 const uid = userid;
                 const fetchedData = await getData(uid);
-                master(fetchedData); // Call Master with the fetched data
+                master(fetchedData); // call master with the fetched data
             } catch (error) {
                 console.error("Error fetching data", error);
             }
         }
 
         fetchData();
-    }, [userid]);
+    }, [userid]); // added userid to dependecy array to satisfy eslint
 
     return (
         <div>

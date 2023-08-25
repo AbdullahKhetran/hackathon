@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Cart } from "@/lib/drizzle"
+import { Cart, NewCart } from "@/lib/drizzle"
 
 interface CartState {
-    products: Array<Cart>,
+    products: Array<NewCart>,
     totalQuantity: number,
     totalAmount: number,
 }
@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
     initialState, // initialState: initialState
     reducers: {
 
-        addToCart(state, action: PayloadAction<{ product: Cart, quantity: number }>) {
+        addToCart(state, action: PayloadAction<{ product: NewCart, quantity: number }>) {
 
             const ap = action.payload
 

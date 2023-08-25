@@ -1,8 +1,10 @@
 
 import { Product } from "@/types/sanity";
+import { NewCart } from "./drizzle";
 
 type Props = {
-  product: Product,
+  // product: Product,
+  product: NewCart,
   quantity: number,
   uid: string,
 }
@@ -14,7 +16,7 @@ export async function handleAddToCart({ product, quantity, uid }: Props) {
     method: "POST",
     body: JSON.stringify({
       userid: uid,
-      productid: product._id,
+      productid: product.productid,
       quantity: quantity,
       price: product.price,
       amount: quantity * product.price
