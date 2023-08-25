@@ -11,6 +11,8 @@ import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { addUserId, removeUserId } from "@/redux/features/authSlice";
 import { addToCart } from "@/redux/features/cartSlice"
+import { NewCart } from "@/lib/drizzle"
+import { MouseEvent } from "react"
 
 type Props = {
     matchingProduct: Product,
@@ -20,16 +22,36 @@ export function Order({ matchingProduct }: Props) {
 
     const [quantity, setQuantity] = useState(1)
 
-    // User Id
     const dispatch = useDispatch<AppDispatch>()
-    const userIdFromState = useAppSelector((state) => state.auth.uid)
-    // console.log("User id on product page", userIdFromState)
 
+
+    // User Id
+    const userIdFromState = useAppSelector((state) => state.auth.uid)
+    // console.log("user id from state is", userIdFromState)
     if (userIdFromState.length === 0) {
         dispatch(addUserId(uuid()))
     }
     const userId = useAppSelector((state) => state.auth.uid)
-    // console.log("user id from state is", userId)
+    // console.log("User id on product page", userId)
+
+
+    const cartProduct: NewCart = {
+        userid: userId,
+        productid: matchingProduct._id,
+        quantity: quantity,
+        price: matchingProduct.price,
+        amount: quantity * matchingProduct.price,
+    }
+
+
+    const handleAddToCartClick = (product: NewCart, quantity: number) => (event: MouseEvent) => {
+        const payload = {
+            product: product,
+            quantity: quantity,
+        }
+        dispatch(addToCart(payload));
+        handleAddToCart({ product, quantity, uid: userId })
+    };
 
     return (
         <div className="flex flex-col gap-10 max-w-[70%]">
@@ -69,7 +91,7 @@ export function Order({ matchingProduct }: Props) {
             <div className="flex my-4 gap-2 w-[60%]">
 
                 <button
-                    onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: userId })}
+                    onClick={handleAddToCartClick(cartProduct, quantity)}
                     className="flex gap-2  justify-center items-center grow bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
                 >
 
@@ -78,7 +100,7 @@ export function Order({ matchingProduct }: Props) {
                 </button>
 
 
-                <h2 className="self-center text-3xl font-bold tracking-widest">{"$" + matchingProduct?.price}</h2>
+                <h2 className="self-center text-3xl font-bold tracking-widest">{"$" + matchingProduct?.price * quantity}</h2>
             </div>
         </div>
     )
