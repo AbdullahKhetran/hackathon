@@ -6,6 +6,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
+    // timeout: 1000,
     key: "root",
     storage
 }
@@ -15,13 +16,14 @@ const combinedReducer = combineReducers({
     auth: authReducer
 })
 
+
 const persistedReducer = persistReducer(persistConfig, combinedReducer)
 
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false
-    }),
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    //     serializableCheck: false
+    // }),
     devTools: true
 })
 

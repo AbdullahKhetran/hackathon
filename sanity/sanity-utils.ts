@@ -2,7 +2,7 @@ import clientConfig from "@/sanity/config/client-config"
 import { createClient, groq } from "next-sanity";
 import { Brand, Product } from "@/types/sanity"
 import imageUrlBuilder from "@sanity/image-url"
-import { MyProduct } from "@/components/Cart/utils";
+import { MyProduct } from "@/types/products";
 
 // Image Url builder
 const builder = imageUrlBuilder(clientConfig)
