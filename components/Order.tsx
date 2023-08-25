@@ -1,7 +1,7 @@
 "use client"
 import { handleAddToCart } from "@/lib/utils"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
-import { Product } from "@/types/Product"
+import { Product } from "@/types/sanity"
 import Size from "./Product/Size"
 import { useState } from "react"
 import { v4 as uuid } from "uuid";
@@ -10,6 +10,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { addUserId, removeUserId } from "@/redux/features/authSlice";
+import { addToCart } from "@/redux/features/cartSlice"
 
 type Props = {
     matchingProduct: Product,
@@ -31,7 +32,7 @@ export function Order({ matchingProduct }: Props) {
     // console.log("user id from state is", userId)
 
     return (
-        <div className="flex flex-col gap-10 max-w-[70%] mt-16">
+        <div className="flex flex-col gap-10 max-w-[70%]">
             <div className=" flex flex-col gap-1">
                 <h1 className="text-3xl tracking-wider text-darkGray">{matchingProduct?.name}</h1>
                 <h2 className="text-2xl font-semibold text-black/50">{matchingProduct?.category}</h2>
@@ -65,12 +66,14 @@ export function Order({ matchingProduct }: Props) {
                 </div>
             </div>
 
-            <div className="flex my-4 gap-2">
+            <div className="flex my-4 gap-2 w-[60%]">
 
-                <button onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: userId })}
-                    className="flex gap-2 md:w-40 justify-center  bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
+                <button
+                    onClick={() => handleAddToCart({ product: matchingProduct, quantity, uid: userId })}
+                    className="flex gap-2  justify-center items-center grow bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
                 >
-                    <ShoppingCart />
+
+                    <ShoppingCart size={28} />
                     <span> Add to Cart</span>
                 </button>
 
