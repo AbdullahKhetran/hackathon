@@ -34,9 +34,10 @@ export default async function ProductPage({ params }: { params: { id: string } }
                 <Navbar />
                 <div className="mb-24 p-8 bg-sectionSilver flex flex-col gap-8">
                     {/* Product Image and order */}
-                    <div className="flex flex-col justify-between">
+
+                    <div className="flex flex-col gap-8 lg:flex-row ">
                         {/* Image */}
-                        <div className="flex gap-8">
+                        <div className="flex gap-8 ">
                             <div>
                                 Images carousel
                             </div>

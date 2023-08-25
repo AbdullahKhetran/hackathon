@@ -13,7 +13,7 @@ const initialState: CartState = {
     totalAmount: 0,
 }
 
-/* Updates
+/* Updates that should happen
 Cart
     total amount
     total quantity
@@ -92,6 +92,9 @@ export const cartSlice = createSlice({
 
             // product
             state.products.filter((product) => product._id !== ap)
+        },
+        reset: state => {
+            state = initialState
         }
     }
 })

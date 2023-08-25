@@ -1,7 +1,6 @@
-import { Product } from "@/types/Product"
 import clientConfig from "@/sanity/config/client-config"
 import { createClient, groq } from "next-sanity";
-import { Brand } from "@/types/Brands";
+import { Brand, Product } from "@/types/sanity"
 import imageUrlBuilder from "@sanity/image-url"
 import { MyProduct } from "@/components/Cart/utils";
 
