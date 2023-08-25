@@ -2,16 +2,8 @@ import { Cart } from "@/lib/drizzle";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { Image } from "sanity";
 import { ShoppingCart } from "lucide-react";
+import { MyProduct } from "@/types/products";
 
-export interface MyProduct {
-    _id: string,
-    name: string,
-    price: number,
-    category: string,
-    // image: any,
-    image: Image,
-    slug: { current: string; _type: string; },
-}
 
 
 export function getIdsFromDb(items: Cart[]) {

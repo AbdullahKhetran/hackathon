@@ -6,10 +6,9 @@ import { Cart } from "@/lib/drizzle";
 import { useAppSelector } from "@/redux/hooks";
 import { Displayer } from "@/components/Cart/ProductCard";
 import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Cart/utils";
-import { MyProduct } from "@/components/Cart/utils";
-import { getSpecificProduct } from "@/sanity/sanity-utils";
 import { getData } from "@/components/Cart/CartData"
 import { useEffect, useState } from "react"
+import { MyProduct } from "@/types/products";
 
 
 export default function Home() {
