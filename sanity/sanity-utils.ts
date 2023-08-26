@@ -25,6 +25,7 @@ export function getAllProducts(): Promise<Product[]> {
             slug,
             details,
             care,
+            images,
         }`
     )
 }
@@ -40,6 +41,7 @@ export function getFemaleProducts(): Promise<Product[]> {
             slug,
             details,
             care,
+            images,
             // Not needed but this is how you url can be shown, run in groq playground
             "imageUrl": image.asset->url
         }`
@@ -57,6 +59,7 @@ export function getMaleProducts(): Promise<Product[]> {
             slug,
             details,
             care,
+            images,
         }`
     )
 }
@@ -70,6 +73,7 @@ export function getKidsProducts(): Promise<Product[]> {
             price,
             image,
             category,
+            images,
         }`
     )
 }

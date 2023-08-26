@@ -7,6 +7,7 @@ import { PortableText } from '@portabletext/react';
 import { PortableTextBlock } from "sanity";
 import { urlFor } from "@/sanity/sanity-utils";
 import { Order } from "@/components/Order";
+import ImageCarousel from "@/components/Product/Images";
 
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
@@ -28,6 +29,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         care = matchingProduct.care
     }
 
+    // console.log(matchingProduct?.images)
     return (
         <div >
             <div className='max-w-center'>
@@ -36,19 +38,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
                     {/* Product Image and order */}
 
                     <div className="flex flex-col gap-8 lg:flex-row ">
+
                         {/* Image */}
-                        <div className="flex gap-8 ">
-                            <div>
-                                Images carousel
-                            </div>
-                            <div>
-                                <Image
-                                    src={url}
-                                    alt={`${matchingProduct?.name} image`}
-                                    width={370}
-                                    height={394} />
-                            </div>
-                        </div>
+                        <ImageCarousel matchingProduct={matchingProduct!} />
 
                         {/* Order */}
                         <Order matchingProduct={matchingProduct!} />

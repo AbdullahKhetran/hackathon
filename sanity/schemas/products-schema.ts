@@ -36,6 +36,21 @@ const product = {
 
         },
         {
+            name: "images",
+            title: "Images",
+            type: "array",
+            of: [
+                {
+                    name: "secondary-image",
+                    title: "Secondary Image",
+                    type: "image",
+                    options: {
+                        hotspot: true,
+                    }
+                }
+            ]
+        },
+        {
             name: "slug",
             title: "Slug",
             type: "slug",

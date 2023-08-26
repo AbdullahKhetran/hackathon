@@ -18,6 +18,7 @@ export type Product = {
     category: string,
     // image: string,
     image: Image,
+    images: Image[],
     slug: {
         current: string,
         _type: string
