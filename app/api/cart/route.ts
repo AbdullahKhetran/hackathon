@@ -5,6 +5,8 @@ import { eq, and } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
 
@@ -18,18 +20,18 @@ export async function GET(request: NextRequest) {
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
             return NextResponse.json(
-                { response: res })
+                { response: res }, {
+                headers: {
+                    'Access-Control-Allow-Origin': origin || "https://hackathon-git-development-abdullahkhetran.vercel.app/",
+                    'Content-Type': 'application/json',
+                }
+            })
         } else {
-            return NextResponse.json({ message: "Cart is Empty" })
             return NextResponse.json({ message: "Cart is Empty" })
         }
     }
 
     catch (error) {
-        return NextResponse.json(
-            { message: "Something went wrong", err: error },
-            { status: 500, }
-        )
         return NextResponse.json(
             { message: "Something went wrong", err: error },
             { status: 500, }
