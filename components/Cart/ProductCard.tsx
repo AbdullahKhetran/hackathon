@@ -29,19 +29,11 @@ export function DisplayProduct({ dbData, product }: Props) {
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
     // to refresh component when delete button is clicked
-    const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCount((prevCount) => prevCount + 1);
-        }, 300);
-        return () => clearInterval(interval);
-    }, []);
-
+    const [refresh, setRefresh] = useState(false);
     const refreshComponent = () => {
-        setCount(0);
+        setRefresh(!refresh);
     };
-
 
 
     let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
@@ -75,7 +67,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
-        refreshComponent()
+        refreshComponent
     }
 
     return (
