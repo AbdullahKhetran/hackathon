@@ -1,6 +1,7 @@
 import './globals.css'
 import { Sora } from 'next/font/google'
 import ReduxProvider from '@/redux/Provider'
+import { Analytics } from '@vercel/analytics/react';
 
 const sora = Sora({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={sora.className}>
         <ReduxProvider>
           {children}
+          <Analytics />
         </ReduxProvider>
       </body>
 
