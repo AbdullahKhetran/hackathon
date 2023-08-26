@@ -4,7 +4,7 @@ import Copyright from "@/components/Footer/Copyright"
 import Navbar from "@/components/Navbar/Navbar"
 import { Cart } from "@/lib/drizzle";
 import { useAppSelector } from "@/redux/hooks";
-import { Displayer } from "@/components/Cart/ProductCard";
+import { Displayer } from "@/components/Cart/ProductsCard";
 import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Cart/utils";
 import { getData } from "@/components/Cart/CartData"
 import { useEffect, useState } from "react"
@@ -15,6 +15,7 @@ export default function Home() {
 
     const [sanityProducts, setSanityProducts] = useState<MyProduct[]>([]);
     const [dataFetched, setDataFetched] = useState(false)
+    const [dbData, setDbData] = useState<Cart[]>([])
 
     const userid = useAppSelector((state) => state.auth.uid);
 
@@ -38,6 +39,7 @@ export default function Home() {
             try {
                 const uid = userid;
                 const fetchedData = await getData(uid);
+                setDbData(fetchedData)
                 master(fetchedData); // call master with the fetched data
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -55,7 +57,7 @@ export default function Home() {
 
             <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
                 {dataFetched
-                    ? <PageContent products={sanityProducts} />
+                    ? <PageContent dbData={dbData} products={sanityProducts} />
                     : <LoadingComponent />
                 }
             </div>
@@ -66,11 +68,15 @@ export default function Home() {
     )
 }
 
+type Props = {
+    dbData: Cart[],
+    products: MyProduct[]
+}
 
-function PageContent({ products }: { products: MyProduct[] }) {
+function PageContent({ dbData, products }: Props) {
     return products.length === 0
         ? <EmptyCart />
-        : <Displayer products={products} />
+        : <Displayer dbData={dbData} products={products} />
 }
 
 function LoadingComponent() {

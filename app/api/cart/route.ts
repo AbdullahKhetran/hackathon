@@ -112,7 +112,7 @@ export async function DELETE(request: NextRequest) {
     const paramProductId = params.get("productid")
 
     try {
-        if (paramUserId) {
+        if (paramUserId && paramUserId) {
 
             const uid = paramUserId as string;
             const productId = paramProductId as string
@@ -122,12 +122,12 @@ export async function DELETE(request: NextRequest) {
                 .returning()
 
             return NextResponse.json(
-                { message: "Products removed sucessfully" },
+                { message: "Product removed sucessfully" },
                 { status: 200 }
             )
         } else {
             return NextResponse.json(
-                { message: "Products could not be removed" },
+                { message: "Product could not be removed" },
                 { status: 400 }
             )
         }
