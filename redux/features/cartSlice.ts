@@ -50,7 +50,29 @@ export const cartSlice = createSlice({
             }
         },
 
-        subtractFromCart(state, action: PayloadAction<string>) {
+        increaseQuantity(state, action: PayloadAction<string>) {
+
+            const ap = action.payload;
+
+            const existingProduct = state.products.find((product) => product.productid === ap)
+
+            // cart
+            state.totalQuantity++;
+            state.totalAmount += existingProduct?.price!
+
+            // product
+            if (existingProduct !== undefined) {
+
+                existingProduct.quantity++;
+                existingProduct.amount += existingProduct.price
+
+            } else {
+                alert("Something went wrong, Check Console")
+                console.log("Existing Product is undefined")
+            }
+        },
+
+        decreaseQuantity(state, action: PayloadAction<string>) {
 
             const ap = action.payload;
 
@@ -99,6 +121,6 @@ export const cartSlice = createSlice({
     }
 })
 
-export const { addToCart, subtractFromCart, deleteFromCart } = cartSlice.actions
+export const { addToCart, decreaseQuantity, increaseQuantity, deleteFromCart } = cartSlice.actions
 
 export default cartSlice.reducer
