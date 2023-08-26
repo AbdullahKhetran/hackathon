@@ -28,7 +28,6 @@ export default function Home() {
             // console.log("CP: Products from sanity", products);
 
             setSanityProducts(products);
-            setDataFetched(true)
         } catch (error) {
             console.error("Error processing data", error);
         }
@@ -39,6 +38,7 @@ export default function Home() {
             try {
                 const uid = userid;
                 const fetchedData = await getData(uid);
+                setDataFetched(true)
                 setDbData(fetchedData)
                 master(fetchedData); // call master with the fetched data
             } catch (error) {

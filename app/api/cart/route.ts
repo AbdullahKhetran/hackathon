@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 
 
-
 export async function GET(request: NextRequest) {
+
+    const origin = request.headers.get('origin')
 
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
@@ -18,7 +19,13 @@ export async function GET(request: NextRequest) {
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
             return NextResponse.json(
-                { response: res })
+                res,
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
         }
@@ -32,33 +39,59 @@ export async function GET(request: NextRequest) {
     }
 }
 
+// from dave gray video of nextjs middleware
+// const DATA_SOURCE_URL = "https://jsonplaceholder.typicode.com/todos"
 
+// export async function GET(request: Request) {
+//     const origin = request.headers.get('origin')
+
+//     const res = await fetch(DATA_SOURCE_URL)
+
+//     const todos = await res.json()
+
+//     return new NextResponse(JSON.stringify(todos), {
+//         headers: {
+//             'Access-Control-Allow-Origin': origin || "*",
+//             'Content-Type': 'application/json',
+//         }
+//     })
+// }
 
 export async function POST(request: NextRequest) {
+    const origin = request.headers.get('origin')
+
 
     const req: NewCart = await request.json();
 
     try {
         if (req) {
+            if (req) {
 
-            const res = await db.insert(cartTable).values({
-                userid: req.userid,
-                productid: req.productid,
-                quantity: req.quantity,
-                price: req.price,
-                amount: req.amount
-            }).returning()
+                const res = await db.insert(cartTable).values({
+                    userid: req.userid,
+                    productid: req.productid,
+                    quantity: req.quantity,
+                    price: req.price,
+                    amount: req.amount,
+                }).returning()
 
-            return NextResponse.json(
-                { message: "Data added successfully", res })
+                return NextResponse.json(
+                    { message: "Data added successfully", res },
+                    {
+                        headers: {
+                            'Access-Control-Allow-Origin': origin!,
+                            'Content-Type': 'application/json',
+                        }
+                    }
+                )
 
-        } else {
-            return NextResponse.json(
-                { message: "Data could not be inserted" },
-                { status: 400 }
-            )
+            } else {
+                return NextResponse.json(
+                    { message: "Data could not be inserted" },
+                    { status: 400 }
+                )
+            }
         }
-
     } catch (error) {
         console.log("POST request error", error)
         return NextResponse.json(
@@ -72,6 +105,9 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
+
     const req: NewCart = await request.json();
 
     try {
@@ -81,9 +117,15 @@ export async function PUT(request: NextRequest) {
                 .set({ quantity: req.quantity, amount: req.amount })
                 .where(and(eq(cartTable.userid, req.userid), eq(cartTable.productid, req.productid)))
                 .returning()
-            console.log("res from PUT request", res)
+
             return NextResponse.json(
-                { message: "Product updated sucessfully" }
+                { message: "Product updated sucessfully" },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(
@@ -105,6 +147,9 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
+
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
     const paramProductId = params.get("productid")
@@ -120,7 +165,13 @@ export async function DELETE(request: NextRequest) {
                 .returning()
 
             return NextResponse.json(
-                { message: "Product removed sucessfully" }
+                { message: "Product removed sucessfully" },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(

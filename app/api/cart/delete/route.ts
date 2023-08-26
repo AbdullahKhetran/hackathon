@@ -4,6 +4,9 @@ import { eq } from "drizzle-orm";
 
 export async function DELETE(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
+
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
 
@@ -18,7 +21,13 @@ export async function DELETE(request: NextRequest) {
                 .returning()
 
             return NextResponse.json(
-                { message: "Products removed sucessfully" }
+                { message: "Products removed sucessfully" },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(
