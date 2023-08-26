@@ -11,7 +11,6 @@ import Copyright from '@/components/Footer/Copyright'
 
 export default function Home() {
   return (
-    // <div className=" max-w-screen-2xl 2xl:mx-auto">
     <div>
       <div className='max-w-center'>
         <Navbar />

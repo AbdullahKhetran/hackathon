@@ -1,6 +1,6 @@
 "use client"
 import OpenMenu from "./openMenu";
-import CloseMenu from "./closedMenu";
+import ClosedMenu from "./closedMenu";
 import { useState } from "react";
 
 export default function SmNav() {
@@ -14,7 +14,7 @@ export default function SmNav() {
         <div className=" my-8 mx-8 md:mx-16 ">
             {burger ?
                 <OpenMenu onShow={changeState} /> :
-                <CloseMenu onShow={changeState} />
+                <ClosedMenu onShow={changeState} />
             }
         </div>
     )

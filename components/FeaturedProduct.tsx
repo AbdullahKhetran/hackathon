@@ -12,6 +12,7 @@ export default async function FeaturedProduct() {
 
             <div className="flex gap-12 mt-4">
 
+                {/* cant use a loop because styling is different for each item */}
                 <div>
                     {displayFeaturedProduct(featuredProducts[0])}
                 </div>

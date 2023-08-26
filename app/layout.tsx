@@ -1,5 +1,6 @@
 import './globals.css'
 import { Sora } from 'next/font/google'
+import ReduxProvider from '@/redux/Provider'
 
 const sora = Sora({
   subsets: ["latin"],
@@ -20,8 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={sora.className}>{children}</body>
-      {/* <Header /> */}
+      <body className={sora.className}>
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
+      </body>
 
     </html>
   )

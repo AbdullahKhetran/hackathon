@@ -1,44 +1,45 @@
 import { Cart } from "@/lib/drizzle";
-import { cartData } from "./CartData";
 import { getSpecificProduct } from "@/sanity/sanity-utils";
+import { Image } from "sanity";
+import { ShoppingCart } from "lucide-react";
+import { MyProduct } from "@/types/products";
 
 
-export type MyProduct = {
-    _id: string,
-    name: string,
-    price: number,
-    category: string,
-    image: any,
-    slug: { current: string; _type: string; },
+
+export function getIdsFromDb(items: Cart[]) {
+    const productId: string[] = items.map((item) => item.productid);
+    // console.log("ids from db", productId, "length", productId.length)
+    return productId;
+
 }
 
-export let productId: string[] = []
-export let products: MyProduct[] = []
 
+export async function getProductsFromSanity(ids: string[]) {
+    const products: MyProduct[] = []
 
-export async function getIdsFromDb(items: Cart[]) {
-    items.map((item) => (
-        productId.push(item.productid)
-    ))
-    console.log(productId)
-    return productId
-}
+    const productPromises = ids.map(async (id) => {
+        let product = await getSpecificProduct(id)
+        // console.log("Product object is", product)
+        return product
+    })
 
-export async function getProductsFromSanity(Ids: string[]) {
+    // Wait to resolve all promises and add them to the array using spread operator
+    products.push(...await Promise.all(productPromises))
 
-    for (let index = 0; index < Ids.length; index++) {
-
-        let product = await getSpecificProduct(Ids[index])
-        products.push(product)
-    }
-    // console.log(products)
     return products
+
 }
 
 
 
-export async function Caller() {
-    const res = await cartData()
-    getIdsFromDb(res)
-    getProductsFromSanity(productId)
+export function EmptyCart() {
+    return (
+        <div>
+            <h1 className="font-bold text-xl">Shopping Cart</h1>
+            <div className="flex flex-col items-center gap-4">
+                <ShoppingCart size={140} />
+                <h1 className="font-bold text-4xl tracking-wide">Your cart is empty</h1>
+            </div>
+        </div>
+    )
 }
