@@ -58,7 +58,7 @@ export function DisplayProduct({ dbData, product }: Props) {
 
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
-        // handleDeleteFromCart({ uid: userId, productId: productId })
+        handleDeleteFromCart({ uid: userId, productId: productId })
     }
 
     return (
@@ -82,9 +82,11 @@ export function DisplayProduct({ dbData, product }: Props) {
                 </div>
 
                 <div className="flex flex-col justify-between items-end">
+
                     <button onClick={handleDelete(userId, cartProduct.productid)}>
                         <Trash2 />
                     </button>
+
                     <div>
                         <div className='flex gap-3 items-center'>
                             <button
@@ -92,7 +94,9 @@ export function DisplayProduct({ dbData, product }: Props) {
                                 className='bg-[#f1f1f1] rounded-full p-1'>
                                 <MinusIcon size={16} />
                             </button>
+
                             <h2>{itemQuantity}</h2>
+
                             <button
                                 onClick={handlePlus(cartProduct.productid)}
                                 className='border-2 border-black rounded-full p-1'>
