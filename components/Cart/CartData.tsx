@@ -41,15 +41,7 @@ import { Cart } from "@/lib/drizzle";
 
 
 export async function getData(uid: string) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        },
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}`)
     // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}`)
 
     if (!res.ok) {
