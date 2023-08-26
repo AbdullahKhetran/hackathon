@@ -19,7 +19,12 @@ export async function DELETE(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Products removed sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(

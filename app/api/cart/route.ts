@@ -15,24 +15,17 @@ export async function GET(request: NextRequest) {
     try {
         if (paramUserId) {
 
-
             const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            return new NextResponse(JSON.stringify(res), {
-                headers: {
-                    'Access-Control-Allow-Origin': origin || "https://hackathon-git-development-abdullahkhetran.vercel.app/",
-                    'Content-Type': 'application/json',
-                }
-            })
-
-            // return NextResponse.json(
-            //     { response: res }, {
-            //     headers: {
-            //         'Access-Control-Allow-Origin': origin || "https://hackathon-git-development-abdullahkhetran.vercel.app/",
-            //         'Content-Type': 'application/json',
-            //     }
-            // })
+            return NextResponse.json(
+                { response: res },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
         }
@@ -46,7 +39,23 @@ export async function GET(request: NextRequest) {
     }
 }
 
+// from dave gray video of nextjs middleware
+// const DATA_SOURCE_URL = "https://jsonplaceholder.typicode.com/todos"
 
+// export async function GET(request: Request) {
+//     const origin = request.headers.get('origin')
+
+//     const res = await fetch(DATA_SOURCE_URL)
+
+//     const todos = await res.json()
+
+//     return new NextResponse(JSON.stringify(todos), {
+//         headers: {
+//             'Access-Control-Allow-Origin': origin || "*",
+//             'Content-Type': 'application/json',
+//         }
+//     })
+// }
 
 export async function POST(request: NextRequest) {
 
@@ -66,7 +75,12 @@ export async function POST(request: NextRequest) {
 
                 return NextResponse.json(
                     { message: "Data added successfully", res },
-                    { status: 200 }
+                    {
+                        headers: {
+                            'Access-Control-Allow-Origin': origin!,
+                            'Content-Type': 'application/json',
+                        }
+                    }
                 )
 
             } else {
@@ -101,7 +115,12 @@ export async function PUT(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Product updated sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(
@@ -139,7 +158,12 @@ export async function DELETE(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Product removed sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
+                    }
+                }
             )
         } else {
             return NextResponse.json(

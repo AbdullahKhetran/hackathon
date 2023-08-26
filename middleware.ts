@@ -1,11 +1,9 @@
 import { NextResponse } from "next/server"
 
 const allowedOrigins = process.env.NODE_ENV === 'production'
-    ? ['https://www.hackathon-git-development-abdullahkhetran.vercel.app/',
-        'https://hackathon-git-development-abdullahkhetran.vercel.app/',
-        'https://www.hackathon-tau-ten.vercel.app/',
-        'https://hackathon-tau-ten.vercel.app/']
-    : ['http://localhost:3000']
+    // maybe try with both with and without www
+    ? [`${process.env.NEXT_PUBLIC_URL}`, `${process.env.NEXT_PUBLIC_PREVIEW_URL}`, `${process.env.SECRET_URL}`]
+    : ['http://localhost:3000', `${process.env.NEXT_PUBLIC_URL}`, `${process.env.NEXT_PUBLIC_PREVIEW_URL}`]
 
 export function middleware(request: Request) {
 
@@ -26,8 +24,6 @@ export function middleware(request: Request) {
 
     console.log(request.method)
     console.log(request.url)
-
-
 
     return NextResponse.next()
 }
