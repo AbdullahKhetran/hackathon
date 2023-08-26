@@ -19,7 +19,13 @@ export async function DELETE(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Products removed sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
+                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    }
+                }
             )
         } else {
             return NextResponse.json(

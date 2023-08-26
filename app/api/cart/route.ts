@@ -17,7 +17,15 @@ export async function GET(request: NextRequest) {
             const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            return NextResponse.json(res)
+            return NextResponse.json(
+                { response: res },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
+                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    }
+                })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
         }
@@ -50,8 +58,13 @@ export async function POST(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Data added successfully", res },
-                { status: 200 }
-            )
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
+                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    }
+                })
 
         } else {
             return NextResponse.json(
@@ -85,7 +98,13 @@ export async function PUT(request: NextRequest) {
             console.log("res from PUT request", res)
             return NextResponse.json(
                 { message: "Product updated sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
+                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    }
+                }
             )
         } else {
             return NextResponse.json(
@@ -123,7 +142,13 @@ export async function DELETE(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Product removed sucessfully" },
-                { status: 200 }
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'https://hackathon-git-development-abdullahkhetran.vercel.app/',
+                        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                    }
+                }
             )
         } else {
             return NextResponse.json(
