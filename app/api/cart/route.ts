@@ -82,7 +82,7 @@ export async function PUT(request: NextRequest) {
                 .set({ quantity: req.quantity, amount: req.amount })
                 .where(and(eq(cartTable.userid, req.userid), eq(cartTable.productid, req.productid)))
                 .returning()
-
+            console.log("res from PUT request", res)
             return NextResponse.json(
                 { message: "Product updated sucessfully" },
                 { status: 200 }

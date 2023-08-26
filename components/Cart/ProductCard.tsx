@@ -6,7 +6,7 @@ import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useState } from "react"
-import { addToCart, subtractFromCart, deleteFromCart } from "@/redux/features/cartSlice"
+import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
@@ -24,7 +24,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     const totalAmount = useAppSelector(state => state.cart.totalAmount)
     const totalItems = useAppSelector(state => state.cart.totalQuantity)
 
-    // i know this is true because product was provided from db
+    // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
     // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
@@ -37,23 +37,19 @@ export function DisplayProduct({ dbData, product }: Props) {
     }
 
 
-    const handlePlus = (product: NewCart, quantity: number) => (event: MouseEvent) => {
-        const payload = {
-            product: product,
-            quantity: quantity,
-        }
-        dispatch(addToCart(payload));
+    const handlePlus = (productId: string) => (event: MouseEvent) => {
+        dispatch(increaseQuantity(productId));
         handleChange({ uid: userId, product: cartProduct, quantity: cartProduct.quantity + 1 })
     };
 
     const handleMinus = (productId: string) => (event: MouseEvent) => {
-        dispatch(subtractFromCart(productId));
-        handleChange({ uid: userId, product: cartProduct, quantity: cartProduct.quantity - 1 })
+        dispatch(decreaseQuantity(productId));
+        // handleChange({ uid: userId, product: cartProduct, quantity: cartProduct.quantity - 1 })
     };
 
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
-        handleDeleteFromCart({ uid: userId, productId: productId })
+        // handleDeleteFromCart({ uid: userId, productId: productId })
     }
 
     return (
@@ -89,7 +85,7 @@ export function DisplayProduct({ dbData, product }: Props) {
                             </button>
                             <h2>{cartProduct.quantity}</h2>
                             <button
-                                onClick={handlePlus(cartProduct, cartProduct.quantity)}
+                                onClick={handlePlus(cartProduct.productid)}
                                 className='border-2 border-black rounded-full p-1'>
                                 <PlusIcon size={16} />
                             </button>
