@@ -29,7 +29,6 @@ export async function GET(request: NextRequest) {
                 })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
-            return NextResponse.json({ message: "Cart is Empty" })
         }
     }
 
