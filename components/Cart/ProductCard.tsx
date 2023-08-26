@@ -9,8 +9,7 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/feat
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
-import { useRouter } from "next/router";
-
+import { useRouter } from 'next/navigation'
 
 type Props = {
     dbData: Cart[],
@@ -22,7 +21,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     // to refresh component when delete button is clicked
     const router = useRouter();
     const handleRefresh = () => {
-        router.reload();
+        router.refresh();
     };
 
     const dispatch = useAppDispatch()
