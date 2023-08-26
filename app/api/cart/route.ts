@@ -194,3 +194,26 @@ export async function DELETE(request: NextRequest) {
     }
 
 }
+
+export async function OPTIONS(request: NextRequest) {
+    const origin = request.headers.get('origin')
+
+    try {
+        return NextResponse.json(
+            { message: "Sucess" },
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': origin!,
+                    'Content-Type': 'application/json',
+                }
+            }
+        )
+
+    } catch (error) {
+        console.log("OPTIONS request error", error)
+        return NextResponse.json(
+            { err: error },
+            { status: 500 }
+        )
+    }
+}
