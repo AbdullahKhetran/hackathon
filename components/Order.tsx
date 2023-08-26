@@ -50,7 +50,7 @@ export function Order({ matchingProduct }: Props) {
             quantity: quantity,
         }
         dispatch(addToCart(payload)); // updating state
-        // handleAddToCart({ product, quantity, uid: userId }) // updating database
+        handleAddToCart({ product, quantity, uid: userId }) // updating database
     };
 
     return (
