@@ -61,13 +61,6 @@ export default function Home() {
                 }
             </div>
 
-            <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
-                {dataFetched
-                    ? <PageContent dbData={dbData} products={sanityProducts} />
-                    : <LoadingComponent />
-                }
-            </div>
-
             <Footer />
             <Copyright />
         </div>
