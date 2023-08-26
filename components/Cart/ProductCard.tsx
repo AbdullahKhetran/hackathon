@@ -6,7 +6,7 @@ import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
+import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
@@ -29,7 +29,6 @@ export function DisplayProduct({ dbData, product }: Props) {
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
     // to refresh component when delete button is clicked
-
     const [refresh, setRefresh] = useState(false);
     const refreshComponent = () => {
         setRefresh(!refresh);
@@ -67,7 +66,11 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
-        refreshComponent
+        refreshComponent()
+    }
+
+    const hanldeReset = () => (event: MouseEvent) => {
+        dispatch(reset())
     }
 
     return (
@@ -115,6 +118,11 @@ export function DisplayProduct({ dbData, product }: Props) {
                     </div>
                 </div>
             </div>
+
+            <button onClick={hanldeReset} className="font-bold bg-red-600">
+                Reset the state
+            </button>
+
         </div>
     )
 }
