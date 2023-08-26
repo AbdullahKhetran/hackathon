@@ -5,7 +5,7 @@ import { MinusIcon, PlusIcon, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
@@ -28,7 +28,21 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
-    const [totalProducts, setTotalProducts] = useState(dbData.length)
+    // to refresh component when delete button is clicked
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCount((prevCount) => prevCount + 1);
+        }, 300);
+        return () => clearInterval(interval);
+    }, []);
+
+    const refreshComponent = () => {
+        setCount(0);
+    };
+
+
 
     let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
     let [amount, setAmount] = useState(dbProduct.amount)
@@ -61,7 +75,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
-        setTotalProducts(totalProducts - 1)
+        refreshComponent()
     }
 
     return (
