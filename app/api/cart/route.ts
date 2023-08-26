@@ -19,13 +19,20 @@ export async function GET(request: NextRequest) {
             const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            return NextResponse.json(
-                { response: res }, {
+            return new NextResponse(JSON.stringify(res), {
                 headers: {
                     'Access-Control-Allow-Origin': origin || "https://hackathon-git-development-abdullahkhetran.vercel.app/",
                     'Content-Type': 'application/json',
                 }
             })
+
+            // return NextResponse.json(
+            //     { response: res }, {
+            //     headers: {
+            //         'Access-Control-Allow-Origin': origin || "https://hackathon-git-development-abdullahkhetran.vercel.app/",
+            //         'Content-Type': 'application/json',
+            //     }
+            // })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
         }
