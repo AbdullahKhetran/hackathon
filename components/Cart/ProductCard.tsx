@@ -28,6 +28,8 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
+    const [totalProducts, setTotalProducts] = useState(dbData.length)
+
     let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
     let [amount, setAmount] = useState(dbProduct.amount)
 
@@ -59,6 +61,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
+        setTotalProducts(totalProducts - 1)
     }
 
     return (
