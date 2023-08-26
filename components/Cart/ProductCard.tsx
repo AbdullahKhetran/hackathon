@@ -9,7 +9,8 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/feat
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/router";
+
 
 type Props = {
     dbData: Cart[],
@@ -19,7 +20,10 @@ type Props = {
 export function DisplayProduct({ dbData, product }: Props) {
 
     // to refresh component when delete button is clicked
-    const router = useRouter()
+    const router = useRouter();
+    const handleRefresh = () => {
+        router.reload();
+    };
 
     const dispatch = useAppDispatch()
 
@@ -27,10 +31,6 @@ export function DisplayProduct({ dbData, product }: Props) {
 
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
-
-
-
-
 
     let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
     let [amount, setAmount] = useState(dbProduct.amount)
@@ -63,7 +63,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => () => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
-        router.refresh()
+        handleRefresh()
     }
 
     return (
