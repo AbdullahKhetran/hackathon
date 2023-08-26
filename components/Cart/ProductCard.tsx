@@ -44,16 +44,16 @@ export function DisplayProduct({ dbData, product }: Props) {
 
     const handlePlus = (productId: string) => (event: MouseEvent) => {
         dispatch(increaseQuantity(productId));
-        setItemQuantity(itemQuantity++)
+        setItemQuantity(itemQuantity + 1)
         setAmount(amount + dbProduct.price)
-        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity })
+        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity + 1 })
     };
 
     const handleMinus = (productId: string) => (event: MouseEvent) => {
         dispatch(decreaseQuantity(productId));
-        setItemQuantity(itemQuantity--);
+        setItemQuantity(itemQuantity - 1);
         setAmount(amount - dbProduct.price)
-        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity })
+        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity - 1 })
     };
 
     const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
