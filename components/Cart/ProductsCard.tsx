@@ -1,14 +1,8 @@
 // "use client"
 import { Cart, NewCart } from "@/lib/drizzle"
-import { MinusIcon, PlusIcon, Trash2 } from "lucide-react"
-import Image from "next/image"
-import { urlFor } from "@/sanity/sanity-utils"
 import Link from "next/link"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
-import { useState } from "react"
-import { increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
-import { MouseEvent } from "react"
 import { DisplayProduct } from "./ProductCard"
 
 type Props = {
@@ -18,28 +12,9 @@ type Props = {
 
 export function Displayer({ dbData, products }: Props) {
 
-    const dispatch = useAppDispatch()
-
     const userId = useAppSelector(state => state.auth.uid)
     const totalAmount = useAppSelector(state => state.cart.totalAmount)
     const totalItems = useAppSelector(state => state.cart.totalQuantity)
-
-    // const cartProduct: NewCart = {
-    //     userid: userId,
-    //     productid: product._id,
-    //     quantity: quantity,
-    //     price: product.price,
-    //     amount: quantity * product.price,
-    // }
-
-    function handleMinus(productId: string) {
-        dispatch(decreaseQuantity(productId))
-    }
-
-    const handlePlus = (productId: string) => (event: MouseEvent) => {
-        dispatch(increaseQuantity(productId));
-    };
-
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
@@ -48,15 +23,10 @@ export function Displayer({ dbData, products }: Props) {
             <div className="flex flex-col gap-4">
                 {/* Generating Prodcut Cards */}
                 {products.map((product) => {
-
-
                     return (
                         <DisplayProduct dbData={dbData} product={product} key={product._id} />
                     )
-
-
                 }
-
                 )}
             </div>
 

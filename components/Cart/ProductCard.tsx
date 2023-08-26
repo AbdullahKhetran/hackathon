@@ -36,6 +36,7 @@ export function DisplayProduct({ dbData, product }: Props) {
         amount: dbProduct.quantity * product.price,
     }
 
+    // for  increasing product
     const handlePlus = (productId: string) => () => {
         dispatch(increaseQuantity(productId));
         setItemQuantity(itemQuantity + 1)
@@ -43,15 +44,19 @@ export function DisplayProduct({ dbData, product }: Props) {
         handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity + 1 })
     };
 
+    // for decreasing product
     const handleMinus = (productId: string) => () => {
-        dispatch(decreaseQuantity(productId));
-        setItemQuantity(itemQuantity - 1);
-        setAmount(amount - dbProduct.price)
-        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity - 1 })
+        dispatch(decreaseQuantity(productId)); // updates state
+        setItemQuantity(itemQuantity - 1); // updates ui
+        setAmount(amount - dbProduct.price) // updates ui
+        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity - 1 }) // updates database
     };
 
+    // for removing product
     const handleDelete = (userId: string, productId: string) => () => {
+        // updating state
         dispatch(deleteFromCart(productId));
+        // updating database
         handleDeleteFromCart({ uid: userId, productId: productId })
     }
 
