@@ -58,6 +58,8 @@ export async function GET(request: NextRequest) {
 // }
 
 export async function POST(request: NextRequest) {
+    const origin = request.headers.get('origin')
+
 
     const req: NewCart = await request.json();
 
@@ -103,6 +105,9 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
+
     const req: NewCart = await request.json();
 
     try {
@@ -141,6 +146,9 @@ export async function PUT(request: NextRequest) {
 
 
 export async function DELETE(request: NextRequest) {
+
+    const origin = request.headers.get('origin')
+
 
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")

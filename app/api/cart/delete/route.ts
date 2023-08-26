@@ -4,6 +4,9 @@ import { eq } from "drizzle-orm";
 
 export async function DELETE(request: NextRequest) {
 
+    const origin = request.headers.get('origin')
+
+
     const params = request.nextUrl.searchParams
     const paramUserId = params.get("userid")
 
