@@ -85,7 +85,7 @@ export function DisplayProduct({ dbData, product }: Props) {
                         <div className='flex gap-3 items-center'>
                             <button
                                 onClick={handleMinus(cartProduct.productid)}
-                                disabled={itemQuantity > 0 ? false : true}
+                                disabled={itemQuantity > 1 ? false : true}
                                 className='bg-[#f1f1f1] rounded-full p-1'>
                                 <MinusIcon size={16} />
                             </button>
