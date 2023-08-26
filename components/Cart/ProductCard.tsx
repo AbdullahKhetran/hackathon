@@ -1,58 +1,102 @@
-import { Cart } from "@/lib/drizzle"
+"use client"
+
+import { Cart, NewCart } from "@/lib/drizzle";
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react"
-import { getIdsFromDb, getProductsFromSanity } from "./utils"
 import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useState } from "react"
+import { addToCart, subtractFromCart, deleteFromCart } from "@/redux/features/cartSlice"
+import { MyProduct } from "@/types/products"
+import { MouseEvent } from "react"
+import { handleDeleteFromCart, handleChange } from "@/lib/utils";
 
 
-export async function DisplayProducts({ res }: { res: Cart[] }) {
-    // const { res } = props
-    let productsID = await getIdsFromDb(res)
-    let products = await getProductsFromSanity(productsID)
+type Props = {
+    dbData: Cart[],
+    product: MyProduct
+}
+
+export function DisplayProduct({ dbData, product }: Props) {
+    const dispatch = useAppDispatch()
+
+    const userId = useAppSelector(state => state.auth.uid)
+    const totalAmount = useAppSelector(state => state.cart.totalAmount)
+    const totalItems = useAppSelector(state => state.cart.totalQuantity)
+
+    // i know this is true because product was provided from db
+    const dbProduct = dbData.find(item => item.productid === product._id)!
+
+    // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
+    const cartProduct: NewCart = {
+        userid: userId,
+        productid: dbProduct.productid,
+        quantity: dbProduct.quantity,
+        price: dbProduct.price,
+        amount: dbProduct.quantity * product.price,
+    }
+
+
+    const handlePlus = (product: NewCart, quantity: number) => (event: MouseEvent) => {
+        const payload = {
+            product: product,
+            quantity: quantity,
+        }
+        dispatch(addToCart(payload));
+        handleChange({ uid: userId, product: cartProduct, quantity: cartProduct.quantity + 1 })
+    };
+
+    const handleMinus = (productId: string) => (event: MouseEvent) => {
+        dispatch(subtractFromCart(productId));
+        handleChange({ uid: userId, product: cartProduct, quantity: cartProduct.quantity - 1 })
+    };
+
+    const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
+        dispatch(deleteFromCart(productId));
+        handleDeleteFromCart({ uid: userId, productId: productId })
+    }
 
     return (
-        <div>
-            {products.map((product) => (
-                <div key={product._id} className="flex flex-col gap-8">
-                    <Image
-                        src={urlFor(product.image).url()}
-                        alt="Product image"
-                        width={200}
-                        height={200}
-                        className="rounded-3xl"
+        <div key={product._id} className="flex flex-col md:flex-row gap-8 mt-8">
 
-                    />
-                    <div className="flex justify-between">
+            <Image
+                src={urlFor(product.image).url()}
+                alt="Product image"
+                width={240}
+                height={240}
+                className="rounded-3xl"
+            />
+            <div className="flex justify-between grow">
+                <div className="flex flex-col justify-between gap-[6px] text-lg">
+                    <h1 className="text-darkGray text-2xl font-light">{product.name}</h1>
+                    <h2 className="text-productSubtitle text-base font-semibold">{product.category}</h2>
+                    <h2 className="text-darkGray font-semibold">Delivery Estimation</h2>
+                    <p className="text-yellow-400 font-semibold">5 Working Days</p>
+                    <h2 className="text-darkGray font-bold tracking-wide">${cartProduct.amount}</h2>
+                    {/* TODO this should be updated when quantity is added */}
+                </div>
 
-                        <div className="flex flex-col justify-between gap-1 text-lg">
-                            <h1 className="text-darkGray text-2xl font-light">{product.name}</h1>
-                            <h2 className="text-productSubtitle text-base font-semibold">{product.category}</h2>
-                            <h2 className="text-darkGray font-semibold">Delivery Estimation</h2>
-                            <p className="text-yellow-400 font-semibold">5 Working Days</p>
-                            <h2 className="text-darkGray font-bold tracking-wide">{product.price}</h2>
-                        </div>
-
-                        <div className="flex flex-col justify-between items-end">
-                            <button>
-                                <Trash2 />
+                <div className="flex flex-col justify-between items-end">
+                    <button onClick={handleDelete(userId, cartProduct.productid)}>
+                        <Trash2 />
+                    </button>
+                    <div>
+                        <div className='flex gap-3 items-center'>
+                            <button
+                                onClick={handleMinus(cartProduct.productid,)}
+                                className='bg-[#f1f1f1] rounded-full p-1'>
+                                <MinusIcon size={16} />
                             </button>
-                            <div>
-                                <div className='flex gap-3 items-center'>
-                                    <button className='bg-[#f1f1f1] rounded-full p-1'>
-                                        <MinusIcon size={16} />
-                                    </button>
-                                    <h2>1</h2>
-                                    <button className='border-2 border-black rounded-full p-1'>
-                                        <PlusIcon size={16} />
-                                    </button>
-                                </div>
-                            </div>
+                            <h2>{cartProduct.quantity}</h2>
+                            <button
+                                onClick={handlePlus(cartProduct, cartProduct.quantity)}
+                                className='border-2 border-black rounded-full p-1'>
+                                <PlusIcon size={16} />
+                            </button>
                         </div>
                     </div>
                 </div>
-            ))}
+            </div>
         </div>
     )
-
 }
-

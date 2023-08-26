@@ -4,19 +4,18 @@ import header from "@/public/header.webp"
 import Image from 'next/image';
 import { getBrandLogos } from '@/sanity/sanity-utils';
 import { displayLogos } from './utils';
-import { AddToCartButton } from './Buttons';
 
 export default async function MainSection() {
     const brandLogos = await getBrandLogos()
 
     return (
 
-        <div className='flex gap-16 mt-16 mb-24 mx-8 md:mx-16 xl:mx-32   '>
+        <div className='flex gap-16 mt-16 mb-24 mx-8 md:mx-16 xl:mx-32'>
 
 
-            <div className='flex flex-col justify-between gap-4 md:gap-10 pt-8 lg:pt-12 '>
+            <div className='flex flex-col justify-between gap-4 md:gap-10 pt-8 lg:pt-12'>
                 <div className='flex flex-col gap-8'>
-                    <span className='w-[120px] h-10 py-2 px-4 bg-blue-100 text-blue-700 font-semibold rounded-lg  '>
+                    <span className='w-[120px] h-10 py-2 px-4 bg-blue-100 text-blue-700 font-semibold rounded-lg'>
                         Sale 70%
                         {/* alternative: shadcn badge component */}
                     </span>
@@ -28,9 +27,7 @@ export default async function MainSection() {
                         href="/products"
                         className="w-[80%] sm:w-[60%] lg:w-1/2"
                     >
-                        <button className="flex justify-center items-center gap-2 bg-darkGray text-white font-bold p-3 
-                    border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black
-                     ">
+                        <button className="flex justify-center items-center gap-2 bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black">
                             <ShoppingCart />
                             Start Shopping
                         </button>

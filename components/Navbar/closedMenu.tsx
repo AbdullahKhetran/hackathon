@@ -4,14 +4,13 @@ import logo from "@/public/Logo.webp"
 import { AlignJustify } from "lucide-react";
 
 type Props = {
-    onShow: any
+    onShow: () => void
 }
 
 export default function CloseMenu({ onShow }: Props) {
 
     return (
-
-        <div className="flex justify-between ">
+        <div className="flex justify-between">
             <Link href="/">
                 <Image
                     src={logo}
@@ -24,10 +23,6 @@ export default function CloseMenu({ onShow }: Props) {
             <button onClick={onShow} >
                 <AlignJustify size={38} />
             </button>
-
-
         </div>
-
-
     )
 }

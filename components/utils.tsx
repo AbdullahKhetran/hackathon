@@ -1,7 +1,6 @@
-import { Product } from "@/types/Product"
 import Image from "next/image"
 import Link from "next/link"
-import { Brand } from "@/types/Brands"
+import { Brand, Product } from "@/types/sanity"
 import { urlFor } from "@/sanity/sanity-utils"
 
 
