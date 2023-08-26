@@ -1,5 +1,4 @@
 import { cartTable, db, NewCart } from "@/lib/drizzle";
-import { cartTable, db, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 

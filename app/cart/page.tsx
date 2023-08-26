@@ -1,5 +1,4 @@
 "use client"
-"use client"
 import Footer from "@/components/Footer/Footer"
 import Copyright from "@/components/Footer/Copyright"
 import Navbar from "@/components/Navbar/Navbar"
@@ -10,14 +9,6 @@ import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Car
 import { getData } from "@/components/Cart/CartData"
 import { useEffect, useState } from "react"
 import { MyProduct } from "@/types/products";
-import { Cart } from "@/lib/drizzle";
-import { useAppSelector } from "@/redux/hooks";
-import { Displayer } from "@/components/Cart/ProductsCard";
-import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Cart/utils";
-import { getData } from "@/components/Cart/CartData"
-import { useEffect, useState } from "react"
-import { MyProduct } from "@/types/products";
-
 
 export default function Home() {
 
@@ -80,23 +71,6 @@ export default function Home() {
             <Footer />
             <Copyright />
         </div>
-    )
-}
-
-type Props = {
-    dbData: Cart[],
-    products: MyProduct[]
-}
-
-function PageContent({ dbData, products }: Props) {
-    return products.length === 0
-        ? <EmptyCart />
-        : <Displayer dbData={dbData} products={products} />
-}
-
-function LoadingComponent() {
-    return (
-        <div>Fetching Data ...</div>
     )
 }
 
