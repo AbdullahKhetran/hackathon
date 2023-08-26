@@ -41,7 +41,7 @@ export async function handleAddToCart({ product, quantity, uid }: Props) {
 
 export async function handleDeleteFromCart({ uid, productId }: DeleteProductProps) {
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart/delete?userid=${uid}&productid=${productId}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}api/cart?userid=${uid}&productid=${productId}`, {
     method: "DELETE",
   })
 
