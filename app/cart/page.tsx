@@ -9,7 +9,7 @@ import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Car
 import { getData } from "@/components/Cart/CartData"
 import { useEffect, useState } from "react"
 import { MyProduct } from "@/types/products";
-import { reset } from "@/redux/features/cartSlice";
+// import { reset } from "@/redux/features/cartSlice";
 
 export default function Home() {
 
@@ -19,7 +19,7 @@ export default function Home() {
 
     const userid = useAppSelector((state) => state.auth.uid);
 
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
 
     async function master(data: Cart[]) {
         try {
@@ -64,9 +64,9 @@ export default function Home() {
                 }
             </div>
 
-            <button onClick={() => dispatch(reset())} className="bg-red-600">
+            {/* <button onClick={() => dispatch(reset())} className="bg-red-600">
                 Reset state
-            </button>
+            </button> */}
 
             <Footer />
             <Copyright />
