@@ -88,9 +88,8 @@ export function Order({ matchingProduct }: Props) {
                 </div>
             </div>
 
-            <div className="flex my-4 gap-2 w-[60%]">
+            <div className="flex my-4 gap-2 max-w-[60%] lg:max-w-none border-2 border-red-600">
 
-                {/* TODO fix its width */}
                 <button
                     onClick={handleAddToCartClick(cartProduct, quantity)}
                     className="flex gap-2  justify-center items-center grow bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"

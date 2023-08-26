@@ -24,10 +24,10 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
+    // ui will be changed and data will be updated based on these
     const [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
     const [amount, setAmount] = useState(dbProduct.amount)
 
-    // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
     const cartProduct: NewCart = {
         userid: userId,
         productid: dbProduct.productid,
@@ -38,10 +38,10 @@ export function DisplayProduct({ dbData, product }: Props) {
 
     // for  increasing product
     const handlePlus = (productId: string) => () => {
-        dispatch(increaseQuantity(productId));
-        setItemQuantity(itemQuantity + 1)
-        setAmount(amount + dbProduct.price)
-        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity + 1 })
+        dispatch(increaseQuantity(productId)); // updates state
+        setItemQuantity(itemQuantity + 1) // updates ui
+        setAmount(amount + dbProduct.price) // updates ui
+        handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity + 1 }) // updates database
     };
 
     // for decreasing product
@@ -77,7 +77,6 @@ export function DisplayProduct({ dbData, product }: Props) {
                     <h2 className="text-darkGray font-semibold">Delivery Estimation</h2>
                     <p className="text-yellow-400 font-semibold">5 Working Days</p>
                     <h2 className="text-darkGray font-bold tracking-wide">${amount}</h2>
-                    {/* TODO this should be updated when quantity is added */}
                 </div>
 
                 <div className="flex flex-col justify-between items-end">
