@@ -27,6 +27,7 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
+    // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
     const cartProduct: NewCart = {
         userid: userId,
         productid: dbProduct.productid,
