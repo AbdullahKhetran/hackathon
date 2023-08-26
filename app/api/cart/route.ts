@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
             return NextResponse.json(
-                { res },
+                res,
                 {
                     headers: {
                         'Access-Control-Allow-Origin': origin!,
