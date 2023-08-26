@@ -3,12 +3,13 @@ import Footer from "@/components/Footer/Footer"
 import Copyright from "@/components/Footer/Copyright"
 import Navbar from "@/components/Navbar/Navbar"
 import { Cart } from "@/lib/drizzle";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Displayer } from "@/components/Cart/ProductsCard";
 import { EmptyCart, getIdsFromDb, getProductsFromSanity } from "@/components/Cart/utils";
 import { getData } from "@/components/Cart/CartData"
 import { useEffect, useState } from "react"
 import { MyProduct } from "@/types/products";
+import { reset } from "@/redux/features/cartSlice";
 
 export default function Home() {
 
@@ -17,6 +18,8 @@ export default function Home() {
     const [dbData, setDbData] = useState<Cart[]>([])
 
     const userid = useAppSelector((state) => state.auth.uid);
+
+    const dispatch = useAppDispatch()
 
     async function master(data: Cart[]) {
         try {
@@ -60,6 +63,10 @@ export default function Home() {
                     : <LoadingComponent />
                 }
             </div>
+
+            <button onClick={() => dispatch(reset())} className="bg-red-600">
+                Reset state
+            </button>
 
             <Footer />
             <Copyright />

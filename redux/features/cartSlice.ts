@@ -116,7 +116,9 @@ export const cartSlice = createSlice({
             state.products.filter((product) => product.productid !== ap)
         },
         reset: state => {
-            state = initialState
+            state.products = []
+            state.totalQuantity = 0;
+            state.totalAmount = 0
         }
     }
 })
