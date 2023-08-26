@@ -34,7 +34,7 @@ export function Order({ matchingProduct }: Props) {
     const userId = useAppSelector((state) => state.auth.uid)
     // console.log("User id on product page", userId)
 
-
+    // constructing product for add to cart
     const cartProduct: NewCart = {
         userid: userId,
         productid: matchingProduct._id,
@@ -43,7 +43,7 @@ export function Order({ matchingProduct }: Props) {
         amount: quantity * matchingProduct.price,
     }
 
-
+    // combining multiple functions in a single one
     const handleAddToCartClick = (product: NewCart, quantity: number) => (event: MouseEvent) => {
         const payload = {
             product: product,

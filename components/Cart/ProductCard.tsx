@@ -92,7 +92,7 @@ export function DisplayProduct({ dbData, product }: Props) {
                                 className='bg-[#f1f1f1] rounded-full p-1'>
                                 <MinusIcon size={16} />
                             </button>
-                            <h2>{cartProduct.quantity}</h2>
+                            <h2>{itemQuantity}</h2>
                             <button
                                 onClick={handlePlus(cartProduct.productid)}
                                 className='border-2 border-black rounded-full p-1'>
