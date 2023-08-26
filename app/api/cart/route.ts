@@ -1,4 +1,5 @@
 import { cartTable, db, NewCart } from "@/lib/drizzle";
+import { cartTable, db, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 
@@ -15,6 +16,7 @@ export async function GET(request: NextRequest) {
     try {
         if (paramUserId) {
 
+
             const uid = paramUserId as string;
             const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
@@ -28,10 +30,15 @@ export async function GET(request: NextRequest) {
                 })
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
+            return NextResponse.json({ message: "Cart is Empty" })
         }
     }
 
     catch (error) {
+        return NextResponse.json(
+            { message: "Something went wrong", err: error },
+            { status: 500, }
+        )
         return NextResponse.json(
             { message: "Something went wrong", err: error },
             { status: 500, }
