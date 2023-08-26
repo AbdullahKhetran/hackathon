@@ -34,7 +34,7 @@ export async function getProductsFromSanity(ids: string[]) {
 
 export function EmptyCart() {
     return (
-        <div>
+        <div className="my-18 mx-8 md:mx-16 xl:mx-32 px-4">
             <h1 className="font-bold text-xl">Shopping Cart</h1>
             <div className="flex flex-col items-center gap-4">
                 <ShoppingCart size={140} />

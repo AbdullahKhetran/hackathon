@@ -88,7 +88,7 @@ export function Order({ matchingProduct }: Props) {
                 </div>
             </div>
 
-            <div className="flex my-4 gap-2 max-w-[60%] lg:max-w-none border-2 border-red-600">
+            <div className="flex my-4 gap-2 max-w-[60%] lg:max-w-none">
 
                 <button
                     onClick={handleAddToCartClick(cartProduct, quantity)}
