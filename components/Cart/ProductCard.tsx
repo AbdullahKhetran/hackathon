@@ -7,9 +7,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
 import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
-import { MouseEvent } from "react"
+// import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
-import { useRouter } from 'next/navigation'
 
 type Props = {
     dbData: Cart[],
@@ -18,12 +17,6 @@ type Props = {
 
 export function DisplayProduct({ dbData, product }: Props) {
 
-    // to refresh component when delete button is clicked
-    const router = useRouter();
-    const handleRefresh = () => {
-        router.refresh();
-    };
-
     const dispatch = useAppDispatch()
 
     const userId = useAppSelector(state => state.auth.uid)
@@ -31,9 +24,8 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
-    let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
-    let [amount, setAmount] = useState(dbProduct.amount)
-
+    const [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
+    const [amount, setAmount] = useState(dbProduct.amount)
 
     // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
     const cartProduct: NewCart = {
@@ -43,7 +35,6 @@ export function DisplayProduct({ dbData, product }: Props) {
         price: dbProduct.price,
         amount: dbProduct.quantity * product.price,
     }
-
 
     const handlePlus = (productId: string) => () => {
         dispatch(increaseQuantity(productId));
@@ -62,7 +53,6 @@ export function DisplayProduct({ dbData, product }: Props) {
     const handleDelete = (userId: string, productId: string) => () => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
-        handleRefresh()
     }
 
     return (
@@ -95,6 +85,7 @@ export function DisplayProduct({ dbData, product }: Props) {
                         <div className='flex gap-3 items-center'>
                             <button
                                 onClick={handleMinus(cartProduct.productid)}
+                                disabled={itemQuantity ? false : true}
                                 className='bg-[#f1f1f1] rounded-full p-1'>
                                 <MinusIcon size={16} />
                             </button>
