@@ -1,12 +1,11 @@
 "use client"
-
 import { Cart, NewCart } from "@/lib/drizzle";
 import { MinusIcon, PlusIcon, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { useEffect, useState } from "react"
-import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/redux/features/cartSlice"
+import { deleteFromCart, increaseQuantity, decreaseQuantity } from "@/redux/features/cartSlice"
 import { MyProduct } from "@/types/products"
 import { MouseEvent } from "react"
 import { handleDeleteFromCart, handleChange } from "@/lib/utils";
@@ -20,18 +19,15 @@ type Props = {
 export function DisplayProduct({ dbData, product }: Props) {
     const dispatch = useAppDispatch()
 
-
     const userId = useAppSelector(state => state.auth.uid)
-    const totalAmount = useAppSelector(state => state.cart.totalAmount)
-    const totalItems = useAppSelector(state => state.cart.totalQuantity)
 
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
     // to refresh component when delete button is clicked
-    const [refresh, setRefresh] = useState(false);
+    const [refresh, setRefresh] = useState(0);
     const refreshComponent = () => {
-        setRefresh(!refresh);
+        setRefresh(refresh + 1);
     };
 
 
@@ -49,28 +45,24 @@ export function DisplayProduct({ dbData, product }: Props) {
     }
 
 
-    const handlePlus = (productId: string) => (event: MouseEvent) => {
+    const handlePlus = (productId: string) => () => {
         dispatch(increaseQuantity(productId));
         setItemQuantity(itemQuantity + 1)
         setAmount(amount + dbProduct.price)
         handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity + 1 })
     };
 
-    const handleMinus = (productId: string) => (event: MouseEvent) => {
+    const handleMinus = (productId: string) => () => {
         dispatch(decreaseQuantity(productId));
         setItemQuantity(itemQuantity - 1);
         setAmount(amount - dbProduct.price)
         handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity - 1 })
     };
 
-    const handleDelete = (userId: string, productId: string) => (event: MouseEvent) => {
+    const handleDelete = (userId: string, productId: string) => () => {
         dispatch(deleteFromCart(productId));
         handleDeleteFromCart({ uid: userId, productId: productId })
         refreshComponent()
-    }
-
-    const hanldeReset = () => (event: MouseEvent) => {
-        dispatch(reset())
     }
 
     return (
@@ -97,12 +89,13 @@ export function DisplayProduct({ dbData, product }: Props) {
 
                     <button onClick={handleDelete(userId, cartProduct.productid)}>
                         <Trash2 />
+                        <p className="hidden">{refresh}</p>
                     </button>
 
                     <div>
                         <div className='flex gap-3 items-center'>
                             <button
-                                onClick={handleMinus(cartProduct.productid,)}
+                                onClick={handleMinus(cartProduct.productid)}
                                 className='bg-[#f1f1f1] rounded-full p-1'>
                                 <MinusIcon size={16} />
                             </button>
@@ -118,11 +111,6 @@ export function DisplayProduct({ dbData, product }: Props) {
                     </div>
                 </div>
             </div>
-
-            <button onClick={hanldeReset} className="font-bold bg-red-600">
-                Reset the state
-            </button>
-
         </div>
     )
 }
