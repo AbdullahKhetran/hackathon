@@ -28,8 +28,8 @@ export function DisplayProduct({ dbData, product }: Props) {
     // i know this is true because product was originally provided from db
     const dbProduct = dbData.find(item => item.productid === product._id)!
 
-    const [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
-    const [amount, setAmount] = useState(dbProduct.amount)
+    let [itemQuantity, setItemQuantity] = useState(dbProduct.quantity)
+    let [amount, setAmount] = useState(dbProduct.amount)
 
 
     // kya is pr useState use kr skte hain, kyu ke isme changes ho rahi hain neeche
@@ -44,14 +44,14 @@ export function DisplayProduct({ dbData, product }: Props) {
 
     const handlePlus = (productId: string) => (event: MouseEvent) => {
         dispatch(increaseQuantity(productId));
-        setItemQuantity(itemQuantity + 1)
+        setItemQuantity(itemQuantity++)
         setAmount(amount + dbProduct.price)
         handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity })
     };
 
     const handleMinus = (productId: string) => (event: MouseEvent) => {
         dispatch(decreaseQuantity(productId));
-        setItemQuantity(itemQuantity - 1);
+        setItemQuantity(itemQuantity--);
         setAmount(amount - dbProduct.price)
         handleChange({ uid: userId, product: cartProduct, quantity: itemQuantity })
     };
