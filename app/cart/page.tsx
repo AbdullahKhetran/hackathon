@@ -12,6 +12,7 @@ import { urlFor } from "@/sanity/sanity-utils"
 import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/redux/features/cartSlice"
 import Link from "next/link";
 import { handleChange } from "@/lib/utils";
+import StripeCheckoutButton from "@/components/CheckoutButton";
 
 
 
@@ -172,9 +173,7 @@ export default function Home() {
                             <h2>Sub Total</h2>
                             <h2>{totalAmount}</h2>
                         </div>
-                        <Link href={"/checkout"} >
-                            <button className="bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black w-full">Process to Checkout</button>
-                        </Link>
+                        <StripeCheckoutButton products={data} />
                     </div>
                 </div>
             </div>
