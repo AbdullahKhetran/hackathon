@@ -43,7 +43,7 @@ export function getFemaleProducts(): Promise<Product[]> {
             care,
             images,
             // Not needed but this is how you url can be shown, run in groq playground
-            "imageUrl": image.asset->url
+            // "imageUrl": image.asset->url
         }`
     )
 }

@@ -10,6 +10,16 @@ export interface MyProduct {
     slug: { current: string; _type: string; },
 }
 
+export type CombinedProduct = {
+    id: string,
+    name: string,
+    category: string,
+    image: Image,
+    price: number,
+    quantity: number,
+    amount: number
+}
+
 // this one is export by drizle as type Cart
 type DbData = {
     id: number, // primary key auto incrementing

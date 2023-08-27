@@ -18,7 +18,6 @@ export function displayProducts(products: Product[]) {
                     className={`flex flex-col w-[250px]`}>
                     {/* set parent's width to image width so that "break-words" can be applied on text */}
 
-                    {/* url builder used here */}
                     < Image
                         src={urlFor(product.image).url()}
                         alt={product.name}

@@ -1,7 +1,55 @@
+import { Cart } from "@/lib/drizzle";
+import { getSpecificProduct, urlFor } from "@/sanity/sanity-utils";
+import { MyProduct } from "@/types/products";
+import { CombinedProduct } from "@/types/products";
+
 import { cartTable, db, NewCart } from "@/lib/drizzle";
 import { NextRequest, NextResponse } from "next/server";
 import { eq, and } from "drizzle-orm";
 
+
+function getIdsFromDb(items: Cart[]) {
+    const productId: string[] = items.map((item) => item.productid);
+    return productId;
+
+}
+async function getProductsFromSanity(ids: string[]) {
+    const products: MyProduct[] = []
+
+    const productPromises = ids.map(async (id) => {
+        let product = await getSpecificProduct(id)
+        return product
+    })
+
+    // Wait to resolve all promises and add them to the array using spread operator
+    products.push(...await Promise.all(productPromises))
+
+    return products
+}
+
+function makeCombinedProductsArray(res: Cart[], sanityProducts: MyProduct[]) {
+
+    const combinedProductsArray: CombinedProduct[] = []
+
+    sanityProducts.map((sanityProduct) => {
+        // match the product with databse product
+        const dbProduct = res.find(dbProduct => dbProduct.productid === sanityProduct._id)
+
+        const combinedProduct: CombinedProduct = {
+            id: dbProduct!.productid,
+            name: sanityProduct.name,
+            category: sanityProduct.category,
+            image: sanityProduct.image,
+            quantity: dbProduct!.quantity,
+            price: dbProduct!.price,
+            amount: dbProduct!.amount,
+        }
+        // push to array (local scope)
+        combinedProductsArray.push(combinedProduct)
+    })
+    // update the main array
+    return combinedProductsArray
+}
 
 export async function GET(request: NextRequest) {
 
@@ -13,22 +61,27 @@ export async function GET(request: NextRequest) {
     // console.log("User id in params is " + paramUserId)
 
     try {
-        if (paramUserId) {
+        const uid = paramUserId as string;
+        const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
 
-            const uid = paramUserId as string;
-            const res = await db.select().from(cartTable).where(eq(cartTable.userid, uid))
+        if (res.length > 0) {
+            const ids = getIdsFromDb(res)
+            const sanityProducts = await getProductsFromSanity(ids)
+            const combinedProducts = makeCombinedProductsArray(res, sanityProducts)
 
             return NextResponse.json(
-                res,
+                combinedProducts,
                 {
                     headers: {
                         'Access-Control-Allow-Origin': origin!,
                         'Content-Type': 'application/json',
                     }
                 })
+
         } else {
             return NextResponse.json({ message: "Cart is Empty" })
         }
+
     }
 
     catch (error) {

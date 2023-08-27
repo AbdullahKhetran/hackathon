@@ -1,5 +1,4 @@
-"use client"
-import { Cart } from "@/lib/drizzle";
+import { CombinedProduct } from "@/types/products";
 
 export async function getData(uid: string) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cart?userid=${uid}`)
@@ -9,8 +8,7 @@ export async function getData(uid: string) {
         throw new Error('Failed to fetch data')
     }
 
-    const dataPromises: Promise<Cart[]> = res.json();
-    const data: Cart[] = await dataPromises;
+    const data: CombinedProduct[] = await res.json()
 
     return data
 }
