@@ -66,6 +66,16 @@ export function Order({ matchingProduct }: Props) {
                     // update state
                     dispatch(increaseQuantity(existingProduct.id))
 
+                } else {
+                    // update database
+                    handleAddToCart({ product: cartProduct, quantity: quantity, uid: userId }) // updates database
+                    //    update state
+                    const payload = {
+                        product: cartProduct,
+                        quantity: quantity,
+                    }
+                    dispatch(addToCart(payload));
+
                 }
             } else {
                 // update database
