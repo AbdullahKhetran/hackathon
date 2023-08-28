@@ -9,7 +9,7 @@ const stripe = new Stripe(key!, {
 });
 
 export async function POST(request: NextRequest) {
-
+    console.log("fetch request received")
 
     const products = await request.json();
 

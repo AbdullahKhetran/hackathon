@@ -1,4 +1,3 @@
-"use client"
 import { getStripePromise } from "@/lib/stripe";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
