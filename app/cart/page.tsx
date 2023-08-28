@@ -39,14 +39,11 @@ export default function Home() {
             // const res = await fetch(`http://localhost:3000/api/cart?userid=${uid}&productid=${productId}`, {
             method: "DELETE",
         })
-
-        // to refetch data, this is included in useEffect dependency array
-        setRefresh(!refresh)
-
         console.log(res)
         if (!res.ok) {
             throw new Error("Could not remove product")
         }
+        setRefresh(!refresh)
     }
 
     useEffect(() => {
@@ -63,7 +60,9 @@ export default function Home() {
         fetchData();
     }, [refresh, userid]);
 
-
+    const handleReset = () => {
+        dispatch(reset())
+    }
 
     if (data.length === 0) return (
         <div>
@@ -74,13 +73,7 @@ export default function Home() {
             <Footer />
             <Navbar />
         </div>
-    )
-
-    const handleReset = () => {
-        dispatch(reset())
-    }
-
-    return (
+    ); else return (
         <div >
             <Navbar />
 
