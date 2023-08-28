@@ -27,9 +27,6 @@ export default function Home() {
     const totalAmount = useAppSelector(state => state.cart.totalAmount)
     const totalItems = useAppSelector(state => state.cart.totalQuantity)
 
-
-    const [itemQuantity, setItemQuantity] = useState(0)
-
     const dispatch = useAppDispatch()
 
     // Delete request
@@ -99,16 +96,14 @@ export default function Home() {
                             // for  increasing product
                             const handlePlus = (productId: string) => () => {
                                 dispatch(increaseQuantity(productId)); // updates state
-                                handleChange({ uid: userid, product: product, quantity: itemQuantity + 1 }) // updates database
-                                // setItemQuantity(itemQuantity + 1) // updates ui because of re-render
+                                handleChange({ uid: userid, product: product, quantity: product.quantity + 1 }) // updates database
                                 setRefresh(!refresh) // updates ui
                             };
 
                             // for decreasing product
                             const handleMinus = (productId: string) => () => {
                                 dispatch(decreaseQuantity(productId)); // updates state
-                                handleChange({ uid: userid, product: product, quantity: itemQuantity - 1 }) // updates database
-                                // setItemQuantity(itemQuantity - 1) // updates ui because of re-render
+                                handleChange({ uid: userid, product: product, quantity: product.quantity - 1 }) // updates database
                                 setRefresh(!refresh) // updates ui                              
                             };
 
@@ -146,7 +141,7 @@ export default function Home() {
                                                 <div className='flex gap-3 items-center'>
                                                     <button
                                                         onClick={handleMinus(product.id)}
-                                                        disabled={itemQuantity > 1 ? false : true}
+                                                        disabled={product.quantity > 1 ? false : true}
                                                         className='bg-[#f1f1f1] rounded-full p-1'>
                                                         <MinusIcon size={16} />
                                                     </button>
