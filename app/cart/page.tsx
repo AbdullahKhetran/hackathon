@@ -13,7 +13,8 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/red
 import Link from "next/link";
 import { handleChange } from "@/lib/utils";
 import StripeCheckoutButton from "@/components/CheckoutButton";
-import { useRouter } from "next/navigation";
+import product from "@/sanity/schemas/products-schema";
+// import { useRouter } from "next/navigation";
 
 
 function EmptyCart() {
@@ -29,8 +30,6 @@ function EmptyCart() {
 }
 
 export default function Home() {
-
-    const router = useRouter()
 
     const userid = useAppSelector((state) => state.auth.uid);
 
@@ -102,7 +101,8 @@ export default function Home() {
         </div>
     );
 
-    if (data.length > 0) return (
+    // if (data.length > 0)
+    return (
         <div >
             <Navbar />
 
@@ -112,10 +112,13 @@ export default function Home() {
                     <div className="flex flex-col gap-4">
                         {/* Generating Prodcut Cards */}
 
+                        {/* {data.map((product) => (
+                            <Test product={product} key={product.id} />
+                        ))} */}
+
                         {data.map((product) => {
                             // console.log(product)
-
-
+                            // const stateProduct = useAppSelector((state) => state.cart.products.find(item => item.productid === product.id))
 
 
                             // for  increasing product
@@ -123,7 +126,6 @@ export default function Home() {
                                 dispatch(increaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity + 1 }) // updates database
                                 setRefresh(!refresh) // updates ui
-                                // router.refresh()
                             };
 
                             // for decreasing product
@@ -131,7 +133,6 @@ export default function Home() {
                                 dispatch(decreaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity - 1 }) // updates database
                                 setRefresh(!refresh) // updates ui    
-                                // router.refresh()
                             };
 
                             // for removing product
@@ -215,3 +216,23 @@ export default function Home() {
     )
 
 }
+
+// i also have this option which will update the ui based on state but then i cant refresh the page using setrefresh(!refresh)
+// type Prop = {
+//     product: CombinedProduct,
+// }
+
+// function Test({ product }: Prop) {
+//     const [quantity, setQuantity] = useState(product.quantity)
+
+//     const increment = () => {
+//         setQuantity(quantity + 1)
+//     }
+//     return (
+//         <div>
+//             <h1>Name: {product.name}</h1>
+//             <h2>Quantity: {quantity}</h2>
+//             <button onClick={increment}>increase quantity</button>
+//         </div>
+//     )
+// }
