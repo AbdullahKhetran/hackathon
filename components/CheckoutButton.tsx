@@ -1,5 +1,4 @@
 import { getStripePromise } from "@/lib/stripe";
-import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { CombinedProduct } from "@/types/products";
 
@@ -7,7 +6,7 @@ type Props = {
     products: CombinedProduct[]
 }
 
-export default async function StripeCheckoutButton({ products }: Props) {
+export default function StripeCheckoutButton({ products }: Props) {
 
     const userId = useAppSelector(state => state.auth.uid)
 
