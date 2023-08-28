@@ -116,34 +116,34 @@ export async function POST(request: NextRequest) {
     const req: NewCart = await request.json();
 
     try {
+
         if (req) {
-            if (req) {
 
-                const res = await db.insert(cartTable).values({
-                    userid: req.userid,
-                    productid: req.productid,
-                    quantity: req.quantity,
-                    price: req.price,
-                    amount: req.amount,
-                }).returning()
+            const res = await db.insert(cartTable).values({
+                userid: req.userid,
+                productid: req.productid,
+                quantity: req.quantity,
+                price: req.price,
+                amount: req.amount,
+            }).returning()
 
-                return NextResponse.json(
-                    { message: "Data added successfully", res },
-                    {
-                        headers: {
-                            'Access-Control-Allow-Origin': origin!,
-                            'Content-Type': 'application/json',
-                        }
+            return NextResponse.json(
+                { message: "Data added successfully", res },
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': origin!,
+                        'Content-Type': 'application/json',
                     }
-                )
+                }
+            )
 
-            } else {
-                return NextResponse.json(
-                    { message: "Data could not be inserted" },
-                    { status: 400 }
-                )
-            }
+        } else {
+            return NextResponse.json(
+                { message: "Data could not be inserted" },
+                { status: 400 }
+            )
         }
+
     } catch (error) {
         console.log("POST request error", error)
         return NextResponse.json(

@@ -17,7 +17,6 @@ export default async function ProductPage({ params }: { params: { id: string } }
         product.slug.current === params.id
     ))
 
-
     let url: string = ""
     let details: PortableTextBlock[] = []
     let care: PortableTextBlock[] = []
