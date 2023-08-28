@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
                 }),
 
 
-                success_url: `${request.headers.get("origin")}/sucess`,
+                success_url: `${request.headers.get("origin")}/success`,
                 cancel_url: `${request.headers.get("origin")}/cart`
 
             })
