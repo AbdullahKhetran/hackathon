@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
                             },
                             unit_amount: product.price * 100,
                         },
-                        qunatity: product.quantity,
+                        quantity: product.quantity,
                         adjustable_quantity: {
                             enabled: true,
                             minimum: 1,
