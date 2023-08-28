@@ -1,4 +1,3 @@
-// import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
 
 type ButtonParams = {
@@ -19,15 +18,3 @@ export default function Button({ content, path, disabled = false }: ButtonParams
     )
 }
 
-
-
-// export function AddToCartButton({ content }: { content: string }) {
-//     return (
-
-//         <button onClick={handleAddToCart()} className="flex gap-2 justify-center md:w-2/5 bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black">
-//             <ShoppingCart />
-//             {content}
-//         </button>
-
-//     )
-// }

@@ -10,10 +10,8 @@ import { MinusIcon, PlusIcon, ShoppingCart, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { urlFor } from "@/sanity/sanity-utils"
 import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/redux/features/cartSlice"
-import Link from "next/link";
 import { handleChange } from "@/lib/utils";
 import StripeCheckoutButton from "@/components/CheckoutButton";
-import product from "@/sanity/schemas/products-schema";
 // import { useRouter } from "next/navigation";
 
 
@@ -80,9 +78,9 @@ export default function Home() {
         // eslint-disable-next-line
     }, [refresh, userid]);
 
-    const handleReset = () => {
-        dispatch(reset())
-    }
+    // const handleReset = () => {
+    //     dispatch(reset())
+    // }
 
     if (data.length === 0) return (
         <div className="max-w-center">
@@ -101,7 +99,6 @@ export default function Home() {
         </div>
     );
 
-    // if (data.length > 0)
     return (
         <div className="max-w-center">
             <Navbar />

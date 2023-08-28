@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Cart, NewCart } from "@/lib/drizzle"
+import { NewCart } from "@/lib/drizzle"
 
 interface CartState {
     products: Array<NewCart>,

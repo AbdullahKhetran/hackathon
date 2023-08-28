@@ -19,28 +19,3 @@ export type CombinedProduct = {
     quantity: number,
     amount: number
 }
-
-// this one is export by drizle as type Cart
-type DbData = {
-    id: number, // primary key auto incrementing
-    userid: string, // for fetching data
-    productid: string, // _id in sanity
-    // this is item data
-    price: number,
-    quantity: number,
-    amount: number, // price * quantity
-}
-
-// its to be included in state, not in sanity or db
-type State = {
-    // this is total data
-    totalQuantity: number,
-    totalAmount: number,
-}
-
-type SanityData = {
-    _id: string,
-    name: string,
-    category: string,
-    image: Image,
-}

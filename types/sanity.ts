@@ -29,22 +29,3 @@ export type Product = {
 
 }
 
-// export type FeaturedProduct = {
-//     _id: string,
-//     createdAt: Date,
-//     image: string,
-//     title: string,
-//     price: number,
-//     slug: {
-//         current: string,
-//         _type: string
-//     },
-// }
-
-// export type Image = {
-//     Id: string,
-//     _createdAt: Date,
-//     title: string,
-//     image: string,
-//     slug: string,
-// }

@@ -8,7 +8,6 @@ import Navbar from '@/components/Navbar/Navbar'
 import Copyright from '@/components/Footer/Copyright'
 
 
-
 export default function Home() {
   return (
     <div>
@@ -29,5 +28,3 @@ export default function Home() {
     </div>
   )
 }
-
-// testing

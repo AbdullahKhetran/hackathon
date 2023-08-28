@@ -12,7 +12,6 @@ export function LgNavCartIcon() {
     return (
         <Link href={`/cart?userid=${userid}`} className="flex flex-col items-end px-1 py-[4px] bg-socialIconbg rounded-[50%]">
             <span className="bg-[#f02d34] rounded-[50%]  px-1 text-[#eee]  font-semibold  text-xs">{totalQuantity}</span>
-            {/* make the value dynamic */}
             <ShoppingCart size={20} />
         </Link>
     )
