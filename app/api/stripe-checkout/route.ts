@@ -1,6 +1,7 @@
 import { CombinedProduct } from "@/types/products";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { urlFor } from "@/sanity/sanity-utils";
 
 const key = process.env.STRIPE_SECRET_KEY
 
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
                             currency: "usd",
                             product_data: {
                                 name: product.name,
-                                images: [product.image.asset?._ref],
+                                images: [urlFor(product.image).url()],
                             },
                             unit_amount: product.price * 100,
                         },
