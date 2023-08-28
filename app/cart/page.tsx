@@ -14,7 +14,17 @@ import Link from "next/link";
 import { handleChange } from "@/lib/utils";
 import StripeCheckoutButton from "@/components/CheckoutButton";
 
-
+function EmptyCart() {
+    return (
+        <div className="my-18 mx-8 md:mx-16 xl:mx-32 px-4">
+            <h1 className="font-bold text-xl">Shopping Cart</h1>
+            <div className="flex flex-col items-center gap-4">
+                <ShoppingCart size={140} />
+                <h1 className="font-bold text-4xl tracking-wide">Your cart is empty</h1>
+            </div>
+        </div>
+    )
+}
 
 export default function Home() {
 
@@ -73,7 +83,8 @@ export default function Home() {
             <Footer />
             <Navbar />
         </div>
-    ); else return (
+    );
+    else return (
         <div >
             <Navbar />
 
@@ -180,18 +191,5 @@ export default function Home() {
         </div>
     )
 
-}
-
-
-function EmptyCart() {
-    return (
-        <div className="my-18 mx-8 md:mx-16 xl:mx-32 px-4">
-            <h1 className="font-bold text-xl">Shopping Cart</h1>
-            <div className="flex flex-col items-center gap-4">
-                <ShoppingCart size={140} />
-                <h1 className="font-bold text-4xl tracking-wide">Your cart is empty</h1>
-            </div>
-        </div>
-    )
 }
 
