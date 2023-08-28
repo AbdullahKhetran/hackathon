@@ -10,27 +10,43 @@ export default function StripeCheckoutButton({ products }: Props) {
 
     const userId = useAppSelector(state => state.auth.uid)
 
+    // const handleCheckout = async () => {
+
+    //     const stripe = await getStripePromise();
+
+    //     const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/stripe-checkout`, {
+    //         // const res = await fetch(`http://localhost:3000/api/stripe-checkout`, {
+
+    //         method: "POST",
+
+    //         body: JSON.stringify({
+    //             userId: userId,
+    //             products: products,
+    //         })
+    //     })
+
+    //     const data = await res.json();
+
+    //     if (data.session) {
+    //         stripe?.redirectToCheckout({ sessionId: data.session.id });
+    //     }
+    // }
+
     const handleCheckout = async () => {
-
         const stripe = await getStripePromise();
-
-        const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/stripe-checkout`, {
-            // const res = await fetch(`http://localhost:3000/api/stripe-checkout`, {
-
+        const response = await fetch("/api/stripe-session/", {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-cache",
+            body: JSON.stringify(products),
+        });
 
-            body: JSON.stringify({
-                userId: userId,
-                products: products,
-            })
-        })
-
-        const data = await res.json();
+        const data = await response.json();
 
         if (data.session) {
             stripe?.redirectToCheckout({ sessionId: data.session.id });
         }
-    }
+    };
 
 
     return (
