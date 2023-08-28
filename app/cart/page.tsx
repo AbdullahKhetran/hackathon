@@ -115,6 +115,9 @@ export default function Home() {
                         {data.map((product) => {
                             // console.log(product)
 
+
+
+
                             // for  increasing product
                             const handlePlus = (productId: string) => () => {
                                 dispatch(increaseQuantity(productId)); // updates state
