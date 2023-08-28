@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
                             currency: "usd",
                             product_data: {
                                 name: product.name,
-                                images: [product.image],
+                                images: [product.image.asset?._ref],
                             },
                             unit_amount: product.price * 100,
                         },
