@@ -67,8 +67,7 @@ export const cartSlice = createSlice({
                 existingProduct.amount += existingProduct.price
 
             } else {
-                alert("Something went wrong, Check Console")
-                console.log("Existing Product is undefined")
+                console.error("Existing Product is undefined")
             }
         },
 
@@ -92,8 +91,7 @@ export const cartSlice = createSlice({
                     existingProduct.amount -= existingProduct.price
                 }
             } else {
-                alert("Something went wrong, Check Console")
-                console.log("Existing Product is undefined")
+                console.error("Existing Product is undefined")
             }
         },
 
@@ -108,8 +106,7 @@ export const cartSlice = createSlice({
                 state.totalQuantity -= existingProduct?.quantity
 
             } else {
-                alert("Something went wrong, Check Console")
-                console.log("Existing Product is undefined")
+                console.error("Existing Product is undefined")
             }
 
             // product
