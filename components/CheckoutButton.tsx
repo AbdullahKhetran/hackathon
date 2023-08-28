@@ -1,3 +1,5 @@
+"use client"
+
 import { getStripePromise } from "@/lib/stripe";
 import { useAppSelector } from "@/redux/hooks";
 import { CombinedProduct } from "@/types/products";
@@ -35,7 +37,7 @@ export default function StripeCheckoutButton({ products }: Props) {
     const handleCheckout = async () => {
         const stripe = await getStripePromise();
         console.log("sending fetch request")
-        const response = await fetch("/api/stripe-session/", {
+        const response = await fetch(`/api/stripe-session/userid=${userId}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache",
