@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Sucess() {
     return (
-        <div>
+        <div className="max-w-center">
             <Navbar />
 
             <div className="flex flex-col items-center py-16 px-8 gap-6 bg-socialIconbg my-8 mx-8 md:mx-16 rounded-xl">

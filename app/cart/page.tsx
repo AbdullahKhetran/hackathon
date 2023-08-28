@@ -85,7 +85,7 @@ export default function Home() {
     }
 
     if (data.length === 0) return (
-        <div>
+        <div className="max-w-center">
             <Navbar />
 
             <EmptyCart />
@@ -103,7 +103,7 @@ export default function Home() {
 
     // if (data.length > 0)
     return (
-        <div >
+        <div className="max-w-center">
             <Navbar />
 
             <div className=" my-18 mx-8 md:mx-16 xl:mx-32 px-4 ">
