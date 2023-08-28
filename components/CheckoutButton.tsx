@@ -31,23 +31,6 @@ export default function StripeCheckoutButton({ products }: Props) {
         }
     }
 
-    // const handleCheckout = async () => {
-    //     const stripe = await getStripePromise();
-    //     const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/stripe-checkout?userid=${userId}`, {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         cache: "no-cache",
-    //         body: JSON.stringify(products),
-    //     });
-
-    //     const data = await response.json();
-
-    //     if (data.session) {
-    //         stripe?.redirectToCheckout({ sessionId: data.session.id });
-    //     }
-    // };
-
-
     return (
 
         <button onClick={handleCheckout}
