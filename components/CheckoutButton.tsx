@@ -7,7 +7,7 @@ type Props = {
     products: CombinedProduct[]
 }
 
-export default function StripeCheckoutButton({ products }: Props) {
+export default async function StripeCheckoutButton({ products }: Props) {
 
     const userId = useAppSelector(state => state.auth.uid)
 
