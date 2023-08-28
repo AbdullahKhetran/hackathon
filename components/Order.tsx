@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { addUserId, removeUserId } from "@/redux/features/authSlice";
 import { addToCart, increaseQuantity } from "@/redux/features/cartSlice"
 import { NewCart } from "@/lib/drizzle"
-import { MouseEvent } from "react"
+// import { MouseEvent } from "react"
 import { getData } from "@/app/cart/cartData"
 
 
@@ -44,28 +44,39 @@ export function Order({ matchingProduct }: Props) {
         amount: quantity * matchingProduct.price,
     }
 
+    // call on button click
     const handleAddToCartClick = async () => {
 
         try {
+            // get data: if product exists, PUT request else POST request
             const data = await getData(userId)
 
-            const existingProduct = data.find((item) => item.id === matchingProduct._id)
+            if (Array.isArray(data)) {
 
-            if (existingProduct) {
+                const existingProduct = data.find((item) => item.id === matchingProduct._id)
 
-                const newQuantity = existingProduct.quantity + quantity
+                if (existingProduct) {
+                    // only updating when success data was sent and not json object
 
-                await handleChange({ uid: userId, product: existingProduct, quantity: newQuantity })
+                    const newQuantity = existingProduct.quantity + quantity
 
-                dispatch(increaseQuantity(existingProduct.id))
+                    // update database
+                    await handleChange({ uid: userId, product: existingProduct, quantity: newQuantity })
 
+                    // update state
+                    dispatch(increaseQuantity(existingProduct.id))
+
+                }
             } else {
+                // update database
                 handleAddToCart({ product: cartProduct, quantity: quantity, uid: userId }) // updates database
+                //    update state
                 const payload = {
                     product: cartProduct,
                     quantity: quantity,
                 }
-                dispatch(addToCart(payload)); // updating state
+                dispatch(addToCart(payload));
+
             }
 
         } catch (error) {
