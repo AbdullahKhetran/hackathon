@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
                             currency: "usd",
                             product_data: {
                                 name: item.name,
-                                images: [item.image],
+                                // images: [item.image],
                             },
                             unit_amount: item.price * 100,
                         },
