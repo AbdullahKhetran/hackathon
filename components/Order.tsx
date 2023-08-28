@@ -1,18 +1,19 @@
 "use client"
-import { handleAddToCart } from "@/lib/utils"
+import { handleAddToCart, handleChange } from "@/lib/utils"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Product } from "@/types/sanity"
 import Size from "./Product/Size"
 import { useState } from "react"
 import { v4 as uuid } from "uuid";
-// redux
 import { useAppSelector } from "@/redux/hooks";
 import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { addUserId, removeUserId } from "@/redux/features/authSlice";
-import { addToCart } from "@/redux/features/cartSlice"
+import { addToCart, increaseQuantity } from "@/redux/features/cartSlice"
 import { NewCart } from "@/lib/drizzle"
 import { MouseEvent } from "react"
+import { getData } from "@/app/cart/cartData"
+
 
 type Props = {
     matchingProduct: Product,
@@ -43,15 +44,34 @@ export function Order({ matchingProduct }: Props) {
         amount: quantity * matchingProduct.price,
     }
 
-    // combining multiple functions in a single one
-    const handleAddToCartClick = (product: NewCart, quantity: number) => (event: MouseEvent) => {
-        const payload = {
-            product: product,
-            quantity: quantity,
+    const handleAddToCartClick = async () => {
+
+        try {
+            const data = await getData(userId)
+
+            const existingProduct = data.find((item) => item.id === matchingProduct._id)
+
+            if (existingProduct) {
+
+                const newQuantity = existingProduct.quantity + quantity
+
+                await handleChange({ uid: userId, product: existingProduct, quantity: newQuantity })
+
+                dispatch(increaseQuantity(existingProduct.id))
+
+            } else {
+                handleAddToCart({ product: cartProduct, quantity: quantity, uid: userId }) // updates database
+                const payload = {
+                    product: cartProduct,
+                    quantity: quantity,
+                }
+                dispatch(addToCart(payload)); // updating state
+            }
+
+        } catch (error) {
+            console.log(error)
         }
-        dispatch(addToCart(payload)); // updating state
-        handleAddToCart({ product, quantity, uid: userId }) // updating database
-    };
+    }
 
     return (
         <div className="flex flex-col gap-10 max-w-[70%]">
@@ -91,7 +111,7 @@ export function Order({ matchingProduct }: Props) {
             <div className="flex my-4 gap-2 max-w-[60%] lg:max-w-none">
 
                 <button
-                    onClick={handleAddToCartClick(cartProduct, quantity)}
+                    onClick={handleAddToCartClick}
                     className="flex gap-2  justify-center items-center grow bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black"
                 >
 
