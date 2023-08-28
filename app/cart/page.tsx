@@ -91,11 +91,11 @@ export default function Home() {
             <EmptyCart />
 
             <Footer />
-
+            {/* 
             <button className="w-max p-2 bg-red-500"
                 onClick={handleReset}>
                 Reset State
-            </button>
+            </button> */}
 
             <Copyright />
         </div>
@@ -207,10 +207,10 @@ export default function Home() {
             </div>
 
             <Footer />
-            <button className="w-max p-2 bg-red-500"
+            {/* <button className="w-max p-2 bg-red-500"
                 onClick={handleReset}>
                 Reset State
-            </button>
+            </button> */}
             <Copyright />
         </div>
     )

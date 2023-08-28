@@ -9,7 +9,7 @@ export default function Sucess() {
         <div>
             <Navbar />
 
-            <div className="flex flex-col items-center py-16 gap-6 bg-socialIconbg my-8 mx-8 md:mx-16 rounded-xl">
+            <div className="flex flex-col items-center py-16 px-8 gap-6 bg-socialIconbg my-8 mx-8 md:mx-16 rounded-xl">
                 <div className="flex flex-col gap-4 items-center text-center">
                     <CheckCircle size={120} color="green  " />
                     <h1 className="text-5xl font-bold">Thank you for your order!</h1>
