@@ -71,22 +71,23 @@ export async function GET(request: NextRequest) {
 
             return NextResponse.json(
                 combinedProducts,
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': origin!,
-                        'Content-Type': 'application/json',
-                    }
-                })
+                // {
+                //     headers: {
+                //         'Access-Control-Allow-Origin': origin!,
+                //         'Content-Type': 'application/json',
+                //     }
+                // }
+            )
 
         } else {
             return NextResponse.json(
                 { message: "Cart is Empty" },
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': origin!,
-                        'Content-Type': 'application/json',
-                    }
-                }
+                // {
+                //     headers: {
+                //         'Access-Control-Allow-Origin': origin!,
+                //         'Content-Type': 'application/json',
+                //     }
+                // }
             )
 
         }
@@ -138,12 +139,12 @@ export async function POST(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Data added successfully", res },
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': origin!,
-                        'Content-Type': 'application/json',
-                    }
-                }
+                // {
+                //     headers: {
+                //         'Access-Control-Allow-Origin': origin!,
+                //         'Content-Type': 'application/json',
+                //     }
+                // }
             )
 
         } else {
@@ -178,12 +179,12 @@ export async function PUT(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Product updated sucessfully" },
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': origin!,
-                        'Content-Type': 'application/json',
-                    }
-                }
+                // {
+                //     headers: {
+                //         'Access-Control-Allow-Origin': origin!,
+                //         'Content-Type': 'application/json',
+                //     }
+                // }
             )
         } else {
             return NextResponse.json(
@@ -222,12 +223,12 @@ export async function DELETE(request: NextRequest) {
 
             return NextResponse.json(
                 { message: "Product removed sucessfully" },
-                {
-                    headers: {
-                        'Access-Control-Allow-Origin': origin!,
-                        'Content-Type': 'application/json',
-                    }
-                }
+                // {
+                //     headers: {
+                //         'Access-Control-Allow-Origin': origin!,
+                //         'Content-Type': 'application/json',
+                //     }
+                // }
             )
         } else {
             return NextResponse.json(
@@ -251,12 +252,12 @@ export async function OPTIONS(request: NextRequest) {
     try {
         return NextResponse.json(
             { message: "Sucess" },
-            {
-                headers: {
-                    'Access-Control-Allow-Origin': origin!,
-                    'Content-Type': 'application/json',
-                }
-            }
+            // {
+            //     headers: {
+            //         'Access-Control-Allow-Origin': origin!,
+            //         'Content-Type': 'application/json',
+            //     }
+            // }
         )
 
     } catch (error) {

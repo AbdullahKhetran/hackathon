@@ -27,10 +27,10 @@ export async function handleAddToCart({ product, quantity, uid }: PropsPOST) {
 
     method: "POST",
 
-    headers: {
-      'Access-Control-Allow-Origin': origin!,
-      'Content-Type': 'application/json',
-    },
+    // headers: {
+    //   'Access-Control-Allow-Origin': origin!,
+    //   'Content-Type': 'application/json',
+    // },
 
     body: JSON.stringify({
       userid: uid,
