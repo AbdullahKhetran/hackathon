@@ -29,7 +29,7 @@ export async function handleAddToCart({ product, quantity, uid }: PropsPOST) {
 
     body: JSON.stringify({
       userid: uid,
-      productid: product.id,
+      productid: product.productid,
       quantity: quantity,
       price: product.price,
       amount: quantity * product.price
