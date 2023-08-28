@@ -61,7 +61,10 @@ export default function Home() {
             try {
                 const fetchedData = await getData(userid);
 
-                setData(fetchedData)
+                if (Array.isArray(fetchData)) {
+                    // this check because there is possibility that res was json {message: cart is empty}
+                    setData(fetchedData)
+                }
 
             } catch (error) {
                 console.error("Error fetching data", error);
