@@ -122,16 +122,16 @@ export default function Home() {
                             const handlePlus = (productId: string) => () => {
                                 dispatch(increaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity + 1 }) // updates database
-                                // setRefresh(!refresh) // updates ui
-                                router.refresh()
+                                setRefresh(!refresh) // updates ui
+                                // router.refresh()
                             };
 
                             // for decreasing product
                             const handleMinus = (productId: string) => () => {
                                 dispatch(decreaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity - 1 }) // updates database
-                                // setRefresh(!refresh) // updates ui    
-                                router.refresh()
+                                setRefresh(!refresh) // updates ui    
+                                // router.refresh()
                             };
 
                             // for removing product
