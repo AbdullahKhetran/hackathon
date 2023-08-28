@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
         <div >
             <div className='max-w-center'>
                 <Navbar />
-                <div className="mb-24 p-8 bg-sectionSilver flex flex-col gap-8">
+                <div className="mb-24 p-8 mx-16 xl:mx-32 bg-sectionSilver flex flex-col gap-8">
                     {/* Product Image and order */}
 
                     <div className="flex flex-col gap-8 lg:flex-row ">
@@ -47,21 +47,21 @@ export default async function ProductPage({ params }: { params: { id: string } }
                     </div>
 
                     {/* Product details and care */}
-                    <div className="bg-white flex flex-col gap-8 p-8 mt-16">
+                    <div className="bg-white flex flex-col gap-8 p-8 mt-16 max-w-7xl ">
                         <div className="flex border-b-2 border-[#c4c4c4] pb-8">
                             <div className="w-full h-full font-extrabold text-6xl opacity-10">Overview</div>
                             <h1 className="font-bold text-2xl absolute self-center tracking-wider">Product Information</h1>
                         </div>
 
-                        <div className="flex flex-col gap-8 ">
-                            <h2 className="text-productSubtitle font-bold tracking-wider text-xl">PRODUCT DETAILS</h2>
-                            <div className="text-lg text-justify font-light tracking-wider text-darkGray">
+                        <div className="flex flex-col gap-8 md:flex-row ">
+                            <h2 className="text-productSubtitle font-bold tracking-wider text-xl flex-1">PRODUCT DETAILS</h2>
+                            <div className="text-lg text-justify font-light tracking-wider text-darkGray flex-[2_1_0%]">
                                 <PortableText value={details} />
                             </div>
                         </div>
-                        <div className="flex flex-col gap-8">
-                            <h2 className="text-productSubtitle font-bold tracking-wider text-xl">PRODUCT CARE</h2>
-                            <div className="prose text-lg">
+                        <div className="flex flex-col gap-8 md:flex-row ">
+                            <h2 className="text-productSubtitle font-bold tracking-wider text-xl flex-1">PRODUCT CARE</h2>
+                            <div className="prose text-lg flex-[2_1_0%]">
                                 {/* TODO change bullet color to black */}
                                 <PortableText value={care} />
                             </div>

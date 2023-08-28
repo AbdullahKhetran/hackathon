@@ -11,7 +11,9 @@ export default async function Kids() {
         <div>
             <div className='max-w-center'>
                 <Navbar />
-                {displayProducts(kidsProducts)}
+
+                {kidsProducts.length > 0 ? displayProducts(kidsProducts) : <NoProducts />}
+
                 <Footer />
             </div>
             <div className='border border-t border-productSubtitle'></div>
@@ -20,6 +22,15 @@ export default async function Kids() {
                 <Copyright />
 
             </div>
+        </div>
+    )
+}
+
+function NoProducts() {
+    return (
+        <div className="mx-16 xl:mx-32 px-16 my-16 flex flex-col gap-12">
+            <h1 className="text-5xl text-black/70 font-bold text-center">Kids Products are currently unavailable</h1>
+            <h1 className="text-5xl text-black/60 font-semibold text-center">Check again later</h1>
         </div>
     )
 }
