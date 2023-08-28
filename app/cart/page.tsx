@@ -79,6 +79,10 @@ export default function Home() {
         </div>
     )
 
+    const handleReset = () => {
+        dispatch(reset())
+    }
+
     return (
         <div >
             <Navbar />
@@ -96,15 +100,16 @@ export default function Home() {
                             const handlePlus = (productId: string) => () => {
                                 dispatch(increaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: itemQuantity + 1 }) // updates database
-                                setItemQuantity(itemQuantity + 1) // updates ui because of re-render
+                                // setItemQuantity(itemQuantity + 1) // updates ui because of re-render
+                                setRefresh(!refresh) // updates ui
                             };
 
                             // for decreasing product
                             const handleMinus = (productId: string) => () => {
                                 dispatch(decreaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: itemQuantity - 1 }) // updates database
-                                setItemQuantity(itemQuantity - 1) // updates ui because of re-render
-
+                                // setItemQuantity(itemQuantity - 1) // updates ui because of re-render
+                                setRefresh(!refresh) // updates ui                              
                             };
 
                             // for removing product
@@ -179,10 +184,13 @@ export default function Home() {
             </div>
 
             <Footer />
+            <button className="w-max p-2 bg-red-500"
+                onClick={handleReset}>
+                Reset State
+            </button>
             <Copyright />
         </div>
     )
-
 
 }
 
@@ -199,15 +207,3 @@ function EmptyCart() {
     )
 }
 
-
-
-function Loading() {
-    return (
-        <div>
-            <Navbar />
-            <p>Loading...</p>
-            <Footer />
-            <Copyright />
-        </div>
-    )
-} 
