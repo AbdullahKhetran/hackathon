@@ -9,11 +9,14 @@ const stripe = new Stripe(key!, {
 });
 
 export async function POST(request: NextRequest) {
-    const origin = request.headers.get('origin')
 
-    const userId = request.headers.get("userId")
 
     const products = await request.json();
+
+    const body = await request.json();
+    console.log("request body is", body)
+
+    const userId = body.userId
 
     const customer = await stripe.customers.create({
         metadata: {
