@@ -60,17 +60,21 @@ export default function Home() {
         async function fetchData() {
             try {
                 const fetchedData = await getData(userid);
+                // console.log(fetchedData)
+                // console.log("fetched data is an array?", Array.isArray(fetchedData))
 
-                if (Array.isArray(fetchData)) {
-                    // this check because there is possibility that res was json {message: cart is empty}
+                if (Array.isArray(fetchedData)) {
+                    // this check because there is possibility that res was json {message: "cart is empty"}
                     setData(fetchedData)
                 }
+                // console.log("set data is ", data)
 
             } catch (error) {
                 console.error("Error fetching data", error);
             }
         }
         fetchData();
+        // eslint-disable-next-line
     }, [refresh, userid]);
 
     const handleReset = () => {
@@ -84,10 +88,17 @@ export default function Home() {
             <EmptyCart />
 
             <Footer />
-            <Navbar />
+
+            <button className="w-max p-2 bg-red-500"
+                onClick={handleReset}>
+                Reset State
+            </button>
+
+            <Copyright />
         </div>
     );
-    else return (
+
+    if (data.length > 0) return (
         <div >
             <Navbar />
 
