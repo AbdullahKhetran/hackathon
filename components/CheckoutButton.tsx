@@ -36,7 +36,7 @@ export default function StripeCheckoutButton({ products }: Props) {
 
     const handleCheckout = async () => {
         const stripe = await getStripePromise();
-        const response = await fetch("/api/stripe-session/", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/stripe-checkout`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache",
