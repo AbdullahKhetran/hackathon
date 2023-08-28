@@ -13,6 +13,8 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity, reset } from "@/red
 import Link from "next/link";
 import { handleChange } from "@/lib/utils";
 import StripeCheckoutButton from "@/components/CheckoutButton";
+import { useRouter } from "next/navigation";
+
 
 function EmptyCart() {
     return (
@@ -27,6 +29,8 @@ function EmptyCart() {
 }
 
 export default function Home() {
+
+    const router = useRouter()
 
     const userid = useAppSelector((state) => state.auth.uid);
 
@@ -115,20 +119,22 @@ export default function Home() {
                             const handlePlus = (productId: string) => () => {
                                 dispatch(increaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity + 1 }) // updates database
-                                setRefresh(!refresh) // updates ui
+                                // setRefresh(!refresh) // updates ui
+                                router.refresh()
                             };
 
                             // for decreasing product
                             const handleMinus = (productId: string) => () => {
                                 dispatch(decreaseQuantity(productId)); // updates state
                                 handleChange({ uid: userid, product: product, quantity: product.quantity - 1 }) // updates database
-                                setRefresh(!refresh) // updates ui                              
+                                // setRefresh(!refresh) // updates ui    
+                                router.refresh()
                             };
 
                             // for removing product
                             const handleDelete = (userid: string, productId: string) => () => {
                                 dispatch(deleteFromCart(productId)); // updates state
-                                handleDeleteFromCart({ uid: userid, productId: productId }) // updates database
+                                handleDeleteFromCart({ uid: userid, productId: productId }) // updates database                                
                             }
                             return (
                                 <div key={product.id} className="flex flex-col md:flex-row gap-8 mt-8">
@@ -206,4 +212,3 @@ export default function Home() {
     )
 
 }
-

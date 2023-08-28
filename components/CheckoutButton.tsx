@@ -36,9 +36,10 @@ export default function StripeCheckoutButton({ products }: Props) {
 
 
     return (
-        <Link href={"/checkout"} >
-            <button onClick={handleCheckout}
-                className="bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black w-full">Process to Checkout</button>
-        </Link>
+
+        <button onClick={handleCheckout}
+            className="bg-darkGray text-white font-bold p-3 border-2 border-l-gray-600 border-t-gray-600 border-r-black border-b-black w-full">Process to Checkout
+        </button>
+
     )
 }
