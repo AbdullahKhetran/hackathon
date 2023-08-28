@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
 
             return NextResponse.json({ session }, {
                 headers: {
-                    'Access-Control-Allow-Origin': origin!,
+                    'Access-Control-Allow-Origin': origin,
                     'Content-Type': 'application/json',
                 }
             });

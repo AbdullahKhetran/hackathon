@@ -34,14 +34,17 @@ export default function StripeCheckoutButton({ products }: Props) {
 
     const handleCheckout = async () => {
         const stripe = await getStripePromise();
+        console.log("sending fetch request")
         const response = await fetch("/api/stripe-session/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             cache: "no-cache",
             body: JSON.stringify(products),
         });
+        console.log("fetch request sent")
 
         const data = await response.json();
+        console.log("received data is", data)
 
         if (data.session) {
             stripe?.redirectToCheckout({ sessionId: data.session.id });
